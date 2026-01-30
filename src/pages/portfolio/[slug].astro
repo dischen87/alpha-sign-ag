@@ -1,0 +1,304 @@
+---
+/**
+ * Dynamic Project Detail Page (German)
+ * Displays full project information with gallery
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/seo/SEO.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+import { projects, getProjectBySlug, getRelatedProjects, categories } from '../../data/projects';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+};
+
+const { slug } = Astro.params;
+const { project } = Astro.props;
+
+if (!project) {
+  return Astro.redirect('/portfolio');
+}
+
+const relatedProjects = getRelatedProjects(project.slug, 3);
+const categoryLabel = categories.de.find(c => c.key === project.categoryKey)?.label || project.category;
+
+const title = `${project.de.title} | Alpha Sign AG Portfolio`;
+const description = project.de.description;
+---
+
+<BaseLayout title={title} description={description} lang="de">
+  <head slot="head">
+    <SEO
+      title={title}
+      description={description}
+      type="article"
+      keywords={[
+        project.category,
+        'Referenzprojekt',
+        'Alpha Sign',
+        project.client,
+        'Schweiz',
+      ]}
+      image={project.image}
+      imageAlt={project.de.title}
+      locale="de-CH"
+    />
+  </head>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative min-h-[60vh] flex items-end">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img
+          src={project.image}
+          alt={project.de.title}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/60 to-transparent"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-16 pt-32">
+        <div class="max-w-4xl">
+          <!-- Breadcrumb -->
+          <nav class="mb-6" aria-label="Breadcrumb">
+            <ol class="flex items-center gap-2 text-sm text-neutral-300">
+              <li>
+                <a href="/" class="hover:text-white transition-colors">Home</a>
+              </li>
+              <li aria-hidden="true">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </li>
+              <li>
+                <a href="/portfolio" class="hover:text-white transition-colors">Portfolio</a>
+              </li>
+              <li aria-hidden="true">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </li>
+              <li class="text-white" aria-current="page">{project.de.title}</li>
+            </ol>
+          </nav>
+
+          <!-- Category Badge -->
+          <span class="inline-block px-4 py-2 text-sm font-semibold tracking-wide uppercase bg-primary-600 text-white rounded-full mb-4">
+            {categoryLabel}
+          </span>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            {project.de.title}
+          </h1>
+
+          <p class="text-xl text-neutral-200 max-w-2xl">
+            {project.de.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Info Bar -->
+    <section class="bg-primary-600 py-6">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 text-white">
+          <div class="text-center">
+            <p class="text-primary-200 text-sm uppercase tracking-wide mb-1">Kunde</p>
+            <p class="font-semibold text-lg">{project.client}</p>
+          </div>
+          <div class="text-center">
+            <p class="text-primary-200 text-sm uppercase tracking-wide mb-1">Kategorie</p>
+            <p class="font-semibold text-lg">{categoryLabel}</p>
+          </div>
+          <div class="text-center">
+            <p class="text-primary-200 text-sm uppercase tracking-wide mb-1">Jahr</p>
+            <p class="font-semibold text-lg">{project.year}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenge & Solution -->
+    <section class="py-16 lg:py-24 bg-white dark:bg-neutral-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
+            <!-- Challenge -->
+            <div>
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-accent-100 dark:bg-accent-900/30 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-accent-600 dark:text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Die Herausforderung</h2>
+              </div>
+              <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                {project.de.challenge}
+              </p>
+            </div>
+
+            <!-- Solution -->
+            <div>
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-success-100 dark:bg-success-900/30 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-success-600 dark:text-success-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Unsere Lösung</h2>
+              </div>
+              <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                {project.de.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+              Ergebnisse
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400">
+              Die messbaren Erfolge dieses Projekts
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            {project.de.results.map((result, index) => (
+              <div class="flex items-start gap-4 p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-sm">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <p class="text-neutral-700 dark:text-neutral-300 font-medium">{result}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="py-16 lg:py-24 bg-white dark:bg-neutral-950">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+              Projektgalerie
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400">
+              Impressionen aus der Umsetzung
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            {project.gallery.map((image, index) => (
+              <a
+                href={image}
+                class="group block aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"
+                data-lightbox="gallery"
+              >
+                <img
+                  src={image}
+                  alt={`${project.de.title} - Bild ${index + 1}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Projects -->
+    {relatedProjects.length > 0 && (
+      <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                Ähnliche Projekte
+              </h2>
+              <p class="text-lg text-neutral-600 dark:text-neutral-400">
+                Weitere Projekte aus dem Bereich {categoryLabel}
+              </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {relatedProjects.map((relProject) => (
+                <ProjectCard
+                  slug={relProject.slug}
+                  title={relProject.de.title}
+                  category={categories.de.find(c => c.key === relProject.categoryKey)?.label || relProject.category}
+                  client={relProject.client}
+                  image={relProject.image}
+                  href={`/portfolio/${relProject.slug}`}
+                  lang="de"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-primary-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ähnliches Projekt geplant?
+          </h2>
+          <p class="text-lg text-primary-100 mb-8">
+            Wir helfen Ihnen gerne bei der Umsetzung Ihrer Ideen.
+            Kontaktieren Sie uns für eine persönliche Beratung.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/kontakt"
+              class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-700 font-semibold rounded-lg hover:bg-primary-50 transition-colors"
+            >
+              Jetzt Projekt anfragen
+              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a
+              href="/portfolio"
+              class="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-lg border-2 border-white/30 hover:bg-white/10 transition-colors"
+            >
+              Alle Projekte ansehen
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  [data-lightbox] {
+    position: relative;
+    cursor: zoom-in;
+  }
+</style>

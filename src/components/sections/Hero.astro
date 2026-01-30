@@ -1,0 +1,308 @@
+---
+/**
+ * Hero Section Component
+ * Full-width hero with video background, headline, subheadline, CTA buttons, and trust indicators
+ * Professional Swiss design with proper overlay gradients
+ */
+import { useTranslations, getLocaleFromUrl, getLocalizedUrl, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale?: Locale;
+  backgroundImage?: string;
+  backgroundVideo?: string;
+  variant?: 'default' | 'compact';
+}
+
+const currentLocale = (Astro.props.locale ?? getLocaleFromUrl(Astro.url)) as Locale;
+const t = useTranslations(currentLocale);
+
+const { backgroundImage, backgroundVideo = '/videoplayback.mp4', variant = 'default' } = Astro.props;
+
+const isCompact = variant === 'compact';
+---
+
+<section
+  id="hero"
+  class:list={[
+    'relative flex items-center justify-center overflow-hidden',
+    isCompact ? 'min-h-[60vh]' : 'min-h-screen md:min-h-screen'
+  ]}
+  aria-label={t('hero.headline')}
+>
+  <!-- Background Layer -->
+  <div class="absolute inset-0 z-0">
+    <!-- Video Background with Fallback -->
+    {backgroundVideo && (
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        class="absolute inset-0 w-full h-full object-cover"
+        poster={backgroundImage}
+        aria-hidden="true"
+      >
+        <source src={backgroundVideo} type="video/mp4" />
+        <!-- Fallback for browsers that don't support video -->
+      </video>
+    )}
+
+    <!-- Static Image Fallback (shown when video fails or for no-JS) -->
+    {backgroundImage && (
+      <noscript>
+        <img
+          src={backgroundImage}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </noscript>
+    )}
+
+    <!-- Fallback gradient background (shown while video loads or if no video) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-950 video-fallback" aria-hidden="true"></div>
+
+    <!-- Optional fallback image that shows while video loads -->
+    {backgroundImage && (
+      <img
+        src={backgroundImage}
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover video-fallback"
+        aria-hidden="true"
+        loading="eager"
+      />
+    )}
+
+    <!-- Dark Gradient Overlay for text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80" aria-hidden="true"></div>
+
+    <!-- Additional radial gradient for depth -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.3)_100%)]" aria-hidden="true"></div>
+
+    <!-- Subtle pattern overlay -->
+    <div class="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWMThoMnY0em0wLTZoLTJWMTJoMnY0em0wLTZoLTJWNmgydjR6bTAgMzZoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em02LTM2aC00di0yaDR2MnptNiAwaC00di0yaDR2MnptNiAwaC00di0yaDR2MnoiLz48L2c+PC9nPjwvc3ZnPg==')]" aria-hidden="true"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 lg:py-0">
+    <!-- Tagline Badge -->
+    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 animate-fade-in-down">
+      <span class="w-2 h-2 rounded-full bg-primary-400 animate-pulse"></span>
+      <span class="text-sm sm:text-base font-medium text-white/95 tracking-wide">
+        {t('hero.tagline')}
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 leading-[1.05] tracking-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+      <span class="block">{t('hero.headline').split('.')[0]}.</span>
+      <span class="block text-primary-400">{t('hero.headline').split('.')[1]?.trim() || ''}</span>
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+      {t('hero.subheadline')}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-in-up" style="animation-delay: 0.3s;">
+      <!-- Primary CTA -->
+      <a
+        href={getLocalizedUrl('/kontakt', currentLocale)}
+        class="group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-primary-900 bg-white rounded-[var(--radius)] hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+      >
+        {t('hero.cta.primary')}
+        <svg class="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+
+      <!-- Secondary CTA -->
+      <a
+        href={getLocalizedUrl('/portfolio', currentLocale)}
+        class="group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/50 rounded-[var(--radius)] hover:bg-white/10 hover:border-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+      >
+        {t('hero.cta.secondary')}
+        <svg class="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Phone CTA -->
+    <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+      <a
+        href="tel:+41417800505"
+        class="group inline-flex items-center gap-3 px-6 py-3 text-white/90 hover:text-white transition-colors duration-300"
+      >
+        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:bg-primary-500 group-hover:border-primary-500 transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+        </span>
+        <span class="text-lg font-medium tracking-wide">{t('hero.cta.phone')}</span>
+      </a>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="mt-16 pt-8 border-t border-white/10 animate-fade-in-up" style="animation-delay: 0.5s;">
+      <div class="flex flex-wrap justify-center items-center gap-x-8 sm:gap-x-12 gap-y-6">
+        <!-- Experience -->
+        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-7 h-7 text-primary-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.experience')}</span>
+        </div>
+
+        <!-- Projects -->
+        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.projects')}</span>
+        </div>
+
+        <!-- Swiss Made -->
+        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.swissMade')}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-fade-in-up" style="animation-delay: 0.6s;">
+    <a
+      href="#services"
+      class="flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors group"
+      aria-label={currentLocale === 'de' ? 'Nach unten scrollen' : 'Scroll down'}
+    >
+      <span class="text-xs font-medium uppercase tracking-widest">{t('hero.scroll')}</span>
+      <div class="w-7 h-12 border-2 border-current rounded-full flex justify-center pt-2 group-hover:border-primary-400 transition-colors">
+        <div class="w-1.5 h-3 bg-current rounded-full animate-scroll group-hover:bg-primary-400 transition-colors"></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* Hide fallback image once video is playing */
+  video:not([poster]) ~ .video-fallback,
+  video.is-playing ~ .video-fallback {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Scroll indicator animation */
+  @keyframes scroll {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 1.5s ease-in-out infinite;
+  }
+
+  /* Fade in animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Pulse animation for tagline dot */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Mobile height adjustment */
+  @media (max-height: 700px) {
+    #hero {
+      min-height: 100vh;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll,
+    .animate-pulse,
+    .animate-fade-in-down,
+    .animate-fade-in-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Add class to video when it starts playing to hide fallback
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('#hero video');
+    if (video) {
+      video.addEventListener('playing', () => {
+        video.classList.add('is-playing');
+      });
+
+      // Attempt to play video (needed for some browsers)
+      video.play().catch(() => {
+        // Video autoplay was prevented, fallback image will remain visible
+        console.log('Video autoplay prevented by browser');
+      });
+    }
+  });
+</script>

@@ -1,0 +1,138 @@
+---
+/**
+ * Leuchtreklame (Illuminated Signs) Service Page
+ * SEO-optimized for Swiss market with permit information
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Leuchtreklame',
+  description: 'Professionelle Leuchtreklamen in der Schweiz - LED-Lichtwerbung, Leuchtbuchstaben und beleuchtete Schilder. Inkl. Bewilligungsberatung. CHF 2\'000-25\'000. Jetzt beraten lassen: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Moderne LED-Leuchtreklame an Geschäftsgebäude in der Schweiz',
+  serviceDescription: `Setzen Sie Ihr Unternehmen ins rechte Licht mit einer professionellen Leuchtreklame von Alpha Sign AG. Als erfahrener Schweizer Anbieter für Lichtwerbung realisieren wir seit 1989 LED-Leuchtschriften, beleuchtete Logos, Leuchtkasten und 3D-Leuchtbuchstaben.
+
+Unsere LED-Technologie bietet bis zu 80% Energieersparnis gegenüber konventionellen Leuchtreklamen und eine Lebensdauer von über 50'000 Betriebsstunden. Wir begleiten Sie auch durch das kantonale Bewilligungsverfahren - ein Service, den viele Kunden besonders schätzen.
+
+**Kostenlose Beratung: +41 41 780 05 05** - Wir beraten Sie zu Design, Technik und Bewilligung.`,
+  benefits: [
+    '24/7 Sichtbarkeit - auch bei Dunkelheit maximale Werbewirkung',
+    'Energieeffiziente LED-Technologie mit bis zu 80% Stromersparnis',
+    'Lange Lebensdauer von 50\'000+ Betriebsstunden (über 15 Jahre)',
+    'Individuelle Designs - von klassisch elegant bis modern auffällig',
+    'Komplette Bewilligungsberatung und Gesuchserstellung inklusive',
+    'Wartung, Reparatur und Service aus einer Hand',
+    'Verschiedene Leuchteffekte: Dauerlicht, dimmbar, animiert',
+    'Umweltfreundlich: Keine giftigen Gase wie bei Neonröhren',
+  ],
+  priceRange: {
+    min: 2000,
+    max: 25000,
+    note: 'Einfache LED-Leuchtschriften ab CHF 2\'000, Leuchtkästen CHF 3\'000-8\'000, individuelle 3D-Leuchtbuchstaben CHF 5\'000-15\'000, grosse Anlagen und Pylone bis CHF 25\'000+. Inklusive Planung und Montage.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihre Wünsche und Anforderungen. Telefonisch oder vor Ort analysieren wir den Standort und die Montagemöglichkeiten. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Aufmass & Standortanalyse',
+      description: 'Wir vermessen den Montageort, prüfen die elektrischen Anschlüsse und analysieren die Sichtbarkeit aus verschiedenen Blickwinkeln für optimale Werbewirkung.',
+    },
+    {
+      title: 'Design & Bewilligungsgesuch',
+      description: 'Wir erstellen das Design inkl. technischer Zeichnungen und fotorealistischer Visualisierungen. Bei Bedarf übernehmen wir die komplette Erstellung des Baugesuchs.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Nach Erteilung der Baubewilligung (falls erforderlich) produzieren wir Ihre Leuchtreklame mit hochwertigen LED-Modulen, langlebigen Materialien und CE-konformer Elektronik.',
+    },
+    {
+      title: 'Montage & Elektroinstallation',
+      description: 'Unser Fachteam montiert die Leuchtreklame fachgerecht und schliesst sie normkonform (NIV/SIA) ans Stromnetz an. Auch in grosser Höhe mit Hebebühne.',
+    },
+    {
+      title: 'Qualitätskontrolle & Wartungsvertrag',
+      description: 'Nach der Endabnahme und Funktionskontrolle bieten wir optionale Wartungsverträge für regelmässige Reinigung, Inspektion und technische Überprüfung.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'LED-Leuchtschrift Restaurant Löwen',
+      image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80',
+      category: 'Gastronomie',
+      href: '/portfolio/restaurant-loewen',
+    },
+    {
+      title: '3D-Leuchtbuchstaben Autohaus Central',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      category: 'Automotive',
+      href: '/portfolio/autohaus-central',
+    },
+    {
+      title: 'Leuchtkasten Apotheke Vitalis',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Gesundheit',
+      href: '/portfolio/apotheke-vitalis',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Brauche ich eine Bewilligung für eine Leuchtreklame in der Schweiz?',
+      answer: 'Ja, Leuchtreklamen sind in der Schweiz grundsätzlich baubewilligungspflichtig. Das Verfahren variiert je nach Kanton und Gemeinde. Im Kanton Zug ist ein einfaches Baugesuch erforderlich, die Bearbeitungszeit beträgt ca. 4-8 Wochen. Wir übernehmen gerne die komplette Erstellung der Gesuchsunterlagen inkl. Pläne, Visualisierungen und Formulare - und begleiten Sie durch den gesamten Prozess. Kosten für die Bewilligung: ca. CHF 200-500 je nach Gemeinde.',
+    },
+    {
+      question: 'Was kostet eine Leuchtreklame?',
+      answer: 'Die Kosten hängen von Grösse, Bauart und Komplexität ab: Einfache LED-Leuchtschriften beginnen bei CHF 2\'000. Leuchtkästen kosten CHF 3\'000-8\'000. Individuelle 3D-Leuchtbuchstaben aus Aluminium liegen typischerweise bei CHF 5\'000-15\'000. Grosse Anlagen, Pylone oder Sonderformen können bis CHF 25\'000+ kosten. Für ein verbindliches Angebot erstellen wir Ihnen gerne eine kostenlose Offerte: +41 41 780 05 05.',
+    },
+    {
+      question: 'Welche Materialien und Techniken werden für Leuchtreklamen verwendet?',
+      answer: 'Moderne Leuchtreklamen bestehen aus: Gehäuse aus pulverbeschichtetem Aluminium oder Edelstahl (rostfrei, langlebig), Frontblenden aus Acrylglas oder Polycarbonat (schlagfest), LED-Module als Lichtquelle (energieeffizient, langlebig). Für 3D-Buchstaben verwenden wir Aluminium-Profile mit LED-Hinterleuchtung oder durchleuchtetes Acrylglas. Alle Komponenten sind für den Ausseneinsatz geeignet (IP65).',
+    },
+    {
+      question: 'Wie viel Strom verbraucht eine LED-Leuchtreklame?',
+      answer: 'LED-Leuchtreklamen sind sehr energieeffizient. Eine typische Leuchtschrift (ca. 2m Breite) verbraucht nur 50-150 Watt. Bei 8 Stunden täglicher Betriebsdauer entspricht das ca. CHF 50-150 Stromkosten pro Jahr (bei 20 Rp/kWh). Verglichen mit Neonröhren sparen Sie bis zu 80% Energie. Dimmbare Systeme und Zeitschaltuhren reduzieren den Verbrauch zusätzlich.',
+    },
+    {
+      question: 'Wie lange hält eine LED-Leuchtreklame?',
+      answer: 'Moderne LED-Module haben eine Lebensdauer von 50\'000-100\'000 Betriebsstunden. Bei 8 Stunden täglichem Betrieb (ca. 3\'000 Stunden/Jahr) entspricht das über 15-30 Jahren. Die Gehäuse aus Aluminium oder Edelstahl halten bei guter Pflege noch länger. Wir bieten Wartungsverträge für regelmässige Reinigung und Inspektion, damit Ihre Leuchtreklame immer optimal funktioniert.',
+    },
+    {
+      question: 'Kann ich meine bestehende Neon-Reklame auf LED umrüsten?',
+      answer: 'Ja, in vielen Fällen ist eine Umrüstung von Neon auf LED möglich und wirtschaftlich sinnvoll. Die Vorteile: 70-80% geringerer Stromverbrauch, deutlich weniger Wartung, keine Quecksilber-Entsorgung, bessere Farbkonsistenz über die Lebensdauer. Oft können bestehende Gehäuse weiterverwendet werden. Wir prüfen gerne vor Ort, ob Ihre bestehende Anlage umgerüstet werden kann und erstellen eine Kosten-Nutzen-Analyse.',
+    },
+  ],
+  keywords: [
+    'Leuchtreklame Schweiz',
+    'Leuchtreklame Bewilligung',
+    'Leuchtreklame Kosten',
+    'LED Leuchtschrift',
+    'Leuchtbuchstaben',
+    'Lichtwerbung Schweiz',
+    'Leuchtkasten',
+    'Leuchtreklame Zug',
+    'Neon Leuchtschrift LED',
+    'Werbeschilder beleuchtet',
+    '3D Leuchtbuchstaben',
+    'Aussenwerbung beleuchtet',
+    'Firmenschild beleuchtet',
+    'LED Werbung Fassade',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

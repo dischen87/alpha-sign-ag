@@ -1,0 +1,297 @@
+---
+/**
+ * Testimonials Section Component
+ * Customer reviews carousel structure
+ * Uses theme CSS variables for consistent styling
+ */
+import { useTranslations, getLocaleFromUrl, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale?: Locale;
+}
+
+const currentLocale = (Astro.props.locale ?? getLocaleFromUrl(Astro.url)) as Locale;
+const t = useTranslations(currentLocale);
+
+// Customer testimonials with professional avatar images
+const testimonials = [
+  {
+    id: 1,
+    name: 'Thomas Mueller',
+    company: 'Mueller Transport AG',
+    rating: 5,
+    text: currentLocale === 'de'
+      ? 'Alpha Sign hat unsere gesamte Fahrzeugflotte beschriftet. Die Qualität ist hervorragend und der Service erstklassig. Sehr empfehlenswert!'
+      : 'Alpha Sign lettered our entire vehicle fleet. The quality is excellent and the service first-class. Highly recommended!',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&h=150&q=80'
+  },
+  {
+    id: 2,
+    name: 'Sandra Keller',
+    company: 'Keller Immobilien',
+    rating: 5,
+    text: currentLocale === 'de'
+      ? 'Die Gebäudebeschriftung ist perfekt geworden. Vom Konzept bis zur Montage - alles aus einer Hand und in Topqualität.'
+      : 'The building signage turned out perfect. From concept to installation - everything from one source and top quality.',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80'
+  },
+  {
+    id: 3,
+    name: 'Marco Bianchi',
+    company: 'Bianchi Restaurant',
+    rating: 5,
+    text: currentLocale === 'de'
+      ? 'Unsere neue Leuchtreklame ist ein echter Blickfang. Alpha Sign hat unsere Vorstellungen perfekt umgesetzt. Danke!'
+      : 'Our new illuminated sign is a real eye-catcher. Alpha Sign perfectly implemented our ideas. Thank you!',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80'
+  },
+  {
+    id: 4,
+    name: 'Anna Schneider',
+    company: 'Schneider Consulting',
+    rating: 5,
+    text: currentLocale === 'de'
+      ? 'Professionelle Beratung, schnelle Umsetzung und ein tolles Ergebnis. Wir sind begeistert von der Signaletik in unserem neuen Büro.'
+      : 'Professional advice, fast implementation and a great result. We are thrilled with the signage in our new office.',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150&q=80'
+  }
+];
+---
+
+<section id="testimonials" class="py-16 lg:py-24 bg-card overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16 scroll-animate scroll-fade-up" data-scroll-animate>
+      <span class="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-primary bg-accent rounded-full">
+        {currentLocale === 'de' ? 'Kundenstimmen' : 'Testimonials'}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
+        {t('testimonials.title')}
+      </h2>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+        {t('testimonials.subtitle')}
+      </p>
+
+      <!-- 5 Star Rating Display -->
+      <div class="flex items-center justify-center gap-1 mt-6">
+        {[1, 2, 3, 4, 5].map(() => (
+          <svg class="w-8 h-8 text-warning" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ))}
+        <span class="ml-2 text-lg font-semibold text-foreground">5.0</span>
+      </div>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div class="relative scroll-animate scroll-fade-up" data-scroll-animate data-delay="2">
+      <!-- Carousel Container -->
+      <div
+        id="testimonials-carousel"
+        class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4 sm:mx-0 sm:px-0"
+        role="region"
+        aria-label={currentLocale === 'de' ? 'Kundenbewertungen' : 'Customer Reviews'}
+      >
+        {testimonials.map((testimonial, index) => (
+          <article
+            class:list={[
+              "flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center bg-background border border-border rounded-[var(--radius)] p-6 lg:p-8 shadow-sm dark:border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+              index % 2 === 0 ? "testimonial-slide-left" : "testimonial-slide-right"
+            ]}
+            aria-label={`${currentLocale === 'de' ? 'Bewertung von' : 'Review by'} ${testimonial.name}`}
+          >
+            <!-- Rating Stars -->
+            <div class="flex gap-1 mb-4">
+              {[...Array(testimonial.rating)].map(() => (
+                <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+
+            <!-- Quote -->
+            <blockquote class="text-foreground leading-relaxed mb-6">
+              <svg class="w-8 h-8 text-muted mb-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+              <p>{testimonial.text}</p>
+            </blockquote>
+
+            <!-- Author -->
+            <div class="flex items-center gap-4">
+              <!-- Avatar Image -->
+              <div class="w-12 h-12 rounded-full bg-muted overflow-hidden">
+                <img
+                  src={testimonial.image}
+                  alt={`${testimonial.name} - ${testimonial.company}`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <cite class="not-italic font-semibold text-foreground">{testimonial.name}</cite>
+                <p class="text-sm text-muted-foreground">{testimonial.company}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button
+        type="button"
+        id="testimonials-prev"
+        class="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 w-12 h-12 items-center justify-center bg-background border border-border rounded-full shadow-lg hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+        aria-label={currentLocale === 'de' ? 'Vorherige Bewertung' : 'Previous review'}
+      >
+        <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        id="testimonials-next"
+        class="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 w-12 h-12 items-center justify-center bg-background border border-border rounded-full shadow-lg hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+        aria-label={currentLocale === 'de' ? 'Nächste Bewertung' : 'Next review'}
+      >
+        <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Carousel Dots -->
+    <div class="flex justify-center gap-2 mt-8" role="tablist" aria-label={currentLocale === 'de' ? 'Bewertungen Navigation' : 'Reviews Navigation'}>
+      {testimonials.map((_, index) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          class:list={[
+            'testimonial-dot h-3 rounded-full transition-all duration-300',
+            index === 0 ? 'bg-primary w-8' : 'bg-muted w-3 hover:bg-muted-foreground'
+          ]}
+          data-index={index}
+          aria-label={`${currentLocale === 'de' ? 'Gehe zu Bewertung' : 'Go to review'} ${index + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Testimonial card hover and animation */
+  .testimonial-slide-left,
+  .testimonial-slide-right {
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .testimonial-slide-left:hover,
+  .testimonial-slide-right:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-slide-left,
+    .testimonial-slide-right {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('testimonials-carousel');
+    const prevBtn = document.getElementById('testimonials-prev');
+    const nextBtn = document.getElementById('testimonials-next');
+    const dots = document.querySelectorAll('.testimonial-dot');
+
+    if (!carousel) return;
+
+    const getItemWidth = () => {
+      const firstItem = carousel.querySelector('article');
+      return firstItem ? firstItem.offsetWidth + 24 : 0; // 24px is the gap
+    };
+
+    const updateDots = () => {
+      const scrollPosition = carousel.scrollLeft;
+      const itemWidth = getItemWidth();
+      const activeIndex = Math.round(scrollPosition / itemWidth);
+
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('bg-primary', 'w-8');
+          dot.classList.remove('bg-muted', 'w-3');
+          dot.setAttribute('aria-selected', 'true');
+        } else {
+          dot.classList.remove('bg-primary', 'w-8');
+          dot.classList.add('bg-muted', 'w-3');
+          dot.setAttribute('aria-selected', 'false');
+        }
+      });
+    };
+
+    prevBtn?.addEventListener('click', () => {
+      const itemWidth = getItemWidth();
+      carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      const itemWidth = getItemWidth();
+      carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const itemWidth = getItemWidth();
+        carousel.scrollTo({ left: itemWidth * index, behavior: 'smooth' });
+      });
+    });
+
+    carousel.addEventListener('scroll', updateDots);
+  });
+
+  // Scroll animations for testimonials section
+  function initTestimonialsAnimations() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('#testimonials [data-scroll-animate]').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('#testimonials [data-scroll-animate]').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonialsAnimations);
+  } else {
+    initTestimonialsAnimations();
+  }
+  document.addEventListener('astro:page-load', initTestimonialsAnimations);
+</script>

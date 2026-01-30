@@ -1,0 +1,138 @@
+---
+/**
+ * Signaletik (Wayfinding Systems) Service Page
+ * SEO-optimized for Swiss B2B market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Signaletik',
+  description: 'Professionelle Signaletik und Orientierungssysteme in der Schweiz - Wegeleitsysteme, Beschilderung und Leitsysteme für Gebäude und Areale. CHF 3\'000-50\'000. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Modernes Signaletik-System in einem Schweizer Bürogebäude',
+  serviceDescription: `Effektive Orientierung beginnt mit durchdachter Signaletik. Alpha Sign AG entwickelt und realisiert massgeschneiderte Orientierungssysteme für Unternehmen, öffentliche Gebäude, Spitäler, Hotels und Areale in der ganzen Schweiz.
+
+Von der Tiefgarage bis zum Dachgeschoss, vom Empfang bis zum Besprechungsraum - wir führen Ihre Besucher, Patienten, Gäste und Mitarbeiter sicher und intuitiv ans Ziel. Unsere modularen Systeme sind flexibel erweiterbar und erfüllen die Anforderungen an barrierefreie Gestaltung nach SIA 500.
+
+**Kostenlose Beratung für Ihr Signaletik-Projekt: +41 41 780 05 05**`,
+  benefits: [
+    'Einheitliches Erscheinungsbild gemäss Ihrem Corporate Design',
+    'Barrierefreie Orientierung nach SIA 500 (Braille, taktil, kontrastreich)',
+    'Modulare Systeme für einfache Anpassungen und Erweiterungen',
+    'Mehrsprachige Beschilderung (DE/FR/IT/EN) für internationale Umgebungen',
+    'Langlebige, pflegeleichte Materialien für intensive Nutzung',
+    'Komplettservice von Konzept über Produktion bis Montage',
+    'Digitale Signaletik-Lösungen auf Wunsch integrierbar',
+    'Dokumentation für künftige Erweiterungen und Nachbestellungen',
+  ],
+  priceRange: {
+    min: 3000,
+    max: 50000,
+    note: 'Einzelne Türschilder ab CHF 80, Etagenpläne ab CHF 500. Komplette Signaletik-Systeme für KMU (20-50 Schilder) CHF 3\'000-15\'000. Grossprojekte (Spitäler, Verwaltungen, Hotels) CHF 15\'000-50\'000+.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihren Bedarf, die Anzahl zu beschildernder Bereiche und Ihre gestalterischen Anforderungen. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Bedarfsanalyse & Begehung',
+      description: 'Wir analysieren vor Ort die Wegeführung, identifizieren alle Entscheidungspunkte und erfassen systematisch alle zu beschildernden Bereiche mit einem detaillierten Beschilderungsplan.',
+    },
+    {
+      title: 'Konzeptentwicklung & Design',
+      description: 'Basierend auf Ihrem Corporate Design entwickeln wir ein stimmiges Signaletik-Konzept mit Typografie, Piktogrammen, Farbcodes und einheitlicher Formsprache für alle Schildertypen.',
+    },
+    {
+      title: 'Visualisierung & Freigabe',
+      description: 'Sie erhalten fotorealistische Visualisierungen, Musterschild zur Bemusterung und einen detaillierten Beschilderungsplan mit allen Positionen zur finalen Abstimmung.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Die Schilder werden in unserer Werkstatt in Hünenberg aus hochwertigen Materialien wie Aluminium, Acrylglas, Edelstahl oder Verbundwerkstoffen präzise gefertigt.',
+    },
+    {
+      title: 'Montage & Dokumentation',
+      description: 'Unser Montageteam installiert alle Schilder fachgerecht nach Plan. Sie erhalten eine vollständige Dokumentation für künftige Erweiterungen und Nachbestellungen.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Signaletik Verwaltungsgebäude Kanton Zug',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      category: 'Öffentliche Gebäude',
+      href: '/portfolio/verwaltung-zug',
+    },
+    {
+      title: 'Wegeleitsystem Business Park Baar',
+      image: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=600&q=80',
+      category: 'Gewerbe',
+      href: '/portfolio/business-park-baar',
+    },
+    {
+      title: 'Orientierungssystem Klinik Meilen',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Gesundheitswesen',
+      href: '/portfolio/klinik-meilen',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Was ist Signaletik und wofür brauche ich sie?',
+      answer: 'Signaletik (auch Leitsystem oder Orientierungssystem genannt) umfasst alle visuellen Elemente, die der Orientierung in Gebäuden und auf Arealen dienen: Wegweiser, Türschilder, Etagenpläne, Piktogramme, Richtungspfeile und digitale Informationssysteme. Gute Signaletik führt Besucher intuitiv ans Ziel, reduziert Nachfragen beim Personal und vermittelt Professionalität. Besonders wichtig in Spitälern, Hotels, Bürogebäuden, Einkaufszentren und öffentlichen Gebäuden.',
+    },
+    {
+      question: 'Was kostet ein Signaletik-System?',
+      answer: 'Die Kosten variieren stark nach Umfang und Materialwahl: Einzelne Türschilder beginnen bei CHF 80-150. Ein komplettes System für ein KMU oder Bürogebäude (20-50 Schilder) kostet typischerweise CHF 3\'000-15\'000. Grossprojekte wie Spitäler, Hotels oder Verwaltungsgebäude (100+ Schilder) liegen bei CHF 15\'000-50\'000+. Wir erstellen Ihnen gerne eine detaillierte Offerte basierend auf einer Begehung: +41 41 780 05 05.',
+    },
+    {
+      question: 'Welche Materialien eignen sich für Signaletik?',
+      answer: 'Die Wahl hängt vom Einsatzort und Budget ab: Aluminium ist leicht, korrosionsbeständig und vielseitig - ideal für Innen- und Aussenbereich. Acrylglas wirkt modern, edel und ist hinterleuchtbar. Edelstahl ist besonders robust, vandalismussicher und langlebig. Für kostengünstige Lösungen eignen sich Forex, Dibond oder HPL-Platten. Wir beraten Sie zur optimalen Materialwahl für Ihre Anforderungen.',
+    },
+    {
+      question: 'Berücksichtigt ihr barrierefreie Gestaltung?',
+      answer: 'Ja, wir gestalten nach den Richtlinien der SIA 500 für barrierefreies Bauen. Das umfasst: Taktile Elemente und Brailleschrift für Sehbehinderte, kontrastreiche Gestaltung (Schrift/Hintergrund), ausreichende Schriftgrössen (abhängig von Leseabstand), gut erreichbare Montagehöhen (85-160 cm). Barrierefreiheit ist bei öffentlichen Gebäuden und Neubauten oft Pflicht. Wir beraten Sie zu den Anforderungen.',
+    },
+    {
+      question: 'Können bestehende Signaletik-Systeme erweitert werden?',
+      answer: 'Ja, unsere modularen Signaletik-Systeme sind auf Erweiterbarkeit ausgelegt. Bei Umzügen, Umbauten, neuen Mietern oder organisatorischen Änderungen können einzelne Schilder ausgetauscht, ergänzt oder umpositioniert werden. Wir dokumentieren alle Projekte sorgfältig (Materialien, Farben, Schriften), damit Nachbestellungen auch nach Jahren noch perfekt passen. Auch fremde Systeme können wir oft nahtlos erweitern.',
+    },
+    {
+      question: 'Wie lange dauert ein Signaletik-Projekt?',
+      answer: 'Die Dauer hängt vom Umfang ab: Kleine Projekte (10-20 Schilder) können in 2-4 Wochen realisiert werden. Mittlere Projekte (50-100 Schilder) benötigen 4-8 Wochen. Grossprojekte mit Konzeptentwicklung planen Sie mit 2-4 Monaten. Bei Neubauten integrieren wir uns in den Bauzeitplan. Express-Aufträge für Einzelschilder oder Nachbestellungen sind oft innerhalb einer Woche möglich.',
+    },
+  ],
+  keywords: [
+    'Signaletik Schweiz',
+    'Orientierungssystem',
+    'Wegeleitsystem',
+    'Beschilderung Gebäude',
+    'Leitsystem Schweiz',
+    'Türschilder Büro',
+    'Piktogramme Beschilderung',
+    'Barrierefreie Signaletik',
+    'Signaletik Spital',
+    'Signaletik Hotel',
+    'Beschilderungssystem',
+    'Informationsleitsystem',
+    'Gebäudebeschilderung',
+    'Orientierungshilfe Gebäude',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

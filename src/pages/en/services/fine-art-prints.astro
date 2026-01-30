@@ -1,0 +1,138 @@
+---
+/**
+ * Fine Art Prints Service Page (English)
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Fine Art Prints',
+  description: 'Fine Art Prints in Switzerland - High-quality art prints, Giclee printing on Hahnemuhle, canvas prints and photo prints in gallery quality. From CHF 50. Consultation: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Fine Art Print on premium paper in Swiss gallery',
+  serviceDescription: `Bring your artworks and photographs to gallery level with Fine Art Prints from Alpha Sign AG. We print on premium artist papers and canvases using Giclee technology - for artists, photographers, galleries, museums and art lovers.
+
+Our prints are lightfast (over 100 years archival according to Wilhelm Research), color-accurate and achieve highest detail resolution. From single prints to limited editions for your exhibition - we offer professional service with personal consultation.
+
+**Request a test print now: +41 41 780 05 05** - We advise on paper, format and color management.`,
+  benefits: [
+    'Giclee printing with 12-color technology for highest color accuracy and detail fidelity',
+    'Museum quality - lightfast over 100 years (Wilhelm Research certified)',
+    'Premium papers: Hahnemuhle, Canson Infinity, Epson Fine Art, Innova',
+    'Large formats up to 150 cm width on roll, up to 120x180 cm single sheet',
+    'Professional color management with calibrated monitors and soft proofing',
+    'Editions with sequential numbering, signature and certificate of authenticity',
+    'Framing with mat board and museum glass on request',
+    'Secure archiving of your print data for identical reprints',
+  ],
+  priceRange: {
+    min: 50,
+    max: 500,
+    note: 'A4 (21x30 cm) from CHF 50, A3 (30x42 cm) from CHF 80, A2 (42x60 cm) from CHF 120, A1 (60x84 cm) from CHF 200, 100x150 cm from CHF 350. Canvas print approx. 30% surcharge. Volume discounts for editions from 5 pieces.',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'We discuss your project, desired formats and advise on optimal paper/canvas choice for your subject. Call: +41 41 780 05 05.',
+    },
+    {
+      title: 'File Delivery & Review',
+      description: 'Deliver your files at highest resolution (TIFF, PSD, JPG). We check resolution, color profile and printability and advise on optimal settings.',
+    },
+    {
+      title: 'Color Matching & Proofing',
+      description: 'On request, we create a soft proof on calibrated monitor or a proof print on the target paper for approval. This ensures perfect color reproduction.',
+    },
+    {
+      title: 'Paper & Format Selection',
+      description: 'Choose from our range: Matte or glossy Fine Art paper, textured deckle-edge paper, Baryta paper or canvas. We show you samples.',
+    },
+    {
+      title: 'Production',
+      description: 'We print with calibrated Epson SureColor printers and original UltraChrome HDX pigment inks. Each print is individually checked for quality.',
+    },
+    {
+      title: 'Finishing & Shipping',
+      description: 'Drying (24h), quality control and careful packaging (tissue paper, corner protectors, sturdy cardboard). On request framing, certificates and edition numbering.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Photography Edition "Swiss Alps"',
+      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=600&q=80',
+      category: 'Photography',
+      href: '/en/portfolio/edition-schweizer-alpen',
+    },
+    {
+      title: 'Art Print Series for Zurich Gallery',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80',
+      category: 'Art',
+      href: '/en/portfolio/galerie-zuerich',
+    },
+    {
+      title: 'Large Format Canvas Corporate Art',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Corporate Art',
+      href: '/en/portfolio/corporate-art',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between Giclee printing and normal digital printing?',
+      answer: 'Giclee (French for "spray") refers to high-quality inkjet prints with pigmented inks on acid-free Fine Art papers. Unlike standard digital prints, Giclee printers use 8-12 colors instead of 4 (CMYK), achieve a significantly larger color gamut, finer gradations and archival capability of 100+ years instead of 10-20 years. The pigment inks are waterproof and lightfast.',
+    },
+    {
+      question: 'What file formats and resolutions do you need?',
+      answer: 'Ideally TIFF or PSD files without compression (8 or 16 bit) with embedded color profile (Adobe RGB 1998 or ProPhoto RGB for maximum color gamut). Resolution should be at least 200 dpi, preferably 300 dpi at the desired print size. JPEGs at highest quality setting are also possible. For enlargements, we can upscale with specialized algorithms (Topaz, ON1) with minimal loss.',
+    },
+    {
+      question: 'Which papers do you recommend?',
+      answer: 'This depends on the subject and desired look: For photography, we recommend Hahnemuhle Photo Rag 308g (velvety matte, neutral) or Baryta FB (glossy, classic photo look). For graphics and illustrations, Hahnemuhle German Etching (warm-toned, textured) is suitable. For canvas look, Hahnemuhle Canvas or Epson Premium Canvas. We are happy to send you a sample set - also with your image as a mini proof.',
+    },
+    {
+      question: 'Do you offer framing?',
+      answer: 'Yes, we work with a specialized frame manufacturer and offer professional framing: Mat board from acid-free museum board, museum glass (99% UV protection, anti-reflective) or acrylic glass for large formats, high-quality wood or aluminum frames in many profiles and colors. Framing is done archivally - important for preserving the value of editions.',
+    },
+    {
+      question: 'How does printing limited editions work?',
+      answer: 'For artists and photographers, we print limited editions according to your specifications: Sequential numbering (e.g., 3/25), space for your signature, certificate of authenticity with information on paper, print date and edition size. We archive your print files securely encrypted so reprints are color-identical even after years. On request, we can also apply your studio blind embossing stamp.',
+    },
+    {
+      question: 'How quickly can I receive my prints?',
+      answer: 'Standard production time for Fine Art Prints is 3-5 business days. Express orders can often be completed within 24-48 hours (surcharge). Larger editions (50+ pieces) require correspondingly more time. Shipping is by Priority mail (1-2 days CH) or by courier on request. Collection in Hunenberg is possible at any time.',
+    },
+  ],
+  keywords: [
+    'Fine Art Print Switzerland',
+    'Giclee printing Switzerland',
+    'art print printing',
+    'canvas print',
+    'photo print premium',
+    'Hahnemuhle print Switzerland',
+    'gallery print',
+    'art prints printing service',
+    'Fine Art Printing',
+    'archival print photography',
+    'edition printing',
+    'museum print',
+    'large format art print',
+    'pigment print Switzerland',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

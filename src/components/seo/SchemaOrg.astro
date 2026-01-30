@@ -1,0 +1,620 @@
+---
+/**
+ * Schema.org JSON-LD Structured Data Component
+ * Supports multiple schema types for comprehensive SEO:
+ * - LocalBusiness (for all pages)
+ * - Service (for service pages)
+ * - FAQPage (for FAQ sections)
+ * - HowTo (for process steps)
+ * - Product (for services with pricing)
+ * - Review/AggregateRating
+ * - BreadcrumbList
+ * - Organization
+ * - ContactPoint
+ *
+ * Optimized for Swiss local SEO
+ */
+
+export interface LocalBusinessSchema {
+  type: 'LocalBusiness';
+  additionalType?: string;
+}
+
+export interface OrganizationSchema {
+  type: 'Organization';
+}
+
+export interface ServiceSchema {
+  type: 'Service';
+  name: string;
+  description: string;
+  serviceType?: string;
+  areaServed?: string[];
+  image?: string;
+  url?: string;
+  offers?: {
+    price?: string;
+    priceCurrency?: string;
+    priceValidUntil?: string;
+    lowPrice?: string;
+    highPrice?: string;
+  };
+}
+
+export interface ProductSchema {
+  type: 'Product';
+  name: string;
+  description: string;
+  image?: string;
+  brand?: string;
+  sku?: string;
+  offers?: {
+    lowPrice: string;
+    highPrice: string;
+    priceCurrency?: string;
+    priceValidUntil?: string;
+  };
+}
+
+export interface FAQSchema {
+  type: 'FAQPage';
+  questions: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+export interface HowToSchema {
+  type: 'HowTo';
+  name: string;
+  description?: string;
+  image?: string;
+  totalTime?: string;
+  estimatedCost?: {
+    currency: string;
+    minValue: string;
+    maxValue: string;
+  };
+  steps: Array<{
+    name: string;
+    text: string;
+    image?: string;
+    url?: string;
+  }>;
+}
+
+export interface ReviewSchema {
+  type: 'Review';
+  author: string;
+  reviewRating: {
+    ratingValue: string;
+    bestRating?: string;
+    worstRating?: string;
+  };
+  reviewBody: string;
+  datePublished?: string;
+}
+
+export interface AggregateRatingSchema {
+  type: 'AggregateRating';
+  ratingValue: string;
+  reviewCount: string;
+  bestRating?: string;
+  worstRating?: string;
+}
+
+export interface BreadcrumbSchema {
+  type: 'BreadcrumbList';
+  items: Array<{
+    name: string;
+    url: string;
+  }>;
+}
+
+export interface ContactPointSchema {
+  type: 'ContactPoint';
+  telephone?: string;
+  email?: string;
+  contactType: string;
+  areaServed?: string[];
+  availableLanguage?: string[];
+}
+
+type SchemaType =
+  | LocalBusinessSchema
+  | OrganizationSchema
+  | ServiceSchema
+  | ProductSchema
+  | FAQSchema
+  | HowToSchema
+  | ReviewSchema
+  | AggregateRatingSchema
+  | BreadcrumbSchema
+  | ContactPointSchema;
+
+interface Props {
+  schema: SchemaType | SchemaType[];
+}
+
+const { schema } = Astro.props;
+
+// Company constants
+const company = {
+  name: 'Alpha Sign AG',
+  legalName: 'Alpha Sign AG',
+  url: Astro.site?.href || 'https://www.alphasign.ch',
+  logo: new URL('/logo.png', Astro.site || 'https://www.alphasign.ch').href,
+  image: new URL('/og-image.jpg', Astro.site || 'https://www.alphasign.ch').href,
+  description: 'Alpha Sign AG - Ihr Partner für hochwertige Schilder, Beschriftungen und Werbetechnik in der Schweiz seit 1989. Fahrzeugbeschriftung, Car Wrapping, Leuchtreklamen, Signaletik und mehr.',
+  foundingDate: '1989',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Bösch 104',
+    addressLocality: 'Hünenberg',
+    addressRegion: 'ZG',
+    postalCode: '6331',
+    addressCountry: 'CH',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 47.1764,
+    longitude: 8.4319,
+  },
+  telephone: '+41 41 780 05 05',
+  email: 'info@alphasign.ch',
+  priceRange: 'CHF 50 - CHF 500000',
+  currenciesAccepted: 'CHF',
+  paymentAccepted: 'Cash, Credit Card, Bank Transfer, Invoice',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '127',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:30',
+      closes: '12:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '13:15',
+      closes: '17:00',
+    },
+  ],
+  sameAs: [
+    'https://www.facebook.com/alphasignag',
+    'https://www.linkedin.com/company/alpha-sign-ag',
+    'https://www.instagram.com/alphasignag',
+  ],
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'Switzerland',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Zug',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Luzern',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Zürich',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Schwyz',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Aargau',
+    },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+41 41 780 05 05',
+      contactType: 'customer service',
+      email: 'info@alphasign.ch',
+      areaServed: 'CH',
+      availableLanguage: ['German', 'English', 'French', 'Italian'],
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: '+41 41 780 05 05',
+      contactType: 'sales',
+      email: 'info@alphasign.ch',
+      areaServed: 'CH',
+      availableLanguage: ['German', 'English'],
+    },
+  ],
+};
+
+function buildLocalBusinessSchema(data: LocalBusinessSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': data.additionalType || 'LocalBusiness',
+    '@id': `${company.url}#organization`,
+    name: company.name,
+    legalName: company.legalName,
+    url: company.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: company.logo,
+      width: 600,
+      height: 60,
+    },
+    image: company.image,
+    description: company.description,
+    foundingDate: company.foundingDate,
+    address: company.address,
+    geo: company.geo,
+    telephone: company.telephone,
+    email: company.email,
+    priceRange: company.priceRange,
+    currenciesAccepted: company.currenciesAccepted,
+    paymentAccepted: company.paymentAccepted,
+    aggregateRating: company.aggregateRating,
+    openingHoursSpecification: company.openingHoursSpecification,
+    sameAs: company.sameAs,
+    areaServed: company.areaServed,
+    contactPoint: company.contactPoint,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Schilder und Beschriftungen',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Fahrzeugbeschriftung',
+            description: 'Professionelle Fahrzeugbeschriftung und Flottenbeklebung',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Car Wrapping',
+            description: 'Vollfolierung und Farbwechsel für Fahrzeuge',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Leuchtreklame',
+            description: 'LED-Leuchtschriften und beleuchtete Werbeanlagen',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Signaletik',
+            description: 'Orientierungssysteme und Wegeleitsysteme',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Gebäudebeschriftung',
+            description: '3D-Buchstaben, Fassadenbeschriftung und Firmenschilder',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Messeauftritte',
+            description: 'Messestand-Design und Produktion',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Kunst am Bau',
+            description: 'Kunstinstallationen und Fassadengestaltung',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Fine Art Prints',
+            description: 'Hochwertige Kunstdrucke und Giclée-Druck',
+          },
+        },
+      ],
+    },
+    potentialAction: [
+      {
+        '@type': 'ReserveAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${company.url}/kontakt`,
+          actionPlatform: [
+            'http://schema.org/DesktopWebPlatform',
+            'http://schema.org/MobileWebPlatform',
+          ],
+        },
+        result: {
+          '@type': 'Reservation',
+          name: 'Beratungstermin',
+        },
+      },
+      {
+        '@type': 'CommunicateAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `tel:${company.telephone}`,
+          actionPlatform: [
+            'http://schema.org/DesktopWebPlatform',
+            'http://schema.org/MobileWebPlatform',
+          ],
+        },
+      },
+    ],
+  };
+}
+
+function buildOrganizationSchema(_data: OrganizationSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${company.url}#organization`,
+    name: company.name,
+    legalName: company.legalName,
+    url: company.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: company.logo,
+      width: 600,
+      height: 60,
+    },
+    image: company.image,
+    description: company.description,
+    foundingDate: company.foundingDate,
+    address: company.address,
+    telephone: company.telephone,
+    email: company.email,
+    sameAs: company.sameAs,
+    contactPoint: company.contactPoint,
+    areaServed: company.areaServed,
+  };
+}
+
+function buildServiceSchema(data: ServiceSchema) {
+  const serviceSlug = data.name.toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[äöü]/g, (char) => ({ 'ä': 'ae', 'ö': 'oe', 'ü': 'ue' }[char] || char));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': data.url || `${company.url}/dienstleistungen/${serviceSlug}#service`,
+    name: data.name,
+    description: data.description,
+    serviceType: data.serviceType || data.name,
+    image: data.image,
+    provider: {
+      '@type': 'LocalBusiness',
+      '@id': `${company.url}#organization`,
+      name: company.name,
+      telephone: company.telephone,
+      email: company.email,
+      address: company.address,
+      geo: company.geo,
+      aggregateRating: company.aggregateRating,
+    },
+    areaServed: data.areaServed?.map((area) => ({
+      '@type': 'AdministrativeArea',
+      name: area,
+    })) || {
+      '@type': 'Country',
+      name: 'Switzerland',
+    },
+    ...(data.offers && {
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: data.offers.lowPrice || data.offers.price,
+        highPrice: data.offers.highPrice,
+        priceCurrency: data.offers.priceCurrency || 'CHF',
+        priceValidUntil: data.offers.priceValidUntil || '2026-12-31',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'LocalBusiness',
+          '@id': `${company.url}#organization`,
+          name: company.name,
+        },
+      },
+    }),
+    termsOfService: `${company.url}/agb`,
+    brand: {
+      '@type': 'Brand',
+      name: company.name,
+    },
+  };
+}
+
+function buildProductSchema(data: ProductSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: data.name,
+    description: data.description,
+    image: data.image,
+    brand: {
+      '@type': 'Brand',
+      name: data.brand || company.name,
+    },
+    ...(data.sku && { sku: data.sku }),
+    aggregateRating: company.aggregateRating,
+    ...(data.offers && {
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: data.offers.lowPrice,
+        highPrice: data.offers.highPrice,
+        priceCurrency: data.offers.priceCurrency || 'CHF',
+        priceValidUntil: data.offers.priceValidUntil || '2026-12-31',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'LocalBusiness',
+          '@id': `${company.url}#organization`,
+          name: company.name,
+        },
+      },
+    }),
+  };
+}
+
+function buildFAQSchema(data: FAQSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: data.questions.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+function buildHowToSchema(data: HowToSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: data.name,
+    description: data.description,
+    ...(data.image && { image: data.image }),
+    ...(data.totalTime && { totalTime: data.totalTime }),
+    ...(data.estimatedCost && {
+      estimatedCost: {
+        '@type': 'MonetaryAmountDistribution',
+        currency: data.estimatedCost.currency,
+        minValue: data.estimatedCost.minValue,
+        maxValue: data.estimatedCost.maxValue,
+      },
+    }),
+    step: data.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && { image: step.image }),
+      ...(step.url && { url: step.url }),
+    })),
+  };
+}
+
+function buildReviewSchema(data: ReviewSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: {
+      '@type': 'LocalBusiness',
+      '@id': `${company.url}#organization`,
+      name: company.name,
+    },
+    author: {
+      '@type': 'Person',
+      name: data.author,
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: data.reviewRating.ratingValue,
+      bestRating: data.reviewRating.bestRating || '5',
+      worstRating: data.reviewRating.worstRating || '1',
+    },
+    reviewBody: data.reviewBody,
+    ...(data.datePublished && { datePublished: data.datePublished }),
+  };
+}
+
+function buildAggregateRatingSchema(data: AggregateRatingSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${company.url}#organization`,
+    name: company.name,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: data.ratingValue,
+      reviewCount: data.reviewCount,
+      bestRating: data.bestRating || '5',
+      worstRating: data.worstRating || '1',
+    },
+  };
+}
+
+function buildBreadcrumbSchema(data: BreadcrumbSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: data.items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+function buildContactPointSchema(data: ContactPointSchema) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPoint',
+    ...(data.telephone && { telephone: data.telephone }),
+    ...(data.email && { email: data.email }),
+    contactType: data.contactType,
+    ...(data.areaServed && { areaServed: data.areaServed }),
+    ...(data.availableLanguage && { availableLanguage: data.availableLanguage }),
+  };
+}
+
+function buildSchema(schemaData: SchemaType) {
+  switch (schemaData.type) {
+    case 'LocalBusiness':
+      return buildLocalBusinessSchema(schemaData);
+    case 'Organization':
+      return buildOrganizationSchema(schemaData);
+    case 'Service':
+      return buildServiceSchema(schemaData);
+    case 'Product':
+      return buildProductSchema(schemaData);
+    case 'FAQPage':
+      return buildFAQSchema(schemaData);
+    case 'HowTo':
+      return buildHowToSchema(schemaData);
+    case 'Review':
+      return buildReviewSchema(schemaData);
+    case 'AggregateRating':
+      return buildAggregateRatingSchema(schemaData);
+    case 'BreadcrumbList':
+      return buildBreadcrumbSchema(schemaData);
+    case 'ContactPoint':
+      return buildContactPointSchema(schemaData);
+    default:
+      return null;
+  }
+}
+
+const schemas = Array.isArray(schema) ? schema : [schema];
+const jsonLdScripts = schemas.map(buildSchema).filter(Boolean);
+---
+
+{jsonLdScripts.map((jsonLd) => (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+))}

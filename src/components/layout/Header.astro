@@ -1,0 +1,443 @@
+---
+/**
+ * Header Component
+ * Sticky header with logo, navigation, language switcher, and CTA button
+ * Mobile responsive with hamburger menu
+ * Uses theme CSS variables for consistent styling
+ */
+import Navigation from './Navigation.astro';
+import MobileMenuToggle from './MobileMenuToggle.astro';
+import ThemeToggle from '../ui/ThemeToggle.astro';
+import { getLocaleFromUrl, useTranslations, getLocalizedUrl, type Locale } from '../../i18n/utils';
+import { locales, localeNames } from '../../i18n/config';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const currentUrl = Astro.url;
+const locale = getLocaleFromUrl(currentUrl) as Locale;
+const t = useTranslations(locale);
+
+// Get current path without locale for language switcher
+const currentPath = currentUrl.pathname;
+---
+
+<header
+  class:list={[
+    'sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80',
+    'border-border',
+    className,
+  ]}
+  role="banner"
+>
+  <div class="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
+    <!-- Logo -->
+    <a
+      href={getLocalizedUrl('/', locale)}
+      class="flex items-center gap-2 text-xl font-bold text-foreground transition-colors hover:text-primary"
+      aria-label="Alpha Sign - {t('nav.home')}"
+    >
+      <!-- Light Mode Logo -->
+      <img
+        src="/alpha-sign-logo-hell.png"
+        alt="Alpha Sign AG"
+        class="h-[60px] w-auto dark:hidden"
+      />
+      <!-- Dark Mode Logo -->
+      <img
+        src="/Alpha-Sign-removebg-preview.png"
+        alt="Alpha Sign AG"
+        class="h-[60px] w-auto hidden dark:block dark:brightness-0 dark:invert"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden lg:flex lg:items-center lg:gap-6">
+      <Navigation locale={locale} />
+    </div>
+
+    <!-- Right Side Actions -->
+    <div class="flex items-center gap-4">
+      <!-- Mobile CTA Button -->
+      <a
+        href={getLocalizedUrl('/kontakt', locale)}
+        class="inline-flex md:hidden items-center justify-center rounded-[var(--radius)] bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 min-h-[40px]"
+      >
+        {t('nav.requestQuote')}
+      </a>
+
+      <!-- Language Switcher (Desktop) -->
+      <nav
+        class="hidden md:flex items-center gap-1 rounded-lg bg-muted p-1"
+        aria-label={t('common.language')}
+      >
+        {locales.map((lang) => {
+          const isActive = lang === locale;
+          const langUrl = getLocalizedUrl(
+            currentPath.replace(/^\/(en|de)/, '').replace(/^\/+/, '/') || '/',
+            lang
+          );
+          return (
+            <a
+              href={langUrl}
+              hreflang={lang}
+              lang={lang}
+              class:list={[
+                'px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 min-h-[36px] flex items-center justify-center',
+                isActive
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-background/50',
+              ]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {lang.toUpperCase()}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- CTA Button (Desktop) -->
+      <a
+        href={getLocalizedUrl('/kontakt', locale)}
+        class="hidden md:inline-flex items-center justify-center rounded-[var(--radius)] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 active:bg-primary/80 min-h-[44px] btn-press"
+      >
+        {t('nav.requestQuote')}
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <MobileMenuToggle locale={locale} />
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+  aria-hidden="true"
+></div>
+
+<!-- Mobile Menu Drawer -->
+<nav
+  id="mobile-menu"
+  class="fixed right-0 top-0 z-50 h-full w-full max-w-sm translate-x-full transform bg-background shadow-xl transition-transform duration-300 ease-in-out lg:hidden"
+  aria-label={t('nav.mainNavigation')}
+  aria-hidden="true"
+>
+  <div class="flex h-full flex-col">
+    <!-- Mobile Menu Header -->
+    <div class="flex items-center justify-between border-b border-border p-4">
+      <span class="text-lg font-semibold text-foreground">Menu</span>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        aria-label={t('nav.closeMenu')}
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Content -->
+    <div class="flex-1 overflow-y-auto p-4">
+      <ul class="space-y-2">
+        <!-- Home -->
+        <li>
+          <a
+            href={getLocalizedUrl('/', locale)}
+            class="flex items-center rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted min-h-[48px]"
+          >
+            {t('nav.home')}
+          </a>
+        </li>
+
+        <!-- Services with Submenu -->
+        <li>
+          <button
+            type="button"
+            class="mobile-submenu-toggle flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted min-h-[48px]"
+            aria-expanded="false"
+            aria-controls="mobile-services-submenu"
+          >
+            <span>{t('nav.services')}</span>
+            <svg
+              class="mobile-submenu-icon h-5 w-5 transform transition-transform duration-200"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <ul
+            id="mobile-services-submenu"
+            class="mobile-submenu hidden mt-2 space-y-1 pl-4"
+            role="menu"
+            aria-label={t('nav.servicesSubmenu')}
+          >
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/fahrzeugbeschriftung', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.fahrzeugbeschriftung')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/leuchtreklame', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.leuchtreklame')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/signaletik', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.signaletik')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/car-wrapping', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.carWrapping')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/gebaeudebeschriftung', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.gebaeudebeschriftung')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/messeauftritte', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.messeauftritte')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/kunst-am-bau', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.kunstAmBau')}
+              </a>
+            </li>
+            <li role="none">
+              <a
+                href={getLocalizedUrl('/dienstleistungen/fine-art-prints', locale)}
+                class="flex items-center rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground min-h-[44px]"
+                role="menuitem"
+              >
+                {t('nav.servicesList.fineArtPrints')}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Portfolio -->
+        <li>
+          <a
+            href={getLocalizedUrl('/portfolio', locale)}
+            class="flex items-center rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted min-h-[48px]"
+          >
+            {t('nav.portfolio')}
+          </a>
+        </li>
+
+        <!-- About -->
+        <li>
+          <a
+            href={getLocalizedUrl('/ueber-uns', locale)}
+            class="flex items-center rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted min-h-[48px]"
+          >
+            {t('nav.about')}
+          </a>
+        </li>
+
+        <!-- Contact -->
+        <li>
+          <a
+            href={getLocalizedUrl('/kontakt', locale)}
+            class="flex items-center rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted min-h-[48px]"
+          >
+            {t('nav.contact')}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mobile Menu Footer -->
+    <div class="border-t border-border p-4">
+      <!-- Theme Toggle (Mobile) -->
+      <div class="mb-4 flex justify-center">
+        <ThemeToggle />
+      </div>
+
+      <!-- Language Switcher (Mobile) -->
+      <nav
+        class="mb-4 flex items-center justify-center gap-2 rounded-lg bg-muted p-1"
+        aria-label={t('common.language')}
+      >
+        {locales.map((lang) => {
+          const isActive = lang === locale;
+          const langUrl = getLocalizedUrl(
+            currentPath.replace(/^\/(en|de)/, '').replace(/^\/+/, '/') || '/',
+            lang
+          );
+          return (
+            <a
+              href={langUrl}
+              hreflang={lang}
+              lang={lang}
+              class:list={[
+                'flex-1 px-4 py-2 text-center text-sm font-medium rounded-md transition-all duration-200',
+                isActive
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground',
+              ]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {localeNames[lang]}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- CTA Button (Mobile) -->
+      <a
+        href={getLocalizedUrl('/kontakt', locale)}
+        class="flex w-full items-center justify-center rounded-[var(--radius)] bg-primary px-4 py-4 text-base font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 active:bg-primary/80 min-h-[52px] btn-press"
+      >
+        {t('nav.requestQuote')}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu functionality
+  function initMobileMenu() {
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const menuClose = document.getElementById('mobile-menu-close');
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+      menu?.classList.remove('translate-x-full');
+      menu?.setAttribute('aria-hidden', 'false');
+      overlay?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      menuToggle?.setAttribute('aria-expanded', 'true');
+
+      // Focus trap - focus first focusable element
+      const firstFocusable = menu?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable instanceof HTMLElement) {
+        firstFocusable.focus();
+      }
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      menu?.classList.add('translate-x-full');
+      menu?.setAttribute('aria-hidden', 'true');
+      overlay?.classList.add('hidden');
+      document.body.style.overflow = '';
+      menuToggle?.setAttribute('aria-expanded', 'false');
+      menuToggle?.focus();
+    }
+
+    // Toggle menu
+    menuToggle?.addEventListener('click', () => {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close menu
+    menuClose?.addEventListener('click', closeMenu);
+    overlay?.addEventListener('click', closeMenu);
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu();
+      }
+    });
+
+    // Submenu toggles
+    submenuToggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        const submenuId = toggle.getAttribute('aria-controls');
+        const submenu = submenuId ? document.getElementById(submenuId) : null;
+        const icon = toggle.querySelector('.mobile-submenu-icon');
+
+        toggle.setAttribute('aria-expanded', String(!expanded));
+
+        if (submenu) {
+          submenu.classList.toggle('hidden');
+        }
+
+        if (icon) {
+          icon.classList.toggle('rotate-180');
+        }
+      });
+    });
+
+    // Handle keyboard navigation in menu
+    menu?.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const focusableElements = menu.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          if (lastElement instanceof HTMLElement) {
+            lastElement.focus();
+          }
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          if (firstElement instanceof HTMLElement) {
+            firstElement.focus();
+          }
+        }
+      }
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>

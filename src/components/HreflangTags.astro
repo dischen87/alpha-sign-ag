@@ -1,0 +1,20 @@
+---
+/**
+ * HreflangTags Component
+ * Generates hreflang link tags for SEO
+ * Place this component in the <head> of your pages
+ */
+import { generateHreflangTags } from '../i18n/utils';
+
+interface Props {
+  baseUrl?: string;
+}
+
+const { baseUrl = Astro.site?.toString() || 'https://example.com' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const hreflangTags = generateHreflangTags(currentPath, baseUrl.replace(/\/$/, ''));
+---
+
+{hreflangTags.map((tag) => (
+  <link rel={tag.rel} hreflang={tag.hreflang} href={tag.href} />
+))}

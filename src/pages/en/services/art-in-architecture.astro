@@ -1,0 +1,138 @@
+---
+/**
+ * Art in Architecture Service Page (English)
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Art in Architecture',
+  description: 'Art in architecture in Switzerland - Custom art installations, facade design, sculptures and artistic objects. CHF 5,000-100,000+. Experience with public tenders. Consultation: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Artistic installation on modern architecture in Switzerland',
+  serviceDescription: `Alpha Sign AG combines traditional craftsmanship with cutting-edge technology for artistic projects. We realize custom art projects for architecture and public spaces - from large-format wall designs to metal sculptures to interactive light installations.
+
+In close collaboration with architects, artists and building owners, we implement demanding projects that make buildings and spaces unique. Benefit from our experience in the precise execution of artistic visions - with CNC milling, laser cutting, 3D printing and traditional craft techniques.
+
+**Project inquiry: +41 41 780 05 05** - We discuss your vision and show implementation possibilities.`,
+  benefits: [
+    'Implementation of complex artistic visions with highest precision',
+    'Close collaboration with architects, artists and creatives',
+    'State-of-the-art manufacturing techniques: CNC milling, laser cutting, water jet, 3D printing',
+    'Many years of experience with public tenders and competitions',
+    'High-quality, durable materials for indoor and outdoor use',
+    'Complete project management from feasibility study to installation',
+    'Prototyping and samples at original size before series production',
+    'Documentation and maintenance concepts for permanent artworks',
+  ],
+  priceRange: {
+    min: 5000,
+    max: 100000,
+    note: 'Small projects and individual objects from CHF 5,000. Typical art-in-architecture projects (reliefs, sculptures, installations) CHF 20,000-100,000. Large public installations and special projects by individual quote (CHF 100,000+).',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'We discuss your vision, the architectural context and the framework conditions. For competitions, we support from the concept phase. Call: +41 41 780 05 05.',
+    },
+    {
+      title: 'Concept & Feasibility Study',
+      description: 'Together with you, the architect or artist, we analyze feasibility. We create material studies, weight calculations and initial cost estimates.',
+    },
+    {
+      title: 'Design & Technical Planning',
+      description: 'Detailed technical drawings, 3D CAD models and material samples. Coordination with structural engineer, architect and all project participants. Clarification of permits.',
+    },
+    {
+      title: 'Prototyping & Sampling',
+      description: 'For complex projects, we create prototypes, samples or partial pieces at original size for approval. This lets you check material, surface and effect in advance.',
+    },
+    {
+      title: 'Production',
+      description: 'Manufacturing in our workshop with cutting-edge technologies: CNC milling, laser cutting, water jet cutting, welding, surface treatment. Quality control of every component.',
+    },
+    {
+      title: 'Installation & Documentation',
+      description: 'Professional on-site installation - coordinated with the construction schedule. Then handover with complete documentation, care instructions and maintenance recommendations.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Light Sculpture Insurance Company Lobby',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80',
+      category: 'Light Art',
+      href: '/en/portfolio/lichtskulptur-versicherung',
+    },
+    {
+      title: 'Facade Relief Residential Development',
+      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
+      category: 'Facade Art',
+      href: '/en/portfolio/fassadenrelief-wohnen',
+    },
+    {
+      title: 'Metal Sculpture Roundabout Municipality',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+      category: 'Public Space',
+      href: '/en/portfolio/kreisel-skulptur',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is art in architecture?',
+      answer: 'Art in architecture refers to artistic works created specifically for an architectural context. They are permanently connected to the building (facade reliefs, wall designs) or part of the outdoor space (sculptures, installations). In Switzerland, public buildings often have an obligation to allocate 1-2% of the construction budget for art. Private developers are also increasingly using artistic accents.',
+    },
+    {
+      question: 'What materials do you use for art projects?',
+      answer: 'We work with a variety of materials depending on the artistic concept and location: Metals (steel, stainless steel, aluminum, Corten steel, bronze, brass), plastics (acrylic glass, GRP/fiberglass, Corian), wood (solid or plywood), glass, concrete and modern composite materials. For outdoor use, we pay attention to weather resistance, UV stability and vandalism resistance.',
+    },
+    {
+      question: 'Do you work directly with artists?',
+      answer: 'Yes, very gladly and regularly. We technically implement artists visions and contribute our expertise in material processing, statics and installation. Many artists appreciate our ability to make even unusual ideas feasible - while keeping an eye on the budget. On request, we also facilitate contacts with artists from our network.',
+    },
+    {
+      question: 'How does collaboration work for public tenders?',
+      answer: 'We have many years of experience with public procurement procedures (submission, invitation and open procedures) and the corresponding requirements. We support artists or architects with technical documentation for competition entries, create cost estimates and provide references and certifications. If awarded, we handle the on-time realization.',
+    },
+    {
+      question: 'What technologies do you use for art projects?',
+      answer: 'We combine cutting-edge manufacturing technologies with traditional craftsmanship: CNC milling (3- and 5-axis) for precise shapes in metal, wood and plastic. Laser cutting for filigree details and contours. Water jet cutting for thick materials without heat distortion. 3D printing for prototypes and complex geometries. Complemented by welding, grinding, polishing and various surface finishes (powder coating, anodizing, patination).',
+    },
+    {
+      question: 'Do you offer maintenance and care of artworks?',
+      answer: 'Yes, we offer maintenance contracts for permanent art installations. This includes regular inspection, cleaning, repair of surface damage and for light art, maintenance of electrical components. Especially for objects in public spaces, regular care is important for longevity. We create individual maintenance concepts.',
+    },
+  ],
+  keywords: [
+    'art in architecture Switzerland',
+    'art installation',
+    'facade art',
+    'sculpture public space',
+    'architectural art',
+    'public art Switzerland',
+    'metal sculpture',
+    'light art installation',
+    'art in architecture competition',
+    'art project architecture',
+    'facade relief',
+    'art object fabrication',
+    'sculpture manufacturing',
+    'public art Switzerland',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

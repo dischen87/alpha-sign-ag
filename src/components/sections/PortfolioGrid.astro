@@ -1,0 +1,252 @@
+---
+/**
+ * PortfolioGrid Component
+ * Responsive grid layout with filter buttons and animated filtering
+ */
+import ProjectCard from '../ui/ProjectCard.astro';
+import type { Project } from '../../data/projects';
+
+interface Category {
+  key: string;
+  label: string;
+}
+
+interface Props {
+  projects: Project[];
+  categories: Category[];
+  lang?: 'de' | 'en';
+}
+
+const { projects, categories, lang = 'de' } = Astro.props;
+
+const baseUrl = lang === 'de' ? '/portfolio' : '/en/portfolio';
+---
+
+<section class="py-16 lg:py-24 bg-background dark:bg-background">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 scroll-animate scroll-fade-up" data-scroll-animate role="tablist" aria-label={lang === 'de' ? 'Projektkategorien filtern' : 'Filter project categories'}>
+      {categories.map((cat, index) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls="portfolio-grid"
+          data-filter={cat.key}
+          class:list={[
+            'filter-btn',
+            'px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 min-h-[44px]',
+            'border-2 hover:scale-[1.02] active:scale-[0.98]',
+            index === 0
+              ? 'bg-primary border-primary text-primary-foreground shadow-md'
+              : 'bg-card border-border text-foreground hover:border-primary hover:text-primary dark:border-border dark:hover:border-primary',
+          ]}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <div
+      id="portfolio-grid"
+      role="tabpanel"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+    >
+      {projects.map((project, index) => (
+        <div class="scroll-animate scroll-fade-up" data-scroll-animate data-delay={(index % 6) + 1}>
+        <ProjectCard
+          slug={project.slug}
+          title={lang === 'de' ? project.de.title : project.en.title}
+          category={lang === 'de'
+            ? categories.find(c => c.key === project.categoryKey)?.label || project.category
+            : categories.find(c => c.key === project.categoryKey)?.label || project.category
+          }
+          client={project.client}
+          image={project.image}
+          href={`${baseUrl}/${project.slug}`}
+          lang={lang}
+        />
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16">
+      <svg class="w-16 h-16 mx-auto text-muted-foreground/30 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+      <p class="text-lg text-muted-foreground">
+        {lang === 'de' ? 'Keine Projekte in dieser Kategorie gefunden.' : 'No projects found in this category.'}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Initialize scroll animations for Portfolio Grid
+  function initPortfolioGridAnimations() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('[data-scroll-animate]').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    document.querySelectorAll('[data-scroll-animate]').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolioGridAnimations);
+  } else {
+    initPortfolioGridAnimations();
+  }
+  document.addEventListener('astro:page-load', initPortfolioGridAnimations);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const projectCards = document.querySelectorAll<HTMLElement>('.project-card');
+    const emptyState = document.getElementById('empty-state');
+    const grid = document.getElementById('portfolio-grid');
+
+    if (!filterButtons.length || !projectCards.length) return;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        if (!filter) return;
+
+        // Update button states
+        filterButtons.forEach((btn) => {
+          btn.setAttribute('aria-selected', 'false');
+          btn.classList.remove(
+            'bg-primary',
+            'border-primary',
+            'text-primary-foreground',
+            'shadow-md'
+          );
+          btn.classList.add(
+            'bg-card',
+            'border-border',
+            'text-foreground'
+          );
+        });
+
+        button.setAttribute('aria-selected', 'true');
+        button.classList.remove(
+          'bg-card',
+          'border-border',
+          'text-foreground'
+        );
+        button.classList.add(
+          'bg-primary',
+          'border-primary',
+          'text-primary-foreground',
+          'shadow-md'
+        );
+
+        // Filter cards with animation
+        let visibleCount = 0;
+
+        projectCards.forEach((card) => {
+          const category = card.dataset.category;
+          const shouldShow = filter === 'all' || getCategoryKey(category, filter);
+
+          if (shouldShow) {
+            card.classList.remove('hidden');
+            card.classList.add('visible');
+            card.style.position = 'relative';
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('visible');
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              if (card.classList.contains('hidden')) {
+                card.style.position = 'absolute';
+              }
+            }, 300);
+          }
+        });
+
+        // Show/hide empty state
+        if (emptyState) {
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    // Helper function to match category
+    function getCategoryKey(cardCategory: string | undefined, filterKey: string): boolean {
+      if (!cardCategory) return false;
+
+      // Category mapping for matching
+      const categoryMap: Record<string, string[]> = {
+        'fahrzeugbeschriftung': ['Fahrzeugbeschriftung', 'Vehicle Graphics'],
+        'leuchtreklame': ['Leuchtreklame', 'Illuminated Signs'],
+        'signaletik': ['Signaletik', 'Wayfinding'],
+        'car-wrapping': ['Car Wrapping'],
+        'gebaeudebeschriftung': ['Gebäudebeschriftung', 'Building Signage'],
+        'messeauftritte': ['Messeauftritte', 'Trade Shows'],
+        'kunst-am-bau': ['Kunst am Bau', 'Art Installations'],
+        'fine-art-prints': ['Fine Art Prints'],
+      };
+
+      const matchingLabels = categoryMap[filterKey] || [];
+      return matchingLabels.includes(cardCategory);
+    }
+  });
+</script>
+
+<style>
+  .filter-btn {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .filter-btn:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  #portfolio-grid {
+    position: relative;
+  }
+
+  .project-card {
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-card.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .project-card.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>

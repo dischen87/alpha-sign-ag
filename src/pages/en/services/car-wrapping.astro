@@ -1,0 +1,138 @@
+---
+/**
+ * Car Wrapping Service Page (English)
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Car Wrapping',
+  description: 'Professional car wrapping in Switzerland - Full wrap, color change and paint protection film (PPF). CHF 2,500-8,000. Showroom in Hunenberg. Consultation: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Professional car wrapping with matte vinyl in Switzerland',
+  serviceDescription: `Give your vehicle a completely new look with car wrapping from Alpha Sign AG. Whether elegant matte black, eye-catching satin chrome, subtle color change or carbon look - almost anything is possible with high-quality wrapping.
+
+Unlike repainting, car wrapping is fully reversible, significantly faster and often more affordable. At the same time, the film protects your valuable original paint from stone chips, scratches and UV radiation - ideal also for leased vehicles.
+
+**Visit our showroom in Hunenberg** and see various films and colors in person. Consultation appointment: +41 41 780 05 05`,
+  benefits: [
+    'Fully reversible - original condition can be restored at any time',
+    'Faster than painting - full wrap completed in just 3-5 days',
+    'Paint protection from stone chips, scratches and UV radiation',
+    'Unlimited color selection including special effects (matte, satin, carbon, chrome)',
+    'Value increase through protected original paint when selling',
+    'No waiting time for drying - immediately roadworthy',
+    'Ideal for leased vehicles - residue-free removal guaranteed',
+    'Certified wrappers with 3M and Avery training',
+  ],
+  priceRange: {
+    min: 2500,
+    max: 8000,
+    note: 'Partial wrap (roof, hood, mirrors) from CHF 800. Full wrap compact car from CHF 2,500, sedan/wagon CHF 3,500-5,000, SUV/sports car CHF 4,500-6,500. Premium special films (chrome, flip-flop) up to CHF 8,000.',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'Visit our showroom in Hunenberg and see various films in person. We advise on colors, finishes and durability. Appointment: +41 41 780 05 05.',
+    },
+    {
+      title: 'Measurements & Vehicle Assessment',
+      description: 'We precisely measure your vehicle and calculate the exact film requirements. You receive a binding quote with all details and options.',
+    },
+    {
+      title: 'Design & Visualization',
+      description: 'On request, we create a digital visualization of your vehicle in the chosen film color so you can see the result in advance.',
+    },
+    {
+      title: 'Vehicle Preparation',
+      description: 'The vehicle is thoroughly cleaned, degreased and freed from insect residue. Attachments such as mirrors, door handles, trim strips and emblems are carefully removed.',
+    },
+    {
+      title: 'Professional Wrapping',
+      description: 'In our climate-controlled, dust-free workshop, the film is applied bubble-free by our certified 3M wrappers and neatly folded and sealed at all edges.',
+    },
+    {
+      title: 'Quality Control & Handover',
+      description: 'After 24 hours resting time, meticulous final inspection takes place. You receive care instructions, warranty certificate and all information about color change registration in vehicle documents.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Tesla Model 3 Satin Black',
+      image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80',
+      category: 'Full Wrap',
+      href: '/en/portfolio/tesla-satin-black',
+    },
+    {
+      title: 'BMW M4 Competition Orange',
+      image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80',
+      category: 'Color Change',
+      href: '/en/portfolio/bmw-m4-orange',
+    },
+    {
+      title: 'Porsche 911 Paint Protection Film',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+      category: 'PPF',
+      href: '/en/portfolio/porsche-ppf',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between car wrapping and painting?',
+      answer: 'Car wrapping uses self-adhesive high-performance films, painting uses paint. Advantages of wrapping: Fully reversible (film can be removed), significantly faster (3-5 vs. 10-14 days), more color options (matte, satin, carbon, chrome, flip-flop), protects original paint, cheaper for special colors. Disadvantages: If damaged, an entire panel often needs replacing, slightly shorter durability (5-7 vs. 10+ years with quality paint).',
+    },
+    {
+      question: 'What films do you use for car wrapping?',
+      answer: 'We exclusively use premium films from 3M (Series 1080/2080), Avery Dennison Supreme Wrapping Film and Hexis. These cast films are specially developed for vehicles: highly flexible for complex curves, UV-resistant, color-stable for years and with air-release adhesive for bubble-free installation. Thickness: 80-120 microns. All films are REACH-compliant and pollutant-free.',
+    },
+    {
+      question: 'How long does a vehicle wrap last?',
+      answer: 'With high-quality films (3M, Avery Dennison, Hexis) and professional installation, a full wrap lasts 5-7 years. Durability depends on care (hand washing recommended), garage storage and sun exposure. Paint protection films (PPF) can last 10+ years. We provide a 3-year warranty on materials and workmanship.',
+    },
+    {
+      question: 'Do I need to report car wrapping to the road traffic office?',
+      answer: 'Yes, for a full wrap with color change, the new color must be registered in the vehicle documents. The cost is approximately CHF 50 at your canton road traffic office. For partial wraps (roof, hood) or when the base color remains predominantly visible, no change is necessary. We inform you exactly what is required in your case.',
+    },
+    {
+      question: 'Can I take my wrapped car through a car wash?',
+      answer: 'Yes, but with restrictions: We recommend car washes without rotating brushes (touchless washes or hand washing). Pressure washers should be used at least 40 cm away and not directed at edges/seams. In the first 2 weeks after wrapping, please no car wash at all so all edges can fully cure.',
+    },
+    {
+      question: 'How much does car wrapping cost compared to painting?',
+      answer: 'A full wrap typically costs CHF 2,500-6,000 (depending on vehicle size and film), a complete respray CHF 5,000-15,000. Car wrapping is therefore often significantly cheaper, especially for special colors like matte, chrome or carbon that would be very elaborate with paint. Additional advantage: The original paint remains protected and the film can be removed when selling or returning a lease.',
+    },
+  ],
+  keywords: [
+    'car wrapping Switzerland',
+    'vehicle wrap Switzerland',
+    'vinyl wrap cost',
+    'full wrap Switzerland',
+    'car wrap Zug',
+    'car wrap Zurich',
+    'car vinyl',
+    'paint protection film PPF',
+    'PPF Switzerland',
+    'matte car wrap',
+    'color change vinyl wrap',
+    'get car wrapped',
+    'car wrapping prices',
+    'sports car wrap',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

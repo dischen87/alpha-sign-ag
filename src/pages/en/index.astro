@@ -1,0 +1,103 @@
+---
+/**
+ * English Homepage for Alpha Sign AG
+ * Includes LocalBusiness schema for SEO
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Services from '../../components/sections/Services.astro';
+import WhyUs from '../../components/sections/WhyUs.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import CTA from '../../components/sections/CTA.astro';
+import CTABanner from '../../components/ui/CTABanner.astro';
+import type { LocalBusinessSchema, BreadcrumbSchema, OrganizationSchema } from '../../components/seo/SchemaOrg.astro';
+
+// Define schemas for homepage
+const localBusinessSchema: LocalBusinessSchema = {
+  type: 'LocalBusiness',
+  additionalType: 'SignShop',
+};
+
+const organizationSchema: OrganizationSchema = {
+  type: 'Organization',
+};
+
+const breadcrumbSchema: BreadcrumbSchema = {
+  type: 'BreadcrumbList',
+  items: [
+    { name: 'Home', url: 'https://www.alphasign.ch/en/' },
+  ],
+};
+
+// Homepage SEO keywords
+const keywords = [
+  'Signs',
+  'Signage',
+  'Advertising Technology',
+  'Illuminated Signs',
+  'Vehicle Lettering',
+  'Car Wrapping',
+  'Wayfinding Systems',
+  'Building Signage',
+  'Art in Architecture',
+  'Fine Art Prints',
+  'Hunenberg',
+  'Zug',
+  'Switzerland',
+  'Alpha Sign AG',
+];
+---
+
+<BaseLayout
+  title="Alpha Sign AG - Signage, Vehicle Lettering & Wayfinding | Hunenberg, Switzerland"
+  description="Alpha Sign AG in Hunenberg - Your Swiss partner for vehicle lettering, car wrapping, illuminated signs, wayfinding systems, building signage and fine art prints. Since 1989. Request a free quote!"
+  lang="en"
+  keywords={keywords}
+  schema={[localBusinessSchema, organizationSchema, breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <Hero locale="en" />
+
+  <!-- CTA Banner after Hero -->
+  <CTABanner
+    headline="Get Free Consultation"
+    description="Benefit from our expertise. We will provide you with a no-obligation quote for your project."
+    primaryCTA={{ text: "Request Quote", href: "/en/contact" }}
+    secondaryCTA={{ text: "Our Services", href: "/en/services" }}
+    variant="light"
+    compact={true}
+    locale="en"
+  />
+
+  <!-- Services Section -->
+  <Services locale="en" />
+
+  <!-- CTA Banner after Services -->
+  <CTABanner
+    headline="Discuss Your Project"
+    description="From the first idea to the finished implementation - we accompany you every step of the way."
+    primaryCTA={{ text: "Get in Touch", href: "/en/contact" }}
+    variant="dark"
+    compact={true}
+    locale="en"
+  />
+
+  <!-- Why Us / USP Section -->
+  <WhyUs locale="en" />
+
+  <!-- Testimonials Section -->
+  <Testimonials locale="en" />
+
+  <!-- CTA Banner after Testimonials -->
+  <CTABanner
+    headline="See for Yourself"
+    description="Join our satisfied customers. Contact us for a no-obligation conversation."
+    primaryCTA={{ text: "Request Quote", href: "/en/contact" }}
+    variant="gradient"
+    compact={true}
+    locale="en"
+  />
+
+  <!-- Call to Action Section -->
+  <CTA locale="en" phoneNumber="+41 41 780 05 05" />
+</BaseLayout>

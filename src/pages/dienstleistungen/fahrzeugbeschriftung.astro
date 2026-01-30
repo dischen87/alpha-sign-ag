@@ -1,0 +1,138 @@
+---
+/**
+ * Fahrzeugbeschriftung (Vehicle Lettering) Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Fahrzeugbeschriftung',
+  description: 'Professionelle Fahrzeugbeschriftung in der Schweiz - Ihr Fahrzeug als mobile Werbefläche. Von der einzelnen Beschriftung bis zur Komplettfolierung. Jetzt kostenlose Offerte anfragen: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Professionelle Fahrzeugbeschriftung auf Lieferwagen in der Schweiz',
+  serviceDescription: `Verwandeln Sie Ihr Fahrzeug in einen mobilen Werbeträger mit professioneller Fahrzeugbeschriftung von Alpha Sign AG. Seit 1989 beschriften wir in Hünenberg Fahrzeuge aller Art - vom Kleinwagen bis zum LKW, vom Lieferwagen bis zur gesamten Flotte.
+
+Mit bis zu 70'000 Sichtkontakten täglich ist Ihr beschriftetes Fahrzeug eine der kosteneffizientesten Werbeformen überhaupt. Unsere hochwertigen 3M und Avery Folien garantieren eine Haltbarkeit von 5-10 Jahren und schützen gleichzeitig den Originallack Ihres Fahrzeugs.
+
+**Rufen Sie uns an für eine kostenlose Beratung: +41 41 780 05 05** oder nutzen Sie unser Kontaktformular für eine unverbindliche Offerte.`,
+  benefits: [
+    'Haltbarkeit von 5-10 Jahren bei professioneller Pflege',
+    'Schutz des Originallacks - werterhaltend für Ihr Fahrzeug',
+    'Rückstandsfreie Entfernung jederzeit möglich',
+    'Mobile Werbung mit bis zu 70\'000 Sichtkontakten täglich',
+    'Individuelle Designs nach Ihren Corporate-Design-Vorgaben',
+    'Schweizer Qualität aus Hünenberg, Kanton Zug',
+    'Flottenrabatte für Unternehmen ab 3 Fahrzeugen',
+    'Express-Service für dringende Aufträge verfügbar',
+  ],
+  priceRange: {
+    min: 350,
+    max: 6000,
+    note: 'Einzelne Beschriftung (Logo + Kontaktdaten) CHF 350-2\'500. Komplettfolierung CHF 1\'500-6\'000. Preis abhängig von Fahrzeuggrösse, Designkomplexität und Folienmaterial. Flottenrabatte auf Anfrage.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihre Anforderungen telefonisch oder vor Ort. Sie erhalten erste Preisindikationen und Empfehlungen für Ihr Projekt. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Aufmass & Konzept',
+      description: 'Wir nehmen die exakten Masse Ihres Fahrzeugs auf - entweder in unserer Werkstatt oder bei Ihnen vor Ort. Basierend darauf erstellen wir ein erstes Gestaltungskonzept.',
+    },
+    {
+      title: 'Design & Visualisierung',
+      description: 'Unser Designteam erstellt eine fotorealistische Visualisierung auf Basis Ihres Fahrzeugmodells. Sie sehen vorab exakt, wie Ihr Fahrzeug nach der Beschriftung aussehen wird.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Nach Ihrer Freigabe produzieren wir die Folien mit modernster Drucktechnik. Wir verwenden ausschliesslich langlebige Markenfolien von 3M, Avery Dennison oder Oracal.',
+    },
+    {
+      title: 'Professionelle Montage',
+      description: 'Die Montage erfolgt in unserer klimatisierten, staubfreien Werkstatt in Hünenberg. Je nach Umfang dauert dies 4-8 Stunden. Ihr Fahrzeug ist am selben oder nächsten Tag bereit.',
+    },
+    {
+      title: 'Qualitätskontrolle & Übergabe',
+      description: 'Nach der Endkontrolle erhalten Sie eine Pflegeanleitung für maximale Haltbarkeit, Garantiedokumente und fahren mit Ihrem neuen mobilen Werbeträger nach Hause.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Lieferwagenflotte Müller Transport AG',
+      image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80',
+      category: 'Flottenbeklebung',
+      href: '/portfolio/mueller-transport',
+    },
+    {
+      title: 'Handwerkerbetrieb Schreinerei Huber',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+      category: 'Teilbeschriftung',
+      href: '/portfolio/schreinerei-huber',
+    },
+    {
+      title: 'Food Truck Gourmet on Wheels',
+      image: 'https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?auto=format&fit=crop&w=600&q=80',
+      category: 'Vollverklebung',
+      href: '/portfolio/food-truck-gourmet',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Was kostet eine Fahrzeugbeschriftung in der Schweiz?',
+      answer: 'Die Kosten variieren je nach Umfang: Eine einfache Beschriftung (Logo + Kontaktdaten auf beiden Seiten) kostet CHF 350-800. Teilbeschriftungen mit Grafiken liegen bei CHF 800-2\'500. Eine Komplettfolierung kostet CHF 1\'500-6\'000 je nach Fahrzeuggrösse. Bei Flotten ab 3 Fahrzeugen gewähren wir attraktive Mengenrabatte. Rufen Sie uns an für eine kostenlose Offerte: +41 41 780 05 05.',
+    },
+    {
+      question: 'Wie lange hält eine Fahrzeugbeschriftung?',
+      answer: 'Bei Verwendung hochwertiger Markenfolien (3M, Avery Dennison) und professioneller Montage hält eine Fahrzeugbeschriftung 5-10 Jahre. Die Haltbarkeit hängt von der Pflege ab: Regelmässige Handwäsche (keine Waschstrasse mit Bürsten) und Garagierung verlängern die Lebensdauer erheblich. Wir geben auf alle Beschriftungen eine Garantie.',
+    },
+    {
+      question: 'Welche Materialien verwendet ihr für Fahrzeugbeschriftungen?',
+      answer: 'Wir verwenden ausschliesslich Premium-Folien von 3M, Avery Dennison und Oracal. Für Beschriftungen nutzen wir gegossene Hochleistungsfolien (Cast-Folien) mit einer Dicke von 50-80 Mikron. Diese sind besonders flexibel für Kurven und Sicken und haben eine UV-Beständigkeit von 7-10 Jahren. Für Digitaldruck verwenden wir laminierte Druckfolien mit zusätzlichem Schutz gegen Kratzer und Verblassen.',
+    },
+    {
+      question: 'Kann die Fahrzeugbeschriftung wieder entfernt werden?',
+      answer: 'Ja, professionell angebrachte Folien können rückstandsfrei entfernt werden. Der Originallack bleibt unbeschädigt - im Gegenteil: Die Folie hat den Lack vor UV-Strahlung und kleinen Kratzern geschützt. Die Entfernung sollte von Fachpersonal durchgeführt werden und kostet je nach Umfang CHF 200-800. Bei Leasingfahrzeugen ist dies besonders wichtig.',
+    },
+    {
+      question: 'Wie lange dauert die Beschriftung meines Fahrzeugs?',
+      answer: 'Eine einfache Beschriftung (Logo + Text) ist oft innerhalb von 4-6 Stunden fertig - Sie können Ihr Fahrzeug am selben Tag abholen. Für Teilfolierungen planen Sie 1-2 Tage ein, für eine Vollverklebung 2-3 Tage. Bei dringenden Aufträgen bieten wir Express-Service an - sprechen Sie uns an.',
+    },
+    {
+      question: 'Brauche ich eine Bewilligung für Fahrzeugbeschriftung?',
+      answer: 'In der Schweiz ist für normale Fahrzeugbeschriftungen keine Bewilligung erforderlich. Bei Vollfolierungen, die die Grundfarbe des Fahrzeugs ändern, muss die neue Farbe im Fahrzeugausweis eingetragen werden (Kosten ca. CHF 50 beim Strassenverkehrsamt). Wichtig: Sicherheitsrelevante Bereiche wie Scheiben und Rücklichter dürfen nicht beklebt werden. Wir beraten Sie gerne zu allen Vorschriften.',
+    },
+  ],
+  keywords: [
+    'Fahrzeugbeschriftung Schweiz',
+    'Fahrzeugbeschriftung Zug',
+    'Fahrzeugbeschriftung Luzern',
+    'Fahrzeugbeschriftung Zürich',
+    'Autobeschriftung',
+    'Fahrzeugwerbung',
+    'Firmenbeschriftung Fahrzeug',
+    'Lieferwagen Beschriftung',
+    'Flottenbeklebung',
+    'Fahrzeugbeschriftung Kosten',
+    'Fahrzeugbeschriftung Preise Schweiz',
+    'Transporter beschriften',
+    'Firmenwagen Beschriftung',
+    'mobile Werbung Fahrzeug',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

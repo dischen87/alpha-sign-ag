@@ -1,0 +1,138 @@
+---
+/**
+ * Trade Show Displays Service Page (English)
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Trade Show Displays',
+  description: 'Professional trade show displays in Switzerland - Exhibition stand construction, displays, roll-ups and promotional materials. CHF 1,500-15,000+. Full service including setup/teardown. Consultation: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Modern trade show booth at a Swiss exhibition',
+  serviceDescription: `A convincing trade show appearance determines your success. Alpha Sign AG accompanies you from the first idea to the finished booth - and beyond.
+
+We concept, design and produce everything you need for a professional trade show appearance: Custom exhibition stands, modular display systems, roll-ups, banners, counters, lighting and all promotional materials. For ORNARIS, Swissbau, Zuger Messe, SWISS MEDTECH or international appearances.
+
+**Inquire without obligation: +41 41 780 05 05** - We advise on concept, budget and timeline.`,
+  benefits: [
+    'Full service from concept through production to setup and teardown',
+    'Modular systems - reusable for different trade shows and booth sizes',
+    'Transport, storage and logistics included on request',
+    'Short production times possible even for rush orders',
+    'Experience with all major Swiss trade shows',
+    'Sustainable, recyclable materials on request',
+    'Rental options for one-time appearances',
+    'Coordination with trade show organization and booth construction guidelines',
+  ],
+  priceRange: {
+    min: 1500,
+    max: 15000,
+    note: 'Roll-ups from CHF 150, pop-up walls CHF 500-2,000, mobile booth packages (3x3m) CHF 1,500-5,000, custom exhibition stands (9-20 sqm) CHF 5,000-15,000. Large appearances (30+ sqm) on request.',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'We discuss your trade show goals, budget, booth size and design requirements. Call: +41 41 780 05 05 or send us your inquiry.',
+    },
+    {
+      title: 'Measurements & Concept',
+      description: 'Based on the booth plan from the trade show, we develop a concept that optimally presents your brand and considers visitor traffic patterns.',
+    },
+    {
+      title: 'Design & Visualization',
+      description: 'Our design team develops your exhibition stand including graphics, lighting concept and furniture. You receive 3D visualizations for approval.',
+    },
+    {
+      title: 'Production',
+      description: 'We produce all elements in our workshop: Booth walls, graphics, banners, displays, counters and promotional materials - on schedule for your trade show.',
+    },
+    {
+      title: 'Logistics & Setup',
+      description: 'We organize transport to the trade show and professionally set up your booth - you can focus on your core business and your customers.',
+    },
+    {
+      title: 'Teardown & Storage',
+      description: 'After the trade show, we dismantle, transport back and store your booth at our facility on request - maintained and ready for the next deployment.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Exhibition Stand Medtech AG at SWISS MEDTECH',
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80',
+      category: 'Trade Exhibition',
+      href: '/en/portfolio/medtech-swiss-medtech',
+    },
+    {
+      title: 'Mobile Booth Startup at Zuger Messe',
+      image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=600&q=80',
+      category: 'Regional Fair',
+      href: '/en/portfolio/startup-zuger-messe',
+    },
+    {
+      title: 'Flagship Stand Watch Manufacturer Baselworld',
+      image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=600&q=80',
+      category: 'International Exhibition',
+      href: '/en/portfolio/uhren-baselworld',
+    },
+  ],
+  faqs: [
+    {
+      question: 'How far in advance do I need to order an exhibition stand?',
+      answer: 'For a custom, tailored exhibition stand, we recommend 6-8 weeks lead time. Standard products like roll-ups, pop-up walls or banners can often be delivered within 1-2 weeks. For rush orders, ask us - we usually find a solution, even on short notice. The earlier you inquire, the more design flexibility we have.',
+    },
+    {
+      question: 'How much does an exhibition stand cost?',
+      answer: 'Costs depend heavily on size, equipment and customization: A simple pop-up stand (3x3m) with counter and roll-up costs approximately CHF 1,500-3,000. Modular exhibition stands (9-20 sqm) with graphics are CHF 5,000-15,000. Large custom appearances (30+ sqm) with special constructions cost CHF 15,000-50,000+. Rental systems are often cheaper than buying - ask about our rental options.',
+    },
+    {
+      question: 'What materials do you use for exhibition stands?',
+      answer: 'We rely on lightweight, stable and reusable materials: Aluminum profile systems for the structure, textile tension frames with printed fabric panels (washable, wrinkle-free), Forex/Dibond for hard shell elements, LED lighting for optimal illumination. On request, we use sustainable, recyclable materials and FSC-certified wood.',
+    },
+    {
+      question: 'Do you offer rental exhibition stands?',
+      answer: 'Yes, we offer modular exhibition stand systems for rent. This is ideal if you only exhibit 1-2 times annually, need different booth sizes or want to conserve capital. The rental includes transport, setup and teardown. The graphics are individually produced for you and belong to you. Ask about our rental packages.',
+    },
+    {
+      question: 'Do you handle setup and teardown?',
+      answer: 'Yes, we offer full service: Transport, setup according to booth plan, teardown and return transport. Our experienced team knows the major Swiss exhibition halls (Messe Zurich, Messe Basel, Messe Lucerne, BEA Bern) and their regulations. We coordinate with the trade show organization and take care of power, water and internet connections.',
+    },
+    {
+      question: 'Which trade shows do you regularly service?',
+      answer: 'We have experience with all major Swiss trade shows: Swissbau, ORNARIS, Zuspa, Baselworld/Watches & Wonders, Auto Zurich, SWISS MEDTECH, Zuger Messe, Igeho, Giardina and many more. We also regularly service international appearances in Germany (Frankfurt, Munich, Dusseldorf) and Austria. We know the regulations and registration deadlines.',
+    },
+  ],
+  keywords: [
+    'exhibition stand Switzerland',
+    'trade show booth',
+    'trade fair display',
+    'roll-up banner',
+    'pop-up display',
+    'exhibition wall',
+    'trade show rental Switzerland',
+    'promotional display',
+    'exhibition stand cost',
+    'booth builder Switzerland',
+    'exhibition stand design',
+    'mobile exhibition stands',
+    'trade show system',
+    'exhibition booth Switzerland',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

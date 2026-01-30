@@ -1,0 +1,985 @@
+---
+/**
+ * ServiceLayout.astro
+ * Template for individual service pages
+ * Includes: Hero, Description, Benefits, Pricing, Process (HowTo schema), Portfolio, FAQ, CTA
+ */
+import BaseLayout from './BaseLayout.astro';
+import { getLocaleFromUrl, useTranslations, type Locale } from '../i18n';
+import HreflangTags from '../components/HreflangTags.astro';
+import CTABanner from '../components/ui/CTABanner.astro';
+import SidebarCTA from '../components/ui/SidebarCTA.astro';
+
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface RelatedProject {
+  title: string;
+  image: string;
+  category: string;
+  href: string;
+}
+
+interface PriceRange {
+  min: number;
+  max: number;
+  unit?: string;
+  note?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  heroImage: string;
+  heroImageAlt: string;
+  serviceDescription: string;
+  benefits: string[];
+  priceRange: PriceRange;
+  processSteps: ProcessStep[];
+  relatedProjects?: RelatedProject[];
+  faqs: FAQ[];
+  keywords?: string[];
+  lang?: Locale;
+  canonicalPath?: string;
+  alternatePath?: string;
+}
+
+const {
+  title,
+  description,
+  heroImage,
+  heroImageAlt,
+  serviceDescription,
+  benefits,
+  priceRange,
+  processSteps,
+  relatedProjects = [],
+  faqs,
+  keywords = [],
+  lang = getLocaleFromUrl(Astro.url),
+  canonicalPath,
+  alternatePath,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const isGerman = lang === 'de';
+
+// Common translations
+const translations = {
+  de: {
+    benefits: 'Ihre Vorteile',
+    pricing: 'Preisübersicht',
+    priceFrom: 'ab',
+    priceTo: 'bis',
+    priceNote: 'Preise abhängig von Grösse und Komplexität',
+    process: 'Unser Prozess',
+    step: 'Schritt',
+    portfolio: 'Referenzprojekte',
+    viewProject: 'Projekt ansehen',
+    faq: 'Häufig gestellte Fragen',
+    cta: {
+      title: 'Projekt anfragen',
+      subtitle: 'Erhalten Sie eine kostenlose und unverbindliche Offerte für Ihr Projekt.',
+      button: 'Jetzt Offerte anfragen',
+    },
+    priceTransparency: 'Preistransparenz ist uns wichtig',
+  },
+  en: {
+    benefits: 'Your Benefits',
+    pricing: 'Pricing Overview',
+    priceFrom: 'from',
+    priceTo: 'to',
+    priceNote: 'Prices depend on size and complexity',
+    process: 'Our Process',
+    step: 'Step',
+    portfolio: 'Reference Projects',
+    viewProject: 'View project',
+    faq: 'Frequently Asked Questions',
+    cta: {
+      title: 'Request a Quote',
+      subtitle: 'Get a free, no-obligation quote for your project.',
+      button: 'Request Quote Now',
+    },
+    priceTransparency: 'Price transparency is important to us',
+  },
+};
+
+const i18n = translations[lang];
+const contactHref = isGerman ? '/kontakt' : '/en/contact';
+
+// Company info for schemas
+const companyUrl = 'https://www.alphasign.ch';
+
+// Generate the current page URL based on language
+const serviceSlug = title.toLowerCase()
+  .replace(/\s+/g, '-')
+  .replace(/[äöü]/g, (char: string) => ({ 'ä': 'ae', 'ö': 'oe', 'ü': 'ue' }[char] || char));
+const servicePath = isGerman ? `/dienstleistungen/${serviceSlug}` : `/en/services/${serviceSlug}`;
+const serviceUrl = `${companyUrl}${servicePath}`;
+
+// Generate breadcrumb items
+const breadcrumbItems = isGerman
+  ? [
+      { name: 'Home', url: companyUrl },
+      { name: 'Dienstleistungen', url: `${companyUrl}/dienstleistungen` },
+      { name: title, url: serviceUrl },
+    ]
+  : [
+      { name: 'Home', url: `${companyUrl}/en` },
+      { name: 'Services', url: `${companyUrl}/en/services` },
+      { name: title, url: serviceUrl },
+    ];
+
+// Generate BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+
+// Generate HowTo Schema
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: isGerman ? `So funktioniert ${title}` : `How ${title} Works`,
+  description: serviceDescription,
+  image: heroImage,
+  totalTime: 'P1W', // Approximately 1 week for most services
+  estimatedCost: {
+    '@type': 'MonetaryAmountDistribution',
+    currency: 'CHF',
+    minValue: priceRange.min.toString(),
+    maxValue: priceRange.max.toString(),
+  },
+  step: processSteps.map((step, index) => ({
+    '@type': 'HowToStep',
+    position: index + 1,
+    name: step.title,
+    text: step.description,
+    url: `${serviceUrl}#schritt-${index + 1}`,
+  })),
+};
+
+// Generate FAQ Schema
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
+// Generate enhanced Service Schema with pricing
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${serviceUrl}#service`,
+  name: title,
+  description: serviceDescription,
+  image: heroImage,
+  url: serviceUrl,
+  serviceType: title,
+  provider: {
+    '@type': 'LocalBusiness',
+    '@id': `${companyUrl}#organization`,
+    name: 'Alpha Sign AG',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bösch 104',
+      addressLocality: 'Hünenberg',
+      addressRegion: 'ZG',
+      postalCode: '6331',
+      addressCountry: 'CH',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 47.1764,
+      longitude: 8.4319,
+    },
+    telephone: '+41 41 780 05 05',
+    email: 'info@alphasign.ch',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '127',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Switzerland',
+  },
+  priceRange: `CHF ${priceRange.min.toLocaleString('de-CH')} - CHF ${priceRange.max.toLocaleString('de-CH')}`,
+  offers: {
+    '@type': 'AggregateOffer',
+    lowPrice: priceRange.min.toString(),
+    highPrice: priceRange.max.toString(),
+    priceCurrency: 'CHF',
+    priceValidUntil: '2026-12-31',
+    availability: 'https://schema.org/InStock',
+    seller: {
+      '@type': 'LocalBusiness',
+      '@id': `${companyUrl}#organization`,
+      name: 'Alpha Sign AG',
+    },
+  },
+  termsOfService: `${companyUrl}/agb`,
+  brand: {
+    '@type': 'Brand',
+    name: 'Alpha Sign AG',
+  },
+};
+
+// Generate LocalBusiness Schema
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${companyUrl}#organization`,
+  name: 'Alpha Sign AG',
+  legalName: 'Alpha Sign AG',
+  url: companyUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${companyUrl}/logo.png`,
+    width: 600,
+    height: 60,
+  },
+  image: `${companyUrl}/og-image.jpg`,
+  description: 'Alpha Sign AG - Ihr Partner für hochwertige Schilder, Beschriftungen und Werbetechnik in der Schweiz seit 1989.',
+  foundingDate: '1989',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Bösch 104',
+    addressLocality: 'Hünenberg',
+    addressRegion: 'ZG',
+    postalCode: '6331',
+    addressCountry: 'CH',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 47.1764,
+    longitude: 8.4319,
+  },
+  telephone: '+41 41 780 05 05',
+  email: 'info@alphasign.ch',
+  priceRange: 'CHF 50 - CHF 500000',
+  currenciesAccepted: 'CHF',
+  paymentAccepted: 'Cash, Credit Card, Bank Transfer, Invoice',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '127',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:30',
+      closes: '12:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '13:15',
+      closes: '17:00',
+    },
+  ],
+  sameAs: [
+    'https://www.facebook.com/alphasignag',
+    'https://www.linkedin.com/company/alpha-sign-ag',
+    'https://www.instagram.com/alphasignag',
+  ],
+  areaServed: [
+    { '@type': 'Country', name: 'Switzerland' },
+    { '@type': 'AdministrativeArea', name: 'Zug' },
+    { '@type': 'AdministrativeArea', name: 'Luzern' },
+    { '@type': 'AdministrativeArea', name: 'Zürich' },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+41 41 780 05 05',
+      contactType: 'customer service',
+      email: 'info@alphasign.ch',
+      areaServed: 'CH',
+      availableLanguage: ['German', 'English', 'French', 'Italian'],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${title} | Alpha Sign AG`}
+  description={description}
+  lang={lang}
+  keywords={keywords}
+  image={heroImage}
+  imageAlt={heroImageAlt}
+>
+  <Fragment slot="head">
+    <HreflangTags />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <div class="service-page">
+    <!-- Hero Section -->
+    <section class="service-hero">
+      <div class="service-hero__background">
+        <img
+          src={heroImage}
+          alt={heroImageAlt}
+          width="1920"
+          height="600"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="service-hero__overlay"></div>
+      </div>
+      <div class="service-hero__content container">
+        <h1 class="service-hero__title">{title}</h1>
+        <p class="service-hero__description">{description}</p>
+      </div>
+    </section>
+
+    <!-- Service Description with Sidebar -->
+    <section class="service-description section">
+      <div class="container">
+        <div class="service-layout-grid">
+          <div class="service-main-content">
+            <div class="service-description__content">
+              <p class="service-description__text">{serviceDescription}</p>
+              <slot name="description-extra" />
+            </div>
+
+            <!-- Inline CTA after intro (mobile-friendly) -->
+            <div class="service-inline-cta">
+              <CTABanner
+                headline={isGerman ? "Jetzt kostenlos beraten lassen" : "Get Free Consultation"}
+                description={isGerman ? "Profitieren Sie von unserer Expertise." : "Benefit from our expertise."}
+                primaryCTA={{ text: isGerman ? "Offerte anfragen" : "Request Quote", href: contactHref }}
+                variant="light"
+                compact={true}
+                locale={lang}
+              />
+            </div>
+          </div>
+
+          <!-- Desktop Sidebar CTA -->
+          <div class="service-sidebar">
+            <SidebarCTA locale={lang} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="service-benefits section section--alt">
+      <div class="container">
+        <h2 class="section__title">{i18n.benefits}</h2>
+        <ul class="benefits-grid">
+          {benefits.map((benefit) => (
+            <li class="benefit-item">
+              <div class="benefit-item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <span class="benefit-item__text">{benefit}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="service-pricing section">
+      <div class="container">
+        <h2 class="section__title">{i18n.pricing}</h2>
+        <p class="section__subtitle">{i18n.priceTransparency}</p>
+        <div class="pricing-card">
+          <div class="pricing-card__range">
+            <span class="pricing-card__label">{i18n.priceFrom}</span>
+            <span class="pricing-card__amount">CHF {priceRange.min.toLocaleString('de-CH')}</span>
+            <span class="pricing-card__separator">-</span>
+            <span class="pricing-card__label">{i18n.priceTo}</span>
+            <span class="pricing-card__amount">CHF {priceRange.max.toLocaleString('de-CH')}</span>
+            {priceRange.unit && <span class="pricing-card__unit">{priceRange.unit}</span>}
+          </div>
+          <p class="pricing-card__note">{priceRange.note || i18n.priceNote}</p>
+          <slot name="pricing-extra" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner after Pricing -->
+    <CTABanner
+      headline={isGerman ? "Individuelle Offerte erhalten" : "Get Your Custom Quote"}
+      description={isGerman ? "Jeder Auftrag ist einzigartig. Kontaktieren Sie uns fuer eine massgeschneiderte Offerte." : "Every project is unique. Contact us for a tailored quote."}
+      primaryCTA={{ text: isGerman ? "Jetzt anfragen" : "Request Now", href: contactHref }}
+      variant="dark"
+      compact={true}
+      locale={lang}
+    />
+
+    <!-- Process Steps Section (HowTo Schema) -->
+    <section class="service-process section section--alt">
+      <div class="container">
+        <h2 class="section__title">{i18n.process}</h2>
+        <ol class="process-steps">
+          {processSteps.map((step, index) => (
+            <li class="process-step">
+              <div class="process-step__number">
+                <span>{index + 1}</span>
+              </div>
+              <div class="process-step__content">
+                <h3 class="process-step__title">{step.title}</h3>
+                <p class="process-step__description">{step.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Related Projects / Portfolio -->
+    {relatedProjects.length > 0 && (
+      <section class="service-portfolio section">
+        <div class="container">
+          <h2 class="section__title">{i18n.portfolio}</h2>
+          <div class="portfolio-grid">
+            {relatedProjects.map((project) => (
+              <a href={project.href} class="portfolio-item">
+                <div class="portfolio-item__image">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="portfolio-item__content">
+                  <span class="portfolio-item__category">{project.category}</span>
+                  <h3 class="portfolio-item__title">{project.title}</h3>
+                  <span class="portfolio-item__link">{i18n.viewProject}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- FAQ Section -->
+    <section id="faq" class="service-faq section section--alt">
+      <div class="container">
+        <h2 class="section__title">{i18n.faq}</h2>
+        <div class="faq-list">
+          {faqs.map((faq, index) => (
+            <details class="faq-item" id={`faq-${index}`}>
+              <summary class="faq-item__question">
+                <span>{faq.question}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-item__icon">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div class="faq-item__answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner after FAQ -->
+    <CTABanner
+      headline={isGerman ? "Noch Fragen? Wir helfen gerne!" : "Still Have Questions? We're Happy to Help!"}
+      description={isGerman ? "Rufen Sie uns an oder schreiben Sie uns eine E-Mail." : "Call us or send us an email."}
+      primaryCTA={{ text: isGerman ? "Kontakt aufnehmen" : "Get in Touch", href: contactHref }}
+      variant="gradient"
+      compact={true}
+      locale={lang}
+    />
+
+    <!-- CTA Section -->
+    <section class="service-cta section">
+      <div class="container">
+        <div class="cta-card">
+          <h2 class="cta-card__title">{i18n.cta.title}</h2>
+          <p class="cta-card__subtitle">{i18n.cta.subtitle}</p>
+          <a href={contactHref} class="cta-card__button btn btn--primary">
+            {i18n.cta.button}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .service-hero {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .service-hero__background {
+    position: absolute;
+    inset: 0;
+  }
+
+  .service-hero__background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .service-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+  }
+
+  .service-hero__content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 4rem 1rem;
+  }
+
+  .service-hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-hero__description {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    max-width: 600px;
+    opacity: 0.9;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Section */
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section--alt {
+    background-color: #f8fafc;
+  }
+
+  .section__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a365d;
+  }
+
+  .section__subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+  }
+
+  /* Service Layout Grid */
+  .service-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .service-layout-grid {
+      grid-template-columns: 1fr 320px;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .service-main-content {
+    min-width: 0;
+  }
+
+  .service-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .service-sidebar {
+      display: block;
+    }
+  }
+
+  .service-inline-cta {
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .service-inline-cta {
+      display: none;
+    }
+  }
+
+  /* Service Description */
+  .service-description__content {
+    max-width: 800px;
+    text-align: left;
+  }
+
+  @media (max-width: 1023px) {
+    .service-description__content {
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  .service-description__text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #334155;
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .benefit-item__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e0f2fe;
+    color: #0369a1;
+    border-radius: 50%;
+  }
+
+  .benefit-item__text {
+    font-size: 1rem;
+    color: #334155;
+    line-height: 1.5;
+  }
+
+  /* Pricing Card */
+  .pricing-card {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .pricing-card__range {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card__label {
+    font-size: 0.875rem;
+    color: #64748b;
+    text-transform: uppercase;
+  }
+
+  .pricing-card__amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a365d;
+  }
+
+  .pricing-card__separator {
+    font-size: 1.5rem;
+    color: #94a3b8;
+  }
+
+  .pricing-card__unit {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .pricing-card__note {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  /* Process Steps */
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem auto 0;
+    max-width: 800px;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .process-step__number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a365d;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-radius: 50%;
+  }
+
+  .process-step__content {
+    flex: 1;
+    padding-top: 0.25rem;
+  }
+
+  .process-step__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-step__description {
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  /* Portfolio Grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .portfolio-item {
+    display: block;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .portfolio-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .portfolio-item__image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .portfolio-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .portfolio-item:hover .portfolio-item__image img {
+    transform: scale(1.05);
+  }
+
+  .portfolio-item__content {
+    padding: 1.5rem;
+  }
+
+  .portfolio-item__category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #0369a1;
+  }
+
+  .portfolio-item__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a365d;
+    margin: 0.5rem 0;
+  }
+
+  .portfolio-item__link {
+    font-size: 0.875rem;
+    color: #0369a1;
+  }
+
+  /* FAQ List */
+  .faq-list {
+    max-width: 800px;
+    margin: 2rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #1a365d;
+    list-style: none;
+  }
+
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__icon {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-item__answer {
+    padding: 0 1.5rem 1.25rem;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  /* CTA Card */
+  .cta-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
+    border-radius: 1rem;
+    color: white;
+  }
+
+  .cta-card__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-card__subtitle {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Button */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .btn--primary {
+    background: white;
+    color: #1a365d;
+  }
+
+  .btn--primary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .service-hero {
+      min-height: 300px;
+    }
+
+    .section {
+      padding: 3rem 0;
+    }
+
+    .process-step {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .process-step__number {
+      margin: 0 auto;
+    }
+  }
+</style>

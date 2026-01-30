@@ -1,0 +1,56 @@
+---
+import { locales, localeNames, switchLanguage, getLocaleFromUrl, type Locale } from '../i18n/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const currentUrl = Astro.url;
+const currentLocale = getLocaleFromUrl(currentUrl);
+---
+
+<nav class:list={['language-switcher', className]} aria-label="Language selection">
+  <ul>
+    {locales.map((locale) => (
+      <li>
+        <a
+          href={switchLanguage(currentUrl, locale)}
+          aria-current={locale === currentLocale ? 'page' : undefined}
+          hreflang={locale}
+          lang={locale}
+          class:list={[{ active: locale === currentLocale }]}
+        >
+          {localeNames[locale]}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .language-switcher ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .language-switcher a {
+    text-decoration: none;
+    color: inherit;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .language-switcher a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .language-switcher a.active {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+</style>

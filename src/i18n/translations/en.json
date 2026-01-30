@@ -1,0 +1,278 @@
+{
+  "site": {
+    "title": "Alpha Sign",
+    "description": "Welcome to Alpha Sign"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "faq": "FAQ",
+    "requestQuote": "Request Quote",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNavigation": "Main navigation",
+    "servicesSubmenu": "Services submenu",
+    "servicesList": {
+      "fahrzeugbeschriftung": "Vehicle Graphics",
+      "leuchtreklame": "Illuminated Signs",
+      "signaletik": "Wayfinding & Signage",
+      "carWrapping": "Car Wrapping",
+      "gebaeudebeschriftung": "Building Signage",
+      "messeauftritte": "Trade Show Displays",
+      "kunstAmBau": "Art in Architecture",
+      "fineArtPrints": "Fine Art Prints"
+    }
+  },
+  "common": {
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "contactUs": "Contact us",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "language": "Language",
+    "required": "Required",
+    "optional": "Optional",
+    "loading": "Loading..."
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "imprint": "Legal Notice",
+    "terms": "Terms & Conditions",
+    "companyDescription": "Alpha Sign AG - Since 1989, your Swiss partner for high-quality signage, illuminated signs, wayfinding systems and visual communication. Industriestrasse 15, 6331 Hunenberg, Canton of Zug.",
+    "servicesTitle": "Services",
+    "companyTitle": "Company",
+    "contactTitle": "Contact",
+    "about": "About Us",
+    "portfolio": "Portfolio",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "viewOnMap": "View on Map",
+    "services": {
+      "vehicleGraphics": "Vehicle Lettering",
+      "illuminatedSigns": "Illuminated Signs",
+      "wayfinding": "Wayfinding Systems",
+      "carWrapping": "Car Wrapping",
+      "buildingSignage": "Building Signage",
+      "tradeShows": "Trade Show Displays",
+      "artInArchitecture": "Art in Architecture",
+      "digitalPrinting": "Fine Art Prints"
+    }
+  },
+  "contactForm": {
+    "title": "Request a Quote",
+    "subtitle": "Tell us about your project",
+    "step": "Step",
+    "of": "of",
+    "stepTitles": {
+      "contact": "Contact Information",
+      "project": "Project Type",
+      "details": "Project Details"
+    },
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your full name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+41 XX XXX XX XX"
+      },
+      "company": {
+        "label": "Company",
+        "placeholder": "Company name"
+      },
+      "projectType": {
+        "label": "Project Type",
+        "placeholder": "Select a project type"
+      },
+      "projectDetails": {
+        "label": "Project Description",
+        "placeholder": "Describe your project in detail..."
+      },
+      "budget": {
+        "label": "Budget",
+        "min": "CHF 500",
+        "max": "CHF 50,000+"
+      },
+      "timeline": {
+        "label": "Timeline",
+        "placeholder": "Select a timeline",
+        "options": {
+          "asap": "As soon as possible",
+          "1month": "Within 1 month",
+          "3months": "Within 3 months",
+          "6months": "Within 6 months",
+          "flexible": "Flexible"
+        }
+      }
+    },
+    "projectTypes": {
+      "fahrzeugbeschriftung": "Vehicle Graphics",
+      "leuchtreklame": "Illuminated Signs",
+      "signaletik": "Wayfinding & Signage",
+      "carWrapping": "Car Wrapping",
+      "gebaeudebeschriftung": "Building Signage",
+      "messeauftritte": "Trade Show Displays",
+      "kunstAmBau": "Art in Architecture",
+      "andere": "Other"
+    },
+    "validation": {
+      "nameRequired": "Please enter your name",
+      "nameMin": "Name must be at least 2 characters",
+      "emailRequired": "Please enter your email address",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneInvalid": "Please enter a valid phone number",
+      "projectTypeRequired": "Please select a project type",
+      "projectDetailsRequired": "Please describe your project",
+      "projectDetailsMin": "Description must be at least 10 characters",
+      "timelineRequired": "Please select a timeline"
+    },
+    "success": {
+      "title": "Thank you!",
+      "message": "Your request has been successfully submitted. We will get back to you shortly."
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error occurred. Please try again later.",
+      "spam": "This request could not be processed."
+    }
+  },
+  "hero": {
+    "tagline": "Swiss Quality since 1989",
+    "headline": "Your Brand. Perfectly Presented.",
+    "subheadline": "Professional signage, illuminated signs and wayfinding from Hünenberg, Zug",
+    "cta": {
+      "primary": "Free Consultation",
+      "secondary": "Our Work",
+      "phone": "+41 41 780 05 05"
+    },
+    "trust": {
+      "experience": "35+ Years Experience",
+      "projects": "2,500+ Projects",
+      "swissMade": "100% Swiss Made"
+    },
+    "scroll": "Discover"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "The complete spectrum of professional signage and visual communication - everything from a single source",
+    "items": {
+      "vehicleLettering": {
+        "title": "Vehicle Lettering",
+        "description": "Transform your vehicle into a mobile advertising platform. Professional graphics for cars, vans and entire fleets - with 5-10 years durability."
+      },
+      "illuminatedSigns": {
+        "title": "Illuminated Signs",
+        "description": "LED channel letters and illuminated displays for maximum visibility around the clock. Including permit consultation for Canton Zug and all of Switzerland."
+      },
+      "signage": {
+        "title": "Wayfinding Systems",
+        "description": "Professional wayfinding and orientation systems for buildings, premises and public spaces. Barrier-free according to SIA 500 standards."
+      },
+      "carWrapping": {
+        "title": "Car Wrapping",
+        "description": "Full vehicle wraps in premium quality. Color change, paint protection and custom designs - reversible and value-preserving."
+      },
+      "buildingLettering": {
+        "title": "Building Signage",
+        "description": "3D letters, facade signage and window graphics. High-quality, weather-resistant materials for outdoor use."
+      },
+      "tradeShows": {
+        "title": "Trade Show Displays",
+        "description": "Complete exhibition stand solutions: roll-ups, pop-up displays, banners and custom booth concepts for your successful appearance."
+      },
+      "artInArchitecture": {
+        "title": "Art in Architecture",
+        "description": "Custom art installations and artistic designs for architecture and public spaces. Realization of complex artistic visions."
+      },
+      "fineArtPrints": {
+        "title": "Fine Art Prints",
+        "description": "High-quality giclee art prints in gallery quality. Lightfast for over 100 years, on fine art papers from Hahnemuhle and Canson."
+      }
+    }
+  },
+  "whyUs": {
+    "title": "Why Alpha Sign?",
+    "subtitle": "Trust in Swiss quality and over 35 years of experience in Hunenberg",
+    "items": {
+      "experience": {
+        "title": "35+ Years Experience",
+        "description": "Since 1989, your reliable partner for signage, wayfinding and visual communication in Switzerland"
+      },
+      "rating": {
+        "title": "5.0 Star Rating",
+        "description": "Highest customer satisfaction - our clients value quality, reliability and personal service"
+      },
+      "swissQuality": {
+        "title": "100% Swiss Made",
+        "description": "All work is produced in our workshop in Hunenberg, Canton of Zug - with precision and attention to detail"
+      },
+      "fullService": {
+        "title": "Full Service from One Source",
+        "description": "From consultation to design and production to professional installation - one contact for your entire project"
+      }
+    }
+  },
+  "portfolio": {
+    "title": "Our Projects",
+    "subtitle": "Discover a selection of our completed works",
+    "filters": {
+      "all": "All",
+      "vehicleLettering": "Vehicle Lettering",
+      "illuminatedSigns": "Illuminated Signs",
+      "signage": "Wayfinding Signage",
+      "carWrapping": "Car Wrapping",
+      "buildingLettering": "Building Signage",
+      "tradeShows": "Trade Shows",
+      "artInArchitecture": "Art in Architecture",
+      "fineArtPrints": "Fine Art Prints"
+    },
+    "viewProject": "View Project"
+  },
+  "testimonials": {
+    "title": "Customer Reviews",
+    "subtitle": "What our satisfied customers say about us"
+  },
+  "cta": {
+    "title": "Ready for Your Next Project?",
+    "subtitle": "Contact us for a free, no-obligation consultation. We look forward to bringing your ideas to life.",
+    "button": "Request a Free Quote Now",
+    "phone": "Or call us directly"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to the most important questions",
+    "items": {
+      "q1": {
+        "question": "How long does it take to complete a project?",
+        "answer": "Project duration depends on scope and complexity. Simple vehicle lettering can often be completed within a few days, while larger projects like illuminated signs or wayfinding systems may take several weeks. After the initial consultation, you will receive a detailed timeline."
+      },
+      "q2": {
+        "question": "Do you also offer installation services?",
+        "answer": "Yes, we offer complete full-service - from initial consultation through design and production to professional installation. Our experienced installation teams ensure professional on-site installation."
+      },
+      "q3": {
+        "question": "What materials do you use?",
+        "answer": "We exclusively use high-quality branded materials known for their durability and quality. Depending on the application, we rely on proven films, LED technology, and other premium materials."
+      },
+      "q4": {
+        "question": "Can you create custom designs?",
+        "answer": "Absolutely! Our experienced design team develops tailored solutions that perfectly match your brand and requirements. We work closely with you to bring your vision to life."
+      },
+      "q5": {
+        "question": "How do I get a quote?",
+        "answer": "Contact us by phone, email, or through our online form. Describe your project, and we will provide you with a non-binding, detailed quote. For more complex projects, we are happy to arrange an on-site appointment."
+      }
+    }
+  }
+}

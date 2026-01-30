@@ -1,0 +1,138 @@
+---
+/**
+ * Gebäudebeschriftung (Building Signage) Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Gebäudebeschriftung',
+  description: 'Professionelle Gebäudebeschriftung in der Schweiz - Fassadenbeschriftung, 3D-Buchstaben, Firmenschilder und Schaufensterbeschriftung. CHF 500-20\'000. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: '3D-Buchstaben an moderner Fassade in der Schweiz',
+  serviceDescription: `Machen Sie Ihr Unternehmen sichtbar mit professioneller Gebäudebeschriftung von Alpha Sign AG. Ob markante 3D-Buchstaben an der Fassade, elegante Schaufensterbeschriftung, praktische Firmenschilder am Eingang oder grossflächige Fassadenwerbung - wir gestalten und montieren Ihre Aussenwerbung aus hochwertigen, witterungsbeständigen Materialien.
+
+Seit 1989 verschönern wir Gebäude in der ganzen Schweiz - von der kleinen Arztpraxis bis zum Konzernhauptsitz. Unsere Monteure sind für Arbeiten in grosser Höhe geschult und ausgerüstet.
+
+**Kostenlose Vor-Ort-Beratung: +41 41 780 05 05** - Wir besichtigen Ihr Gebäude und erstellen eine unverbindliche Offerte.`,
+  benefits: [
+    'Hochwertige, witterungsbeständige Materialien für lange Haltbarkeit',
+    'Individuelle Designs passend zu Ihrem Corporate Design',
+    '3D-Buchstaben mit oder ohne LED-Beleuchtung',
+    'Professionelle Montage auch in grosser Höhe (Hebebühne, Gerüst)',
+    'Komplette Beratung zu Bewilligungen wenn erforderlich',
+    'Wartung, Reinigung und Pflege auf Wunsch',
+    'Vom Einzelschild bis zur kompletten Fassadengestaltung',
+    'Schweizer Qualität aus eigener Werkstatt in Hünenberg',
+  ],
+  priceRange: {
+    min: 500,
+    max: 20000,
+    note: 'Schaufensterbeschriftung ab CHF 200, Firmenschilder ab CHF 500, Folierung Fassade CHF 500-3\'000, 3D-Buchstaben unbeleuchtet CHF 1\'500-8\'000, 3D-Buchstaben mit LED CHF 3\'000-15\'000, beleuchtete Grossanlagen bis CHF 20\'000+.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Telefonisch oder vor Ort besprechen wir Ihre Wünsche und analysieren die Gegebenheiten am Gebäude. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Aufmass & Vor-Ort-Begehung',
+      description: 'Wir besichtigen Ihr Gebäude, vermessen die Flächen, prüfen die Montagemöglichkeiten und klären eventuelle Bewilligungspflichten mit Ihnen ab.',
+    },
+    {
+      title: 'Konzept & Visualisierung',
+      description: 'Sie erhalten fotorealistische Montagevisualisierungen, die zeigen, wie die Beschriftung an Ihrem Gebäude wirken wird - aus verschiedenen Blickwinkeln und bei Tag/Nacht.',
+    },
+    {
+      title: 'Bewilligung (falls erforderlich)',
+      description: 'Bei bewilligungspflichtigen Anlagen (Leuchtreklamen, grosse 3D-Buchstaben) unterstützen wir Sie beim Baugesuch mit allen erforderlichen Unterlagen.',
+    },
+    {
+      title: 'Produktion',
+      description: 'In unserer Werkstatt in Hünenberg fertigen wir Ihre Beschriftung aus Aluminium, Acrylglas, Edelstahl, Dibond oder anderen Materialien präzise nach Mass.',
+    },
+    {
+      title: 'Montage & Qualitätskontrolle',
+      description: 'Unser erfahrenes Montageteam installiert Ihre Gebäudebeschriftung fachgerecht - auch in grosser Höhe mit Hebebühne oder Gerüst. Anschliessend erfolgt die Endkontrolle.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: '3D-Buchstaben Technopark Zug',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+      category: 'Industrie',
+      href: '/portfolio/technopark-zug',
+    },
+    {
+      title: 'Schaufensterbeschriftung Boutique Mode',
+      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
+      category: 'Retail',
+      href: '/portfolio/boutique-mode',
+    },
+    {
+      title: 'Firmenschild Anwaltskanzlei',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Dienstleistung',
+      href: '/portfolio/anwaltskanzlei',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Welche Materialien eignen sich für Gebäudebeschriftung?',
+      answer: 'Für den Aussenbereich empfehlen wir: Aluminium - leicht, rostfrei, pulverbeschichtbar in allen RAL-Farben, ideal für 3D-Buchstaben. Edelstahl - edel, extrem langlebig, vandalismussicher. Acrylglas - modern, hinterleuchbar, viele Farboptionen. Dibond/Alucobond - stabil, witterungsbeständig, ideal für Schilder. Für Schaufenster eignen sich Klebefolien, Glasdekorfolien oder Sandstrahloptik. Wir beraten Sie zur optimalen Materialwahl für Ihr Budget und Ihre Anforderungen.',
+    },
+    {
+      question: 'Brauche ich eine Bewilligung für Gebäudebeschriftung?',
+      answer: 'Das hängt von Art und Grösse ab: Einfache Beschriftungen (Folien, kleine Schilder, Schaufensterbeschriftung) sind meist bewilligungsfrei. Für grössere 3D-Buchstaben an der Fassade, beleuchtete Werbung oder Anlagen mit Ausladung über öffentlichem Grund kann ein Baugesuch erforderlich sein. Die Vorschriften variieren je nach Kanton und Gemeinde. Im Kanton Zug und der Region beraten wir Sie gerne zu den lokalen Anforderungen.',
+    },
+    {
+      question: 'Was kosten 3D-Buchstaben für die Fassade?',
+      answer: 'Der Preis hängt von Grösse, Material und Beleuchtung ab: Einfache 3D-Buchstaben aus Acrylglas (ca. 20-30 cm hoch) kosten ab CHF 50-100 pro Buchstabe. Aluminium-Buchstaben in gleicher Grösse CHF 80-150 pro Buchstabe. Mit LED-Hinterleuchtung verdoppelt sich der Preis ungefähr. Für einen Firmennamen mit 8-12 Buchstaben rechnen Sie mit CHF 1\'500-5\'000 unbeleuchtet, CHF 3\'000-10\'000 mit LED. Grosse Buchstaben (50+ cm) entsprechend mehr.',
+    },
+    {
+      question: 'Wie lange hält eine Gebäudebeschriftung?',
+      answer: 'Bei hochwertigen Materialien und fachgerechter Montage: Aluminiumschilder und -buchstaben 15-20+ Jahre, Edelstahl praktisch unbegrenzt, Acrylglas 10-15 Jahre, Klebefolien für Schaufenster 5-7 Jahre im Aussenbereich. LED-Beleuchtung hält 50\'000+ Betriebsstunden (über 15 Jahre bei 8h täglichem Betrieb). Die Haltbarkeit hängt von Witterung, Sonneneinstrahlung und Pflege ab.',
+    },
+    {
+      question: 'Könnt ihr auch in grosser Höhe montieren?',
+      answer: 'Ja, unser Montageteam ist für Arbeiten in der Höhe geschult und ausgerüstet. Wir arbeiten mit eigenen Hebebühnen (bis 20m), Hubsteigern und koordinieren bei Bedarf Gerüstbau. Auch Montagen an schwer zugänglichen Stellen, historischen Gebäuden mit Denkmalschutz-Auflagen oder Industriebauten setzen wir regelmässig um. Alle Monteure haben die erforderlichen Sicherheitsausbildungen (SUVA-konform).',
+    },
+    {
+      question: 'Kann man bestehende Beschriftungen aktualisieren oder erweitern?',
+      answer: 'Ja, wir aktualisieren regelmässig bestehende Anlagen: Firmennamen-Änderungen, neue Logos, Erweiterungen um zusätzliche Buchstaben oder Elemente. Bei eigenen früheren Projekten haben wir alle Spezifikationen dokumentiert. Aber auch fremde Beschriftungen können wir oft nahtlos ergänzen - wir analysieren Material und Farben und fertigen passende Ergänzungen.',
+    },
+  ],
+  keywords: [
+    'Gebäudebeschriftung Schweiz',
+    'Fassadenbeschriftung',
+    '3D Buchstaben Fassade',
+    '3D Buchstaben Kosten',
+    'Firmenschild',
+    'Schaufensterbeschriftung',
+    'Aussenwerbung Gebäude',
+    'Firmenbeschriftung',
+    'Leuchtbuchstaben',
+    'Gebäudebeschriftung Zug',
+    'Fassadenwerbung',
+    'Eingangsschild Firma',
+    'Praxisschild',
+    'Bürobeschriftung aussen',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

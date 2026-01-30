@@ -1,0 +1,85 @@
+# robots.txt for Alpha Sign AG
+# https://www.alphasign.ch
+
+# Allow all search engines
+User-agent: *
+
+# Allow crawling of all pages
+Allow: /
+
+# Disallow admin and internal pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /preview/
+Disallow: /draft/
+Disallow: /_astro/
+Disallow: /*.json$
+Disallow: /*?preview=*
+Disallow: /*?draft=*
+
+# Disallow crawling of search results
+Disallow: /suche?
+Disallow: /search?
+
+# Disallow crawling of print versions
+Disallow: /*?print=*
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.alphasign.ch/sitemap-index.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+# Block AI training bots (optional, based on company policy)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

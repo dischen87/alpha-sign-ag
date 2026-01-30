@@ -1,0 +1,21 @@
+---
+// Dynamic pages from CMS
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  // Fetch pages from Sanity CMS
+  // const pages = await sanityClient.fetch(`*[_type == "page"]`);
+
+  // Placeholder - return empty array for now
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Page" lang="de">
+  <main>
+    <h1>Dynamic Page: {slug}</h1>
+    <!-- CMS content will be rendered here -->
+  </main>
+</BaseLayout>

@@ -1,0 +1,148 @@
+---
+/**
+ * Header Component (with React Mobile Menu)
+ * Sticky header with logo, navigation, language switcher, and CTA button
+ * Uses React island for animated mobile menu
+ */
+import Navigation from './Navigation.astro';
+import MobileMenu from './MobileMenu.tsx';
+import { getLocaleFromUrl, useTranslations, getLocalizedUrl, type Locale } from '../../i18n/utils';
+import { locales, localeNames } from '../../i18n/config';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const currentUrl = Astro.url;
+const locale = getLocaleFromUrl(currentUrl) as Locale;
+const t = useTranslations(locale);
+
+// Get current path without locale for language switcher
+const currentPath = currentUrl.pathname;
+
+// Prepare nav items for React component
+const navItems = [
+  { key: 'home', href: getLocalizedUrl('/', locale), label: t('nav.home') },
+  {
+    key: 'services',
+    href: getLocalizedUrl('/dienstleistungen', locale),
+    label: t('nav.services'),
+    hasSubmenu: true,
+    submenuItems: [
+      { key: 'fahrzeugbeschriftung', href: getLocalizedUrl('/dienstleistungen/fahrzeugbeschriftung', locale), label: t('nav.servicesList.fahrzeugbeschriftung') },
+      { key: 'leuchtreklame', href: getLocalizedUrl('/dienstleistungen/leuchtreklame', locale), label: t('nav.servicesList.leuchtreklame') },
+      { key: 'signaletik', href: getLocalizedUrl('/dienstleistungen/signaletik', locale), label: t('nav.servicesList.signaletik') },
+      { key: 'carWrapping', href: getLocalizedUrl('/dienstleistungen/car-wrapping', locale), label: t('nav.servicesList.carWrapping') },
+      { key: 'gebaeudebeschriftung', href: getLocalizedUrl('/dienstleistungen/gebaeudebeschriftung', locale), label: t('nav.servicesList.gebaeudebeschriftung') },
+      { key: 'messeauftritte', href: getLocalizedUrl('/dienstleistungen/messeauftritte', locale), label: t('nav.servicesList.messeauftritte') },
+      { key: 'kunstAmBau', href: getLocalizedUrl('/dienstleistungen/kunst-am-bau', locale), label: t('nav.servicesList.kunstAmBau') },
+      { key: 'fineArtPrints', href: getLocalizedUrl('/dienstleistungen/fine-art-prints', locale), label: t('nav.servicesList.fineArtPrints') },
+    ],
+  },
+  { key: 'portfolio', href: getLocalizedUrl('/portfolio', locale), label: t('nav.portfolio') },
+  { key: 'about', href: getLocalizedUrl('/ueber-uns', locale), label: t('nav.about') },
+  { key: 'faq', href: getLocalizedUrl('/faq', locale), label: t('nav.faq') },
+  { key: 'contact', href: getLocalizedUrl('/kontakt', locale), label: t('nav.contact') },
+];
+
+// Translations for React component
+const mobileMenuTranslations = {
+  openMenu: t('nav.openMenu'),
+  closeMenu: t('nav.closeMenu'),
+  mainNavigation: t('nav.mainNavigation'),
+  servicesSubmenu: t('nav.servicesSubmenu'),
+  requestQuote: t('nav.requestQuote'),
+  language: t('common.language'),
+};
+
+// Languages for language switcher
+const languages = locales.map((lang) => ({
+  code: lang,
+  label: localeNames[lang],
+  href: getLocalizedUrl(
+    currentPath.replace(/^\/(en|de)/, '').replace(/^\/+/, '/') || '/',
+    lang
+  ),
+}));
+---
+
+<header
+  class:list={[
+    'sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:border-slate-800 dark:bg-slate-950/95 dark:supports-[backdrop-filter]:bg-slate-950/80',
+    className,
+  ]}
+  role="banner"
+>
+  <div class="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
+    <!-- Logo -->
+    <a
+      href={getLocalizedUrl('/', locale)}
+      class="flex items-center gap-2 text-xl font-bold text-slate-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
+      aria-label="Alpha Sign - {t('nav.home')}"
+    >
+      <!-- Placeholder Logo -->
+      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+        <span class="text-lg font-bold">A</span>
+      </div>
+      <span class="hidden sm:inline">Alpha Sign</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden lg:flex lg:items-center lg:gap-6">
+      <Navigation locale={locale} />
+    </div>
+
+    <!-- Right Side Actions -->
+    <div class="flex items-center gap-4">
+      <!-- Language Switcher (Desktop) -->
+      <nav
+        class="hidden md:flex items-center gap-1 rounded-lg bg-slate-100 p-1 dark:bg-slate-800"
+        aria-label={t('common.language')}
+      >
+        {locales.map((lang) => {
+          const isActive = lang === locale;
+          const langUrl = getLocalizedUrl(
+            currentPath.replace(/^\/(en|de)/, '').replace(/^\/+/, '/') || '/',
+            lang
+          );
+          return (
+            <a
+              href={langUrl}
+              hreflang={lang}
+              lang={lang}
+              class:list={[
+                'px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200',
+                isActive
+                  ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white',
+              ]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {lang.toUpperCase()}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- CTA Button (Desktop) -->
+      <a
+        href={getLocalizedUrl('/kontakt', locale)}
+        class="hidden md:inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 dark:focus:ring-offset-slate-950"
+      >
+        {t('nav.requestQuote')}
+      </a>
+
+      <!-- Mobile Menu (React Island) -->
+      <MobileMenu
+        client:load
+        locale={locale}
+        navItems={navItems}
+        translations={mobileMenuTranslations}
+        currentPath={currentPath}
+        languages={languages}
+        ctaHref={getLocalizedUrl('/kontakt', locale)}
+      />
+    </div>
+  </div>
+</header>

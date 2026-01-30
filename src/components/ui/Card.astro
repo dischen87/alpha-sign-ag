@@ -1,0 +1,196 @@
+---
+/**
+ * Card Component
+ * A flexible card component for portfolio items, services, and testimonials.
+ * Professional design with proper shadows and hover effects.
+ */
+interface Props {
+  variant?: 'default' | 'image' | 'service' | 'testimonial' | 'elevated';
+  href?: string;
+  class?: string;
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+}
+
+const {
+  variant = 'default',
+  href,
+  class: className = '',
+  padding = 'lg',
+} = Astro.props;
+
+const paddingStyles = {
+  none: '',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+
+const baseStyles = `
+  block
+  bg-card text-card-foreground
+  border border-border
+  rounded-[var(--radius)]
+  overflow-hidden
+  shadow-sm
+  card-animate
+`;
+
+const hoverStyles = href ? `
+  hover:shadow-xl
+  hover:border-primary/50
+  hover:-translate-y-2
+  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+  cursor-pointer
+  dark:border-border dark:hover:border-primary/50
+  active:scale-[0.99]
+` : 'dark:border-border';
+
+const variantStyles = {
+  default: '',
+  image: '',
+  service: 'text-center',
+  testimonial: '',
+  elevated: 'shadow-lg border-0',
+};
+
+const classes = [
+  baseStyles,
+  hoverStyles,
+  variantStyles[variant],
+  className,
+].join(' ');
+---
+
+{variant === 'default' && (
+  href ? (
+    <a href={href} class={classes}>
+      <slot name="header" />
+      <div class={paddingStyles[padding]}>
+        <slot />
+      </div>
+      <slot name="footer" />
+    </a>
+  ) : (
+    <div class={classes}>
+      <slot name="header" />
+      <div class={paddingStyles[padding]}>
+        <slot />
+      </div>
+      <slot name="footer" />
+    </div>
+  )
+)}
+
+{variant === 'elevated' && (
+  href ? (
+    <a href={href} class={classes}>
+      <slot name="header" />
+      <div class={paddingStyles[padding]}>
+        <slot />
+      </div>
+      <slot name="footer" />
+    </a>
+  ) : (
+    <div class={classes}>
+      <slot name="header" />
+      <div class={paddingStyles[padding]}>
+        <slot />
+      </div>
+      <slot name="footer" />
+    </div>
+  )
+)}
+
+{variant === 'image' && (
+  href ? (
+    <a href={href} class={classes}>
+      <div class="aspect-video overflow-hidden bg-muted group">
+        <div class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-105">
+          <slot name="image" />
+        </div>
+      </div>
+      <div class={paddingStyles[padding]}>
+        <slot name="title" />
+        <slot name="description" />
+        <slot name="tags" />
+      </div>
+    </a>
+  ) : (
+    <div class={classes}>
+      <div class="aspect-video overflow-hidden bg-muted">
+        <slot name="image" />
+      </div>
+      <div class={paddingStyles[padding]}>
+        <slot name="title" />
+        <slot name="description" />
+        <slot name="tags" />
+      </div>
+    </div>
+  )
+)}
+
+{variant === 'service' && (
+  href ? (
+    <a href={href} class={classes}>
+      <div class={paddingStyles[padding]}>
+        <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <slot name="icon" />
+        </div>
+        <slot name="title" />
+        <slot name="description" />
+        <slot name="link" />
+      </div>
+    </a>
+  ) : (
+    <div class={classes}>
+      <div class={paddingStyles[padding]}>
+        <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <slot name="icon" />
+        </div>
+        <slot name="title" />
+        <slot name="description" />
+        <slot name="link" />
+      </div>
+    </div>
+  )
+)}
+
+{variant === 'testimonial' && (
+  <div class={classes}>
+    <div class={paddingStyles[padding]}>
+      <!-- Quote Icon -->
+      <div class="mb-4 text-primary/30">
+        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+      </div>
+      <blockquote class="mb-6 text-foreground/90 leading-relaxed text-lg">
+        <slot name="quote" />
+      </blockquote>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
+          <slot name="avatar" />
+        </div>
+        <div>
+          <slot name="author" />
+          <slot name="role" />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  /* Card animation styles */
+  .card-animate {
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+                border-color 0.3s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-animate {
+      transition: none !important;
+    }
+  }
+</style>

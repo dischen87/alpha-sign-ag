@@ -1,0 +1,138 @@
+---
+/**
+ * Base Head Component for Alpha Sign AG
+ * Combines all SEO essentials in one component
+ * Includes meta tags, Open Graph, Twitter Cards, and Schema.org
+ */
+
+import SEO from './SEO.astro';
+import SchemaOrg from './SchemaOrg.astro';
+import type {
+  LocalBusinessSchema,
+  OrganizationSchema,
+  ServiceSchema,
+  ProductSchema,
+  FAQSchema,
+  HowToSchema,
+  ReviewSchema,
+  AggregateRatingSchema,
+  BreadcrumbSchema,
+  ContactPointSchema,
+} from './SchemaOrg.astro';
+
+type SchemaType =
+  | LocalBusinessSchema
+  | OrganizationSchema
+  | ServiceSchema
+  | ProductSchema
+  | FAQSchema
+  | HowToSchema
+  | ReviewSchema
+  | AggregateRatingSchema
+  | BreadcrumbSchema
+  | ContactPointSchema;
+
+interface Props {
+  // SEO Props
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'product';
+  locale?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  keywords?: string[];
+  // Schema Props
+  schema?: SchemaType | SchemaType[];
+  // Additional Props
+  preconnect?: string[];
+  fonts?: string[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  imageAlt,
+  type = 'website',
+  locale = 'de-CH',
+  noindex = false,
+  nofollow = false,
+  publishedTime,
+  modifiedTime,
+  author,
+  keywords = [],
+  schema,
+  preconnect = [],
+  fonts = [],
+} = Astro.props;
+
+// Default preconnect URLs for performance
+const defaultPreconnect = [
+  'https://fonts.googleapis.com',
+  'https://fonts.gstatic.com',
+];
+
+const allPreconnect = [...new Set([...defaultPreconnect, ...preconnect])];
+
+// Full page title with site name
+const fullTitle = title.includes('Alpha Sign') ? title : `${title} | Alpha Sign AG`;
+---
+
+<!-- Essential Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Preconnect for Performance -->
+{allPreconnect.map((url) => (
+  <link rel="preconnect" href={url} crossorigin />
+))}
+
+<!-- Fonts -->
+{fonts.map((font) => (
+  <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
+))}
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" href="/Alpha-Sign-removebg-preview.png" />
+<link rel="apple-touch-icon" href="/Alpha-Sign-removebg-preview.png" />
+
+<!-- Generator -->
+<meta name="generator" content={Astro.generator} />
+
+<!-- SEO Component -->
+<SEO
+  title={fullTitle}
+  description={description}
+  canonical={canonical}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  locale={locale}
+  noindex={noindex}
+  nofollow={nofollow}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  author={author}
+  keywords={keywords}
+/>
+
+<!-- Schema.org Structured Data -->
+{schema && <SchemaOrg schema={schema} />}
+
+<!-- DNS Prefetch for External Resources -->
+<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+<!-- RSS Feed (if applicable) -->
+<link rel="alternate" type="application/rss+xml" title="Alpha Sign AG Blog" href="/rss.xml" />

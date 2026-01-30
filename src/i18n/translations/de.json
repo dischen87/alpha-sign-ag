@@ -1,0 +1,278 @@
+{
+  "site": {
+    "title": "Alpha Sign",
+    "description": "Willkommen bei Alpha Sign"
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "services": "Dienstleistungen",
+    "portfolio": "Portfolio",
+    "faq": "FAQ",
+    "requestQuote": "Offerte anfragen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schliessen",
+    "mainNavigation": "Hauptnavigation",
+    "servicesSubmenu": "Dienstleistungen Untermenü",
+    "servicesList": {
+      "fahrzeugbeschriftung": "Fahrzeugbeschriftung",
+      "leuchtreklame": "Leuchtreklame",
+      "signaletik": "Signaletik",
+      "carWrapping": "Car Wrapping",
+      "gebaeudebeschriftung": "Gebäudebeschriftung",
+      "messeauftritte": "Messeauftritte",
+      "kunstAmBau": "Kunst am Bau",
+      "fineArtPrints": "Fine Art Prints"
+    }
+  },
+  "common": {
+    "readMore": "Mehr erfahren",
+    "learnMore": "Erfahren Sie mehr",
+    "contactUs": "Kontaktieren Sie uns",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "language": "Sprache",
+    "required": "Pflichtfeld",
+    "optional": "Optional",
+    "loading": "Laden..."
+  },
+  "footer": {
+    "copyright": "Alle Rechte vorbehalten",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum",
+    "terms": "AGB",
+    "companyDescription": "Alpha Sign AG - Seit 1989 Ihr Schweizer Partner für hochwertige Beschriftungen, Leuchtreklamen, Signaletik und visuelle Kommunikation. Industriestrasse 15, 6331 Hünenberg, Kanton Zug.",
+    "servicesTitle": "Dienstleistungen",
+    "companyTitle": "Unternehmen",
+    "contactTitle": "Kontakt",
+    "about": "Über uns",
+    "portfolio": "Portfolio",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "viewOnMap": "Auf Karte anzeigen",
+    "services": {
+      "vehicleGraphics": "Fahrzeugbeschriftung",
+      "illuminatedSigns": "Leuchtreklame",
+      "wayfinding": "Signaletik",
+      "carWrapping": "Car Wrapping",
+      "buildingSignage": "Gebäudebeschriftung",
+      "tradeShows": "Messeauftritte",
+      "artInArchitecture": "Kunst am Bau",
+      "digitalPrinting": "Fine Art Prints"
+    }
+  },
+  "contactForm": {
+    "title": "Offertanfrage",
+    "subtitle": "Erzählen Sie uns von Ihrem Projekt",
+    "step": "Schritt",
+    "of": "von",
+    "stepTitles": {
+      "contact": "Kontaktdaten",
+      "project": "Projektart",
+      "details": "Projektdetails"
+    },
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Ihr vollständiger Name"
+      },
+      "email": {
+        "label": "E-Mail",
+        "placeholder": "ihre.email@beispiel.ch"
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "+41 XX XXX XX XX"
+      },
+      "company": {
+        "label": "Firma",
+        "placeholder": "Firmenname"
+      },
+      "projectType": {
+        "label": "Projektart",
+        "placeholder": "Wählen Sie eine Projektart"
+      },
+      "projectDetails": {
+        "label": "Projektbeschreibung",
+        "placeholder": "Beschreiben Sie Ihr Projekt im Detail..."
+      },
+      "budget": {
+        "label": "Budget",
+        "min": "CHF 500",
+        "max": "CHF 50'000+"
+      },
+      "timeline": {
+        "label": "Zeitrahmen",
+        "placeholder": "Wählen Sie einen Zeitrahmen",
+        "options": {
+          "asap": "So schnell wie möglich",
+          "1month": "Innerhalb 1 Monat",
+          "3months": "Innerhalb 3 Monaten",
+          "6months": "Innerhalb 6 Monaten",
+          "flexible": "Flexibel"
+        }
+      }
+    },
+    "projectTypes": {
+      "fahrzeugbeschriftung": "Fahrzeugbeschriftung",
+      "leuchtreklame": "Leuchtreklame",
+      "signaletik": "Signaletik",
+      "carWrapping": "Car Wrapping",
+      "gebaeudebeschriftung": "Gebäudebeschriftung",
+      "messeauftritte": "Messeauftritte",
+      "kunstAmBau": "Kunst am Bau",
+      "andere": "Andere"
+    },
+    "validation": {
+      "nameRequired": "Bitte geben Sie Ihren Namen ein",
+      "nameMin": "Der Name muss mindestens 2 Zeichen lang sein",
+      "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+      "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "phoneInvalid": "Bitte geben Sie eine gültige Telefonnummer ein",
+      "projectTypeRequired": "Bitte wählen Sie eine Projektart",
+      "projectDetailsRequired": "Bitte beschreiben Sie Ihr Projekt",
+      "projectDetailsMin": "Die Beschreibung muss mindestens 10 Zeichen lang sein",
+      "timelineRequired": "Bitte wählen Sie einen Zeitrahmen"
+    },
+    "success": {
+      "title": "Vielen Dank!",
+      "message": "Ihre Anfrage wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden."
+    },
+    "error": {
+      "title": "Fehler",
+      "message": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+      "spam": "Diese Anfrage konnte nicht verarbeitet werden."
+    }
+  },
+  "hero": {
+    "tagline": "Schweizer Qualität seit 1989",
+    "headline": "Ihre Marke. Perfekt inszeniert.",
+    "subheadline": "Professionelle Beschriftungen, Leuchtreklamen und Signaletik aus Hünenberg, Zug",
+    "cta": {
+      "primary": "Kostenlose Beratung",
+      "secondary": "Unsere Arbeiten",
+      "phone": "+41 41 780 05 05"
+    },
+    "trust": {
+      "experience": "35+ Jahre Erfahrung",
+      "projects": "2'500+ Projekte",
+      "swissMade": "100% Swiss Made"
+    },
+    "scroll": "Entdecken"
+  },
+  "services": {
+    "title": "Unsere Dienstleistungen",
+    "subtitle": "Das komplette Spektrum professioneller Beschriftungen und visueller Kommunikation - alles aus einer Hand",
+    "items": {
+      "vehicleLettering": {
+        "title": "Fahrzeugbeschriftung",
+        "description": "Verwandeln Sie Ihr Fahrzeug in einen mobilen Werbeträger. Professionelle Beschriftungen für PKW, Lieferwagen und ganze Flotten - mit 5-10 Jahren Haltbarkeit."
+      },
+      "illuminatedSigns": {
+        "title": "Leuchtreklame",
+        "description": "LED-Leuchtschriften und beleuchtete Schilder für maximale Sichtbarkeit rund um die Uhr. Inklusive Bewilligungsberatung für den Kanton Zug und die ganze Schweiz."
+      },
+      "signage": {
+        "title": "Signaletik",
+        "description": "Professionelle Wegeleitsysteme und Orientierungssysteme für Gebäude, Areale und öffentliche Räume. Barrierefrei nach SIA 500."
+      },
+      "carWrapping": {
+        "title": "Car Wrapping",
+        "description": "Vollständige Fahrzeugfolierung in Premium-Qualität. Farbwechsel, Lackschutz und individuelle Designs - reversibel und werterhaltend."
+      },
+      "buildingLettering": {
+        "title": "Gebäudebeschriftung",
+        "description": "3D-Buchstaben, Fassadenbeschriftung und Schaufenstergestaltung. Hochwertige, witterungsbeständige Materialien für den Aussenbereich."
+      },
+      "tradeShows": {
+        "title": "Messeauftritte",
+        "description": "Komplette Messestand-Lösungen: Roll-ups, Pop-up-Displays, Banner und individuelle Standbau-Konzepte für Ihren erfolgreichen Auftritt."
+      },
+      "artInArchitecture": {
+        "title": "Kunst am Bau",
+        "description": "Individuelle Kunstinstallationen und künstlerische Gestaltungen für Architektur und öffentlichen Raum. Umsetzung komplexer Visionen."
+      },
+      "fineArtPrints": {
+        "title": "Fine Art Prints",
+        "description": "Hochwertige Giclée-Kunstdrucke in Galeriequalität. Lichtecht über 100 Jahre, auf Fine Art Papieren von Hahnemühle und Canson."
+      }
+    }
+  },
+  "whyUs": {
+    "title": "Warum Alpha Sign?",
+    "subtitle": "Vertrauen Sie auf Schweizer Qualität und über 35 Jahre Erfahrung in Hünenberg",
+    "items": {
+      "experience": {
+        "title": "35+ Jahre Erfahrung",
+        "description": "Seit 1989 Ihr zuverlässiger Partner für Beschriftungen, Signaletik und visuelle Kommunikation in der Schweiz"
+      },
+      "rating": {
+        "title": "5.0 Sterne Bewertung",
+        "description": "Höchste Kundenzufriedenheit - unsere Kunden schätzen Qualität, Termintreue und persönlichen Service"
+      },
+      "swissQuality": {
+        "title": "100% Swiss Made",
+        "description": "Alle Arbeiten werden in unserer Werkstatt in Hünenberg, Kanton Zug gefertigt - mit Präzision und Liebe zum Detail"
+      },
+      "fullService": {
+        "title": "Full-Service aus einer Hand",
+        "description": "Von der Beratung über Design und Produktion bis zur fachgerechten Montage - ein Ansprechpartner für Ihr gesamtes Projekt"
+      }
+    }
+  },
+  "portfolio": {
+    "title": "Unsere Projekte",
+    "subtitle": "Entdecken Sie eine Auswahl unserer realisierten Arbeiten",
+    "filters": {
+      "all": "Alle",
+      "vehicleLettering": "Fahrzeugbeschriftung",
+      "illuminatedSigns": "Leuchtreklame",
+      "signage": "Signaletik",
+      "carWrapping": "Car Wrapping",
+      "buildingLettering": "Gebäudebeschriftung",
+      "tradeShows": "Messeauftritte",
+      "artInArchitecture": "Kunst am Bau",
+      "fineArtPrints": "Fine Art Prints"
+    },
+    "viewProject": "Projekt ansehen"
+  },
+  "testimonials": {
+    "title": "Kundenstimmen",
+    "subtitle": "Das sagen unsere zufriedenen Kunden über uns"
+  },
+  "cta": {
+    "title": "Bereit für Ihr nächstes Projekt?",
+    "subtitle": "Kontaktieren Sie uns für eine kostenlose und unverbindliche Beratung. Wir freuen uns darauf, Ihre Ideen in die Tat umzusetzen.",
+    "button": "Jetzt kostenlose Offerte anfragen",
+    "phone": "Oder rufen Sie uns direkt an"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Hier finden Sie Antworten auf die wichtigsten Fragen",
+    "items": {
+      "q1": {
+        "question": "Wie lange dauert die Umsetzung eines Projekts?",
+        "answer": "Die Projektdauer hängt von Umfang und Komplexität ab. Einfache Fahrzeugbeschriftungen können oft innerhalb weniger Tage realisiert werden, während grössere Projekte wie Leuchtreklamen oder Signaletik-Systeme mehrere Wochen in Anspruch nehmen können. Nach der Erstberatung erhalten Sie einen detaillierten Zeitplan."
+      },
+      "q2": {
+        "question": "Bieten Sie auch Montage-Services an?",
+        "answer": "Ja, wir bieten einen kompletten Full-Service an - von der ersten Beratung über Design und Produktion bis hin zur fachgerechten Montage. Unsere erfahrenen Montageteams sorgen für eine professionelle Installation vor Ort."
+      },
+      "q3": {
+        "question": "Welche Materialien verwenden Sie?",
+        "answer": "Wir verwenden ausschliesslich hochwertige Markenmaterialien, die für ihre Langlebigkeit und Qualität bekannt sind. Je nach Anwendungsbereich setzen wir auf bewährte Folien, LED-Technik und weitere Premium-Materialien."
+      },
+      "q4": {
+        "question": "Können Sie auch individuelle Designs erstellen?",
+        "answer": "Absolut! Unser erfahrenes Designteam entwickelt massgeschneiderte Lösungen, die perfekt zu Ihrer Marke und Ihren Anforderungen passen. Wir arbeiten eng mit Ihnen zusammen, um Ihre Vision umzusetzen."
+      },
+      "q5": {
+        "question": "Wie erhalte ich eine Offerte?",
+        "answer": "Kontaktieren Sie uns per Telefon, E-Mail oder über unser Online-Formular. Beschreiben Sie Ihr Projekt, und wir erstellen Ihnen eine unverbindliche, detaillierte Offerte. Bei komplexeren Projekten vereinbaren wir gerne einen Vor-Ort-Termin."
+      }
+    }
+  }
+}

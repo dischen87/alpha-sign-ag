@@ -1,0 +1,122 @@
+---
+/**
+ * BaseLayout.astro
+ * Base layout component with full SEO support
+ * Optimized for Swiss local SEO
+ * Includes Tailwind CSS v4 and shadcn/ui theming
+ */
+import BaseHead from '../components/seo/BaseHead.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import FloatingCTA from '../components/ui/FloatingCTA.astro';
+import '../styles/global.css';
+import { themeInitScript } from '../scripts/theme-init';
+import type {
+  LocalBusinessSchema,
+  OrganizationSchema,
+  ServiceSchema,
+  ProductSchema,
+  FAQSchema,
+  HowToSchema,
+  ReviewSchema,
+  AggregateRatingSchema,
+  BreadcrumbSchema,
+  ContactPointSchema,
+} from '../components/seo/SchemaOrg.astro';
+
+type SchemaType =
+  | LocalBusinessSchema
+  | OrganizationSchema
+  | ServiceSchema
+  | ProductSchema
+  | FAQSchema
+  | HowToSchema
+  | ReviewSchema
+  | AggregateRatingSchema
+  | BreadcrumbSchema
+  | ContactPointSchema;
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'de' | 'en' | 'fr' | 'it';
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+  nofollow?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  keywords?: string[];
+  schema?: SchemaType | SchemaType[];
+}
+
+const {
+  title,
+  description = 'Alpha Sign AG - Ihr Partner für hochwertige Schilder, Beschriftungen und Werbetechnik in der Schweiz seit 1989.',
+  lang = 'de',
+  canonical,
+  image = '/og-image.jpg',
+  imageAlt = 'Alpha Sign AG - Schilder und Beschriftungen',
+  type = 'website',
+  noindex = false,
+  nofollow = false,
+  publishedTime,
+  modifiedTime,
+  author,
+  keywords = [],
+  schema,
+} = Astro.props;
+
+// Map language codes to locales
+const localeMap = {
+  de: 'de-CH',
+  en: 'en',
+  fr: 'fr-CH',
+  it: 'it-CH',
+};
+
+const locale = localeMap[lang] || 'de-CH';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <!-- Prevent flash of incorrect theme -->
+    <script is:inline set:html={themeInitScript} />
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <BaseHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      locale={locale}
+      noindex={noindex}
+      nofollow={nofollow}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      author={author}
+      keywords={keywords}
+      schema={schema}
+    />
+    <!-- Additional head content from pages -->
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors">
+    <div class="page-wrapper">
+      <Header />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <FloatingCTA locale={lang} />
+  </body>
+</html>

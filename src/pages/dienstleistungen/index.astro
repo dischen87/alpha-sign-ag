@@ -1,0 +1,253 @@
+---
+/**
+ * German Services Overview Page
+ * SEO-optimized landing page for all services
+ * Includes comprehensive Schema.org structured data
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import type { LocalBusinessSchema, BreadcrumbSchema, ServiceSchema } from '../../components/seo/SchemaOrg.astro';
+
+// Page metadata
+const pageTitle = 'Dienstleistungen - Beschriftungen, Signaletik & mehr | Alpha Sign AG';
+const pageDescription = 'Das komplette Spektrum professioneller Beschriftungen und visueller Kommunikation: Fahrzeugbeschriftung, Car Wrapping, Leuchtreklamen, Signaletik, Gebäudebeschriftung, Messeauftritte, Kunst am Bau und Fine Art Prints. Alles aus einer Hand in Hünenberg, Kanton Zug.';
+
+// Schema definitions
+const localBusinessSchema: LocalBusinessSchema = {
+  type: 'LocalBusiness',
+  additionalType: 'SignShop',
+};
+
+const breadcrumbSchema: BreadcrumbSchema = {
+  type: 'BreadcrumbList',
+  items: [
+    { name: 'Home', url: 'https://www.alphasign.ch/' },
+    { name: 'Dienstleistungen', url: 'https://www.alphasign.ch/dienstleistungen' },
+  ],
+};
+
+// Services data
+const services = [
+  {
+    title: 'Fahrzeugbeschriftung',
+    description: 'Verwandeln Sie Ihr Fahrzeug in einen mobilen Werbeträger. Professionelle Beschriftungen für PKW, Lieferwagen, Transporter und ganze Fahrzeugflotten. Mit hochwertigen Markenfolien von 3M und Avery erzielen wir eine Haltbarkeit von 5-10 Jahren.',
+    href: '/dienstleistungen/fahrzeugbeschriftung',
+    features: ['5-10 Jahre Haltbarkeit', 'Rückstandsfreie Entfernung', 'Bis zu 70\'000 Sichtkontakte täglich'],
+    priceFrom: 'ab CHF 300',
+  },
+  {
+    title: 'Car Wrapping',
+    description: 'Vollständige Fahrzeugfolierung in Premium-Qualität. Farbwechsel, Lackschutz und individuelle Designs - reversibel und werterhaltend. Schützen Sie Ihren Originallack vor Steinschlägen, Kratzern und UV-Strahlung.',
+    href: '/dienstleistungen/car-wrapping',
+    features: ['Reversibel', 'Lackschutz inklusive', 'Unbegrenzte Farbauswahl'],
+    priceFrom: 'ab CHF 2\'500',
+  },
+  {
+    title: 'Leuchtreklame',
+    description: 'LED-Leuchtschriften und beleuchtete Schilder für maximale Sichtbarkeit - Tag und Nacht. Energieeffiziente LED-Technologie mit über 50\'000 Betriebsstunden. Wir beraten Sie auch bei den kantonalen Bewilligungsverfahren.',
+    href: '/dienstleistungen/leuchtreklame',
+    features: ['24/7 Sichtbarkeit', 'Bis 80% Stromersparnis', 'Bewilligungsberatung inklusive'],
+    priceFrom: 'ab CHF 2\'000',
+  },
+  {
+    title: 'Signaletik',
+    description: 'Professionelle Wegeleitsysteme und Orientierungssysteme für Gebäude, Areale und öffentliche Räume. Von der Tiefgarage bis zum Dachgeschoss - wir führen Ihre Besucher sicher ans Ziel. Barrierefrei nach SIA 500.',
+    href: '/dienstleistungen/signaletik',
+    features: ['Barrierefreiheit nach SIA 500', 'Modulare Systeme', 'Mehrsprachig (DE/FR/IT/EN)'],
+    priceFrom: 'ab CHF 3\'000',
+  },
+  {
+    title: 'Gebäudebeschriftung',
+    description: '3D-Buchstaben, Fassadenbeschriftung, Schaufenstergestaltung und Firmenschilder. Hochwertige, witterungsbeständige Materialien wie Aluminium, Acrylglas und Edelstahl für den Aussenbereich.',
+    href: '/dienstleistungen/gebaeudebeschriftung',
+    features: ['3D-Buchstaben', 'Witterungsbeständig', 'Mit oder ohne Beleuchtung'],
+    priceFrom: 'ab CHF 500',
+  },
+  {
+    title: 'Messeauftritte',
+    description: 'Komplette Messestand-Lösungen für Ihren erfolgreichen Auftritt: Roll-ups, Pop-up-Displays, Banner, Messewände und individuelle Standbau-Konzepte. Inklusive Transport, Auf- und Abbau sowie Einlagerung.',
+    href: '/dienstleistungen/messeauftritte',
+    features: ['Full-Service', 'Modulare Systeme', 'Kurze Lieferzeiten'],
+    priceFrom: 'ab CHF 500',
+  },
+  {
+    title: 'Kunst am Bau',
+    description: 'Individuelle Kunstinstallationen und künstlerische Gestaltungen für Architektur und öffentlichen Raum. In Zusammenarbeit mit Architekten und Künstlern setzen wir komplexe Visionen mit modernsten Fertigungstechniken um.',
+    href: '/dienstleistungen/kunst-am-bau',
+    features: ['CNC, Laser, 3D-Druck', 'Erfahrung mit Ausschreibungen', 'Künstler-Netzwerk'],
+    priceFrom: 'ab CHF 5\'000',
+  },
+  {
+    title: 'Fine Art Prints',
+    description: 'Hochwertige Giclée-Kunstdrucke in Galeriequalität für Künstler, Fotografen und Kunstliebhaber. Lichtecht über 100 Jahre, auf Fine Art Papieren von Hahnemühle und Canson. Grossformate bis 150 cm Breite.',
+    href: '/dienstleistungen/fine-art-prints',
+    features: ['Museumsqualität', '100+ Jahre lichtecht', 'Editionen mit Zertifikat'],
+    priceFrom: 'ab CHF 50',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="de" schema={[localBusinessSchema, breadcrumbSchema]}>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 bg-gradient-to-br from-[var(--color-primary-900)] via-[var(--color-primary-800)] to-[var(--color-primary-700)] text-white overflow-hidden">
+      <div class="absolute inset-0 opacity-10" aria-hidden="true">
+        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)"/>
+        </svg>
+      </div>
+
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="max-w-3xl">
+          <span class="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
+            Alles aus einer Hand
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Unsere Dienstleistungen
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            Das komplette Spektrum professioneller Beschriftungen und visueller Kommunikation - von der Beratung über Design und Produktion bis zur fachgerechten Montage.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <Button href="/kontakt" variant="secondary" size="lg">
+              Kostenlose Beratung anfragen
+            </Button>
+            <a href="tel:+41417800505" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              +41 41 780 05 05
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-16 md:py-24 bg-[var(--background)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid gap-8 md:gap-12">
+          {services.map((service, index) => (
+            <article class="group bg-[var(--card)] rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div class="p-8 md:p-10">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-4">
+                      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--color-primary-100)] text-[var(--primary)] font-bold text-lg">
+                        {index + 1}
+                      </span>
+                      <h2 class="text-2xl md:text-3xl font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                        <a href={service.href} class="hover:underline">{service.title}</a>
+                      </h2>
+                    </div>
+                    <p class="text-[var(--foreground-secondary)] leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-6">
+                      {service.features.map((feature) => (
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--color-primary-50)] text-[var(--color-primary-700)] rounded-full text-sm">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                          </svg>
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-start md:items-end gap-4 md:min-w-[200px]">
+                    <div class="text-right">
+                      <span class="block text-sm text-[var(--foreground-secondary)]">Preis</span>
+                      <span class="text-2xl font-bold text-[var(--primary)]">{service.priceFrom}</span>
+                    </div>
+                    <Button href={service.href} variant="outline" size="sm">
+                      Mehr erfahren
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Alpha Sign Section -->
+    <section class="py-16 md:py-24 bg-[var(--background-secondary)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
+            Warum Alpha Sign?
+          </h2>
+          <p class="text-lg text-[var(--foreground-secondary)] max-w-2xl mx-auto">
+            Über 35 Jahre Erfahrung, Schweizer Qualität und persönlicher Service
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-[var(--card)] rounded-xl p-6 text-center shadow-md">
+            <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-primary-100)] rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-[var(--primary)]">35+</span>
+            </div>
+            <h3 class="font-bold text-[var(--foreground)] mb-2">Jahre Erfahrung</h3>
+            <p class="text-sm text-[var(--foreground-secondary)]">Seit 1989 Ihr Partner für Beschriftungen</p>
+          </div>
+          <div class="bg-[var(--card)] rounded-xl p-6 text-center shadow-md">
+            <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-primary-100)] rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-[var(--primary)]">5.0</span>
+            </div>
+            <h3 class="font-bold text-[var(--foreground)] mb-2">Sterne Bewertung</h3>
+            <p class="text-sm text-[var(--foreground-secondary)]">Höchste Kundenzufriedenheit</p>
+          </div>
+          <div class="bg-[var(--card)] rounded-xl p-6 text-center shadow-md">
+            <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-primary-100)] rounded-full flex items-center justify-center">
+              <span class="text-2xl font-bold text-[var(--primary)]">2.5k</span>
+            </div>
+            <h3 class="font-bold text-[var(--foreground)] mb-2">Projekte</h3>
+            <p class="text-sm text-[var(--foreground-secondary)]">Erfolgreich realisiert</p>
+          </div>
+          <div class="bg-[var(--card)] rounded-xl p-6 text-center shadow-md">
+            <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-100)] rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-[var(--color-accent-500)]" viewBox="0 0 32 32" fill="currentColor">
+                <rect x="13" y="6" width="6" height="20"/>
+                <rect x="6" y="13" width="20" height="6"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-[var(--foreground)] mb-2">Swiss Made</h3>
+            <p class="text-sm text-[var(--foreground-secondary)]">100% Fertigung in Hünenberg</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-[var(--color-primary-600)] to-[var(--color-primary-800)] text-white">
+      <div class="container mx-auto px-4 max-w-4xl text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Haben Sie ein Projekt im Sinn?
+        </h2>
+        <p class="text-xl text-white/90 mb-8">
+          Kontaktieren Sie uns für eine kostenlose und unverbindliche Beratung. Wir freuen uns auf Ihre Anfrage!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href="/kontakt" variant="secondary" size="lg">
+            Jetzt Offerte anfragen
+          </Button>
+          <a href="tel:+41417800505" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors font-medium">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            +41 41 780 05 05
+          </a>
+        </div>
+        <p class="mt-8 text-white/70 text-sm">
+          Industriestrasse 15, 6331 Hünenberg | info@alphasign.ch | Mo-Fr 08:00-17:00
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

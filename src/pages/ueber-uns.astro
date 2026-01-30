@@ -1,0 +1,535 @@
+---
+/**
+ * German About Us Page - Alpha Sign AG
+ * Comprehensive company presentation with history, values, and team
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/seo/SEO.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import Button from '../components/ui/Button.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import Team from '../components/sections/Team.astro';
+import CTABanner from '../components/ui/CTABanner.astro';
+
+// Page metadata
+const pageTitle = 'Über uns - Alpha Sign AG | Schweizer Schilderexperten seit 1989';
+const pageDescription = 'Lernen Sie Alpha Sign AG kennen: Ihr Schweizer Partner für hochwertige Schilder und Beschriftungen seit 1989. Über 35 Jahre Erfahrung, Schweizer Qualität und lokale Präsenz in der Region Zug.';
+
+// Timeline data
+const timelineItems = [
+  {
+    year: '1989',
+    title: 'Gründung von Alpha Sign',
+    description: 'Alpha Sign wird in Hünenberg gegründet - mit der Vision, hochwertige Schilder und Beschriftungen für Schweizer Unternehmen zu fertigen. Der Grundstein für über drei Jahrzehnte Schweizer Qualität.',
+    highlight: true,
+  },
+  {
+    year: '1995',
+    title: 'Erste Leuchtreklamen',
+    description: 'Einführung modernster Technologien für Leuchtbeschriftungen. Alpha Sign wird zum gefragten Partner für Restaurants, Hotels und Einzelhandel in der Region.',
+  },
+  {
+    year: '2003',
+    title: 'Expansion in der Zentralschweiz',
+    description: 'Ausbau des Kundenkreises in den Kantonen Zug, Luzern, Schwyz und Zürich. Aufbau eines zuverlässigen Netzwerks von Montage- und Installationspartnern.',
+  },
+  {
+    year: '2010',
+    title: 'Umzug an die Industriestrasse',
+    description: 'Bezug des neuen Standorts an der Industriestrasse 15 in Hünenberg mit erweiterter Produktionsfläche und modernster Ausstattung.',
+  },
+  {
+    year: '2015',
+    title: 'Digitalisierung und Innovation',
+    description: 'Investition in CNC-Fräsen, Laserschneidtechnologie und umweltfreundliche UV-Druckverfahren. Start des Fine Art Print Service.',
+  },
+  {
+    year: '2020',
+    title: 'LED-Revolution und Nachhaltigkeit',
+    description: 'Vollständige Umstellung auf energieeffiziente LED-Technologie. Einführung umweltfreundlicher Materialien und Prozesse für nachhaltige Produktion.',
+  },
+  {
+    year: 'Heute',
+    title: '35+ Jahre Erfahrung',
+    description: 'Alpha Sign AG ist heute ein führender Anbieter für Beschriftungen, Signaletik und visuelle Kommunikation in der Schweiz - mit 5.0 Sterne Kundenbewertung und über 2\'500 realisierten Projekten.',
+    highlight: true,
+  },
+];
+
+// Team data with realistic Swiss names and professional images
+const teamMembers = [
+  {
+    name: 'Thomas Meier',
+    role: 'Geschäftsführer / CEO',
+    bio: 'Seit über 20 Jahren in der Schilderbranche tätig, leitet Thomas Alpha Sign mit Leidenschaft und dem Blick fürs Detail. Sein Motto: Qualität kennt keine Kompromisse.',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+  {
+    name: 'Sandra Keller',
+    role: 'Leiterin Design & Kreation',
+    bio: 'Mit einem Auge für Ästhetik und Funktionalität verwandelt Sandra und ihr Team Ihre Ideen in visuelle Kommunikation - von der ersten Skizze bis zum fertigen Entwurf.',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+  {
+    name: 'Marco Brunner',
+    role: 'Leiter Produktion',
+    bio: 'Marco und sein Team stehen für Schweizer Präzision: CNC-Fräsen, Laserschneiden, Digitaldruck - alles aus unserer Werkstatt in Hünenberg.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+  {
+    name: 'Peter Huber',
+    role: 'Leiter Montage & Installation',
+    bio: 'Fachgerechte Montage vor Ort - sicher, schnell und sauber. Peters erfahrenes Team sorgt für den perfekten Abschluss jedes Projekts.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+  {
+    name: 'Andrea Müller',
+    role: 'Kundenberatung & Projektleitung',
+    bio: 'Ihr persönlicher Ansprechpartner von der ersten Anfrage bis zur Projektübergabe. Andrea koordiniert Ihre Projekte und hält Sie stets auf dem Laufenden.',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+  {
+    name: 'Lisa Schneider',
+    role: 'Administration & Buchhaltung',
+    bio: 'Im Hintergrund sorgt Lisa für reibungslose Abläufe, korrekte Offerten, pünktliche Lieferungen und erstklassigen Kundenservice.',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&h=300&q=80',
+  },
+];
+
+// USPs
+const usps = [
+  {
+    icon: 'swiss',
+    title: 'Schweizer Qualität',
+    description: 'Alle unsere Produkte werden in der Schweiz gefertigt - mit den höchsten Qualitätsstandards und Präzision.',
+  },
+  {
+    icon: 'experience',
+    title: '35+ Jahre Erfahrung',
+    description: 'Seit 1989 sind wir Ihr verlässlicher Partner für Schilder und Beschriftungen aller Art.',
+  },
+  {
+    icon: 'service',
+    title: 'Full-Service',
+    description: 'Von der Beratung über das Design bis zur Installation - alles aus einer Hand.',
+  },
+  {
+    icon: 'local',
+    title: 'Lokal verankert',
+    description: 'Mit Sitz in Hünenberg sind wir fest in der Region Zug verwurzelt und schnell vor Ort.',
+  },
+  {
+    icon: 'rating',
+    title: '5.0 Sterne Bewertung',
+    description: 'Unsere Kunden schätzen unsere Arbeit - das zeigt sich in unserer erstklassigen Bewertung.',
+  },
+  {
+    icon: 'sustainable',
+    title: 'Nachhaltig',
+    description: 'Umweltfreundliche Materialien und Prozesse für eine bessere Zukunft.',
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} lang="de">
+  <head slot="head">
+    <SEO
+      title={pageTitle}
+      description={pageDescription}
+      canonical="https://alphasign.ch/ueber-uns"
+      keywords={['Alpha Sign AG', 'Über uns', 'Schweizer Schilderhersteller', 'Hünenberg', 'Zug', 'Beschriftungen', 'Firmengeschichte']}
+      locale="de-CH"
+    />
+    <SchemaOrg
+      schema={[
+        { type: 'LocalBusiness' },
+        {
+          type: 'BreadcrumbList',
+          items: [
+            { name: 'Home', url: 'https://alphasign.ch/' },
+            { name: 'Über uns', url: 'https://alphasign.ch/ueber-uns' },
+          ],
+        },
+      ]}
+    />
+  </head>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 bg-gradient-to-br from-[var(--color-primary-900)] via-[var(--color-primary-800)] to-[var(--color-primary-700)] text-white overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10" aria-hidden="true">
+        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)"/>
+        </svg>
+      </div>
+
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="max-w-3xl">
+          <span class="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
+            Seit 1989
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Wir realisieren deine Visionen aus der Kreativwirtschaft
+          </h1>
+          <p class="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            Alpha Sign AG - Ihr Schweizer Partner für hochwertige Schilder, Beschriftungen und Werbetechnik. Mit über 35 Jahren Erfahrung verwandeln wir Ihre Ideen in sichtbare Realität.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <Button href="/kontakt" variant="secondary" size="lg">
+              Kontakt aufnehmen
+            </Button>
+            <Button href="/dienstleistungen" variant="outline" size="lg" class="border-white text-white hover:bg-white hover:text-[var(--color-primary-800)]">
+              Unsere Leistungen
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="py-16 md:py-24 bg-[var(--background)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-6">
+              Unsere Geschichte
+            </h2>
+            <div class="space-y-4 text-[var(--foreground-secondary)] leading-relaxed">
+              <p>
+                Was 1989 in Hünenberg als kleine Werkstatt begann, hat sich zu einem der führenden Anbieter für Schilder und Beschriftungen in der Zentralschweiz entwickelt. Alpha Sign AG steht für <strong class="text-[var(--foreground)]">Schweizer Qualität</strong>, <strong class="text-[var(--foreground)]">Präzision</strong> und <strong class="text-[var(--foreground)]">persönlichen Service</strong>.
+              </p>
+              <p>
+                Unser Gründer erkannte früh das Potenzial hochwertiger Beschilderung als Visitenkarte für Unternehmen. Mit Leidenschaft für Handwerk und einem Auge fürs Detail bauten wir Schritt für Schritt unser Angebot aus - stets mit dem Anspruch, unseren Kunden das Beste zu bieten.
+              </p>
+              <p>
+                Heute verbinden wir traditionelles Handwerk mit modernster Technologie. CNC-Fräsen, Lasercutter und digitale Druckverfahren ermöglichen uns, selbst die anspruchsvollsten Projekte zu realisieren - von der kleinen Türbeschriftung bis zur grossflächigen Fassadengestaltung.
+              </p>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-[var(--background-secondary)] shadow-xl">
+              <!-- Placeholder for company image -->
+              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary-100)] to-[var(--color-primary-200)]">
+                <div class="text-center p-8">
+                  <svg class="w-20 h-20 mx-auto text-[var(--color-primary-400)] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                  <p class="text-[var(--color-primary-600)] font-medium">Firmenbild</p>
+                </div>
+              </div>
+            </div>
+            <!-- Stats Badge -->
+            <div class="absolute -bottom-6 -right-6 bg-[var(--card)] rounded-xl shadow-lg p-6">
+              <div class="text-center">
+                <span class="block text-4xl font-bold text-[var(--primary)]">35+</span>
+                <span class="text-sm text-[var(--foreground-secondary)]">Jahre Erfahrung</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <Timeline items={timelineItems} lang="de" />
+
+    <!-- Mission & Values Section -->
+    <section class="py-16 md:py-24 bg-[var(--background)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-12 md:mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">
+            Unsere Mission & Werte
+          </h2>
+          <p class="text-lg md:text-xl text-[var(--foreground-secondary)] max-w-2xl mx-auto">
+            Was uns antreibt und wofür wir stehen
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Mission -->
+          <div class="bg-[var(--card)] rounded-2xl p-8 shadow-lg">
+            <div class="w-14 h-14 bg-[var(--color-primary-100)] rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[var(--foreground)] mb-3">Mission</h3>
+            <p class="text-[var(--foreground-secondary)]">
+              Wir machen Ihre Marke sichtbar. Durch hochwertige Schilder und Beschriftungen helfen wir Unternehmen, einen bleibenden Eindruck zu hinterlassen und ihre Identität nach aussen zu tragen.
+            </p>
+          </div>
+
+          <!-- Vision -->
+          <div class="bg-[var(--card)] rounded-2xl p-8 shadow-lg">
+            <div class="w-14 h-14 bg-[var(--color-primary-100)] rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[var(--foreground)] mb-3">Vision</h3>
+            <p class="text-[var(--foreground-secondary)]">
+              Der führende Partner für Schilder und Beschriftungen in der Schweiz zu sein - bekannt für Innovation, Qualität und einen Service, der begeistert.
+            </p>
+          </div>
+
+          <!-- Values -->
+          <div class="bg-[var(--card)] rounded-2xl p-8 shadow-lg">
+            <div class="w-14 h-14 bg-[var(--color-primary-100)] rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-[var(--foreground)] mb-3">Werte</h3>
+            <ul class="text-[var(--foreground-secondary)] space-y-2">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Qualität ohne Kompromisse</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Kundenorientierung</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Zuverlässigkeit</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Nachhaltigkeit</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Swiss Quality Section -->
+    <section class="py-16 md:py-24 bg-[var(--color-accent-50)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="order-2 md:order-1">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-accent-100)] rounded-full text-[var(--color-accent-700)] text-sm font-medium mb-6">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+              Swiss Made
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-6">
+              Schweizer Präzision und Qualität
+            </h2>
+            <p class="text-[var(--foreground-secondary)] leading-relaxed mb-6">
+              "Swiss Made" ist mehr als nur ein Label - es ist unser Versprechen. Jedes Produkt, das unsere Werkstatt verlässt, erfüllt die höchsten Qualitätsstandards. Von der sorgfältigen Materialauswahl bis zur präzisen Verarbeitung achten wir auf jedes Detail.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-[var(--color-accent-500)] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong class="text-[var(--foreground)]">Lokale Fertigung:</strong>
+                  <span class="text-[var(--foreground-secondary)]"> Alle Produkte werden in unserer Werkstatt in Hünenberg gefertigt.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-[var(--color-accent-500)] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong class="text-[var(--foreground)]">Hochwertige Materialien:</strong>
+                  <span class="text-[var(--foreground-secondary)]"> Wir verwenden nur geprüfte Materialien von renommierten Lieferanten.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-[var(--color-accent-500)] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong class="text-[var(--foreground)]">Qualitätskontrolle:</strong>
+                  <span class="text-[var(--foreground-secondary)]"> Jedes Projekt durchläuft eine strenge Endkontrolle vor Auslieferung.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="order-1 md:order-2">
+            <div class="relative">
+              <div class="aspect-square rounded-2xl overflow-hidden bg-white shadow-xl flex items-center justify-center">
+                <!-- Swiss Cross Symbol -->
+                <svg class="w-48 h-48 text-[var(--color-accent-500)]" viewBox="0 0 32 32" fill="currentColor">
+                  <rect x="13" y="6" width="6" height="20"/>
+                  <rect x="6" y="13" width="20" height="6"/>
+                </svg>
+              </div>
+              <!-- Location Badge -->
+              <div class="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-4 flex items-center gap-3">
+                <div class="w-10 h-10 bg-[var(--color-primary-100)] rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span class="block text-sm font-semibold text-[var(--foreground)]">Hünenberg</span>
+                  <span class="text-xs text-[var(--foreground-secondary)]">Kanton Zug</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-Star Rating Highlight -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500">
+      <div class="container mx-auto px-4 max-w-4xl text-center">
+        <div class="flex justify-center gap-2 mb-6">
+          {[1, 2, 3, 4, 5].map(() => (
+            <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          ))}
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          5.0 Sterne Bewertung
+        </h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          Unsere Kunden schätzen unsere Arbeit und unseren Service. Das spiegelt sich in unserer hervorragenden Bewertung wider - und motiviert uns jeden Tag, unser Bestes zu geben.
+        </p>
+        <div class="flex flex-wrap justify-center gap-8 text-white">
+          <div class="text-center">
+            <span class="block text-4xl md:text-5xl font-bold">100%</span>
+            <span class="text-white/80">Zufriedene Kunden</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-4xl md:text-5xl font-bold">35+</span>
+            <span class="text-white/80">Jahre Erfahrung</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-4xl md:text-5xl font-bold">1000+</span>
+            <span class="text-white/80">Abgeschlossene Projekte</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <Team members={teamMembers} lang="de" />
+
+    <!-- CTA Banner after Team -->
+    <CTABanner
+      headline="Lernen Sie uns persoenlich kennen"
+      description="Besuchen Sie uns in Huenenberg oder vereinbaren Sie einen Termin fuer eine unverbindliche Beratung."
+      primaryCTA={{ text: "Kontakt aufnehmen", href: "/kontakt" }}
+      secondaryCTA={{ text: "Rufen Sie uns an", href: "tel:+41417800505" }}
+      variant="light"
+      compact={true}
+      locale="de"
+    />
+
+    <!-- USPs Section -->
+    <section class="py-16 md:py-24 bg-[var(--background-secondary)]">
+      <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-12 md:mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--foreground)] mb-4">
+            Warum Alpha Sign?
+          </h2>
+          <p class="text-lg md:text-xl text-[var(--foreground-secondary)] max-w-2xl mx-auto">
+            Was uns von anderen unterscheidet
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {usps.map((usp) => (
+            <div class="bg-[var(--card)] rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div class="w-12 h-12 bg-[var(--color-primary-100)] rounded-lg flex items-center justify-center mb-4">
+                {usp.icon === 'swiss' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" viewBox="0 0 32 32" fill="currentColor">
+                    <rect x="13" y="6" width="6" height="20"/>
+                    <rect x="6" y="13" width="20" height="6"/>
+                  </svg>
+                )}
+                {usp.icon === 'experience' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                )}
+                {usp.icon === 'service' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                )}
+                {usp.icon === 'local' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                )}
+                {usp.icon === 'rating' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                )}
+                {usp.icon === 'sustainable' && (
+                  <svg class="w-6 h-6 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class="text-lg font-bold text-[var(--foreground)] mb-2">{usp.title}</h3>
+              <p class="text-[var(--foreground-secondary)] text-sm">{usp.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-[var(--color-primary-600)] to-[var(--color-primary-800)] text-white">
+      <div class="container mx-auto px-4 max-w-4xl text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          Bereit für Ihr nächstes Projekt?
+        </h2>
+        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          Kontaktieren Sie uns für eine unverbindliche Beratung. Wir freuen uns darauf, Ihre Ideen in die Tat umzusetzen.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href="/kontakt" variant="secondary" size="lg">
+            Jetzt Kontakt aufnehmen
+          </Button>
+          <a
+            href="tel:+41417800505"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-300 font-medium"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            +41 41 780 05 05
+          </a>
+        </div>
+        <p class="mt-8 text-white/70 text-sm">
+          Industriestrasse 15, 6331 Hünenberg | Mo-Fr 08:00-17:00
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

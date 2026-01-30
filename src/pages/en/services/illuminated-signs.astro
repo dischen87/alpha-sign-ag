@@ -1,0 +1,138 @@
+---
+/**
+ * Illuminated Signs Service Page (English)
+ * SEO-optimized for Swiss market with permit information
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Illuminated Signs',
+  description: 'Professional illuminated signs in Switzerland - LED signage, channel letters and light boxes. Including permit consultation. CHF 2,000-25,000. Get advice: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Modern LED illuminated sign on commercial building in Switzerland',
+  serviceDescription: `Put your business in the spotlight with professional illuminated signs from Alpha Sign AG. As an experienced Swiss provider of light advertising, we have been creating LED signs, illuminated logos, light boxes and 3D channel letters since 1989.
+
+Our LED technology offers up to 80% energy savings compared to conventional illuminated signs and a lifespan of over 50,000 operating hours. We also guide you through the cantonal permit process - a service that many customers particularly appreciate.
+
+**Free consultation: +41 41 780 05 05** - We advise on design, technology and permits.`,
+  benefits: [
+    '24/7 visibility - maximum advertising impact even in darkness',
+    'Energy-efficient LED technology with up to 80% power savings',
+    'Long lifespan of 50,000+ operating hours (over 15 years)',
+    'Custom designs - from classic elegant to modern eye-catching',
+    'Complete permit consultation and application preparation included',
+    'Maintenance, repair and service from a single source',
+    'Various lighting effects: continuous light, dimmable, animated',
+    'Environmentally friendly: No toxic gases like in neon tubes',
+  ],
+  priceRange: {
+    min: 2000,
+    max: 25000,
+    note: 'Simple LED signs from CHF 2,000, light boxes CHF 3,000-8,000, custom 3D channel letters CHF 5,000-15,000, large installations and pylons up to CHF 25,000+. Including planning and installation.',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'We discuss your wishes and requirements. By phone or on-site, we analyze the location and mounting options. Call: +41 41 780 05 05.',
+    },
+    {
+      title: 'Measurements & Site Analysis',
+      description: 'We measure the installation location, check electrical connections and analyze visibility from different angles for optimal advertising impact.',
+    },
+    {
+      title: 'Design & Permit Application',
+      description: 'We create the design including technical drawings and photorealistic visualizations. If needed, we handle the complete preparation of the building application.',
+    },
+    {
+      title: 'Production',
+      description: 'After the building permit is granted (if required), we produce your illuminated sign with high-quality LED modules, durable materials and CE-compliant electronics.',
+    },
+    {
+      title: 'Installation & Electrical Connection',
+      description: 'Our specialist team professionally mounts the illuminated sign and connects it to the power grid in compliance with standards (NIV/SIA). Also at great heights with aerial lifts.',
+    },
+    {
+      title: 'Quality Control & Maintenance Contract',
+      description: 'After final acceptance and function check, we offer optional maintenance contracts for regular cleaning, inspection and technical verification.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'LED Sign Restaurant Loewen',
+      image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80',
+      category: 'Gastronomy',
+      href: '/en/portfolio/restaurant-loewen',
+    },
+    {
+      title: '3D Channel Letters Autohaus Central',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      category: 'Automotive',
+      href: '/en/portfolio/autohaus-central',
+    },
+    {
+      title: 'Light Box Pharmacy Vitalis',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Healthcare',
+      href: '/en/portfolio/apotheke-vitalis',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Do I need a permit for an illuminated sign in Switzerland?',
+      answer: 'Yes, illuminated signs in Switzerland generally require a building permit. The procedure varies by canton and municipality. In Canton Zug, a simple building application is required, with processing time of approximately 4-8 weeks. We handle the complete preparation of application documents including plans, visualizations and forms - and guide you through the entire process. Permit costs: approximately CHF 200-500 depending on municipality.',
+    },
+    {
+      question: 'How much does an illuminated sign cost?',
+      answer: 'Costs depend on size, construction type and complexity: Simple LED signs start at CHF 2,000. Light boxes cost CHF 3,000-8,000. Custom aluminum 3D channel letters typically cost CHF 5,000-15,000. Large installations, pylons or special shapes can cost up to CHF 25,000+. For a binding offer, we are happy to provide a free quote: +41 41 780 05 05.',
+    },
+    {
+      question: 'What materials and techniques are used for illuminated signs?',
+      answer: 'Modern illuminated signs consist of: Housing made of powder-coated aluminum or stainless steel (rust-free, durable), front panels made of acrylic glass or polycarbonate (impact-resistant), LED modules as light source (energy-efficient, long-lasting). For 3D letters, we use aluminum profiles with LED backlighting or illuminated acrylic glass. All components are suitable for outdoor use (IP65).',
+    },
+    {
+      question: 'How much electricity does an LED illuminated sign consume?',
+      answer: 'LED illuminated signs are very energy efficient. A typical sign (approx. 2m wide) consumes only 50-150 watts. With 8 hours of daily operation, this equates to approximately CHF 50-150 in electricity costs per year (at 20 cents/kWh). Compared to neon tubes, you save up to 80% energy. Dimmable systems and timers reduce consumption further.',
+    },
+    {
+      question: 'How long does an LED illuminated sign last?',
+      answer: 'Modern LED modules have a lifespan of 50,000-100,000 operating hours. With 8 hours of daily operation (approx. 3,000 hours/year), this equates to over 15-30 years. The aluminum or stainless steel housings last even longer with proper care. We offer maintenance contracts for regular cleaning and inspection to ensure your sign always functions optimally.',
+    },
+    {
+      question: 'Can I convert my existing neon sign to LED?',
+      answer: 'Yes, in many cases converting from neon to LED is possible and economically worthwhile. The advantages: 70-80% lower power consumption, significantly less maintenance, no mercury disposal, better color consistency over lifespan. Often existing housings can be reused. We are happy to check on-site whether your existing system can be converted and create a cost-benefit analysis.',
+    },
+  ],
+  keywords: [
+    'illuminated signs Switzerland',
+    'LED signage',
+    'channel letters',
+    'light box sign',
+    'backlit signs',
+    'neon sign LED conversion',
+    'commercial signage',
+    'storefront lighting',
+    'illuminated sign cost',
+    'LED sign permit Switzerland',
+    'business signage',
+    'exterior illuminated signs',
+    '3D LED letters',
+    'sign lighting',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

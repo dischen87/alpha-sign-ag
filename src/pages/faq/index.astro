@@ -1,0 +1,210 @@
+---
+/**
+ * FAQ Overview Page - German
+ * Links to FAQ sections on individual service pages
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/seo/SEO.astro';
+
+const title = "FAQ - Haufige Fragen zu unseren Dienstleistungen | Alpha Sign AG";
+const description = "Finden Sie Antworten auf haufige Fragen zu Fahrzeugbeschriftung, Car Wrapping, Leuchtreklame, Signaletik und mehr. Experten-Ratgeber von Alpha Sign AG.";
+const canonical = "https://alphasign.ch/faq";
+
+const serviceCategories = [
+  {
+    title: "Fahrzeugbeschriftung",
+    description: "Alles rund um die Beschriftung und Folierung von Firmen- und Privatfahrzeugen.",
+    href: "/dienstleistungen/fahrzeugbeschriftung#faq",
+    image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80",
+    topics: ["Kosten und Preise", "Haltbarkeit", "Materialien", "Entfernung", "Bewilligung"]
+  },
+  {
+    title: "Car Wrapping",
+    description: "Vollfolierung, Farbwechsel und Lackschutzfolie fur Ihr Fahrzeug.",
+    href: "/dienstleistungen/car-wrapping#faq",
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80",
+    topics: ["Wrapping vs. Lackierung", "Folienqualitat", "Pflege", "Strassenverkehrsamt", "Kosten"]
+  },
+  {
+    title: "Leuchtreklame",
+    description: "LED-Lichtwerbung, Leuchtbuchstaben und beleuchtete Firmenschilder.",
+    href: "/dienstleistungen/leuchtreklame#faq",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80",
+    topics: ["Bewilligung und Baubewilligung", "Kosten", "Stromverbrauch", "Lebensdauer", "LED-Umrustung"]
+  },
+  {
+    title: "Signaletik",
+    description: "Orientierungssysteme, Wegeleitsysteme und Beschilderung fur Gebaude.",
+    href: "/dienstleistungen/signaletik#faq",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+    topics: ["Was ist Signaletik", "Kosten", "Materialien", "Barrierefreiheit", "Projektdauer"]
+  },
+  {
+    title: "Gebaudebeschriftung",
+    description: "Fassadenbeschriftung, 3D-Buchstaben und Schaufenstergestaltung.",
+    href: "/dienstleistungen/gebaeudebeschriftung#faq",
+    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80",
+    topics: ["Materialien", "Montage", "Beleuchtung", "Bewilligung"]
+  },
+  {
+    title: "Messeauftritte",
+    description: "Messestande, Displays und Eventbranding fur Ihren professionellen Auftritt.",
+    href: "/dienstleistungen/messeauftritte#faq",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80",
+    topics: ["Planung", "Materialien", "Auf- und Abbau", "Kosten"]
+  }
+];
+
+// FAQ Schema for the overview page
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": serviceCategories.map(service => ({
+    "@type": "Question",
+    "name": `Haufige Fragen zu ${service.title}`,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": `${service.description} Themen: ${service.topics.join(", ")}. Besuchen Sie unsere ${service.title}-Seite fur detaillierte Antworten.`
+    }
+  }))
+};
+---
+
+<BaseLayout title={title} description={description} lang="de">
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    type="website"
+    keywords={["FAQ Beschriftung", "Fahrzeugbeschriftung Fragen", "Werbetechnik FAQ", "Leuchtreklame FAQ", "Signaletik Fragen"]}
+  />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-gray-600 mb-8" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2">
+        <li><a href="/" class="hover:text-blue-600">Home</a></li>
+        <li>/</li>
+        <li class="text-gray-900">FAQ</li>
+      </ol>
+    </nav>
+
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        Haufig gestellte Fragen
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Finden Sie Antworten auf die wichtigsten Fragen zu unseren Dienstleistungen.
+        Wahlen Sie einen Bereich, um die haufigsten Fragen und detaillierte Antworten zu sehen.
+      </p>
+    </header>
+
+    <!-- Service Categories Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {serviceCategories.map((service) => (
+        <a
+          href={service.href}
+          class="group block bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all duration-300"
+        >
+          <div class="aspect-video overflow-hidden">
+            <img
+              src={service.image}
+              alt={service.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              Haufige Fragen zu {service.title}
+            </h2>
+            <p class="text-gray-600 mb-4">{service.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {service.topics.slice(0, 3).map((topic) => (
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                  {topic}
+                </span>
+              ))}
+              {service.topics.length > 3 && (
+                <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                  +{service.topics.length - 3} mehr
+                </span>
+              )}
+            </div>
+            <span class="inline-flex items-center text-blue-600 font-medium group-hover:gap-2 transition-all">
+              FAQ ansehen
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Quick Contact -->
+    <div class="bg-blue-50 rounded-xl p-8 mb-12">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Ihre Frage ist nicht dabei?</h2>
+          <p class="text-gray-600">
+            Kontaktieren Sie uns direkt - wir beraten Sie gerne personlich und unverbindlich.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/kontakt"
+            class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Kontakt aufnehmen
+          </a>
+          <a
+            href="tel:+41417800505"
+            class="inline-flex items-center justify-center px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+          >
+            +41 41 780 05 05
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Resources -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Weitere Informationen</h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/dienstleistungen" class="block bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow text-center">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Alle Dienstleistungen</h3>
+          <p class="text-gray-600 text-sm">Komplette Ubersicht unserer Beschriftungs-Services.</p>
+        </a>
+
+        <a href="/portfolio" class="block bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow text-center">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Portfolio</h3>
+          <p class="text-gray-600 text-sm">Referenzprojekte und Beispiele unserer Arbeit.</p>
+        </a>
+
+        <a href="/kontakt" class="block bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow text-center">
+          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Kontakt</h3>
+          <p class="text-gray-600 text-sm">Personliche Beratung und individuelle Offerten.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

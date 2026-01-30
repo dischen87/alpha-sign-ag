@@ -1,0 +1,79 @@
+---
+/**
+ * Breadcrumb Component
+ * Navigation breadcrumbs with proper ARIA attributes and schema.org markup.
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  icon?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  separator?: 'chevron' | 'slash' | 'arrow';
+  class?: string;
+}
+
+const {
+  items,
+  separator = 'chevron',
+  class: className = '',
+} = Astro.props;
+
+const separatorIcons = {
+  chevron: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`,
+  slash: `<span aria-hidden="true">/</span>`,
+  arrow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>`,
+};
+
+// Generate schema.org structured data
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': items.map((item, index) => ({
+    '@type': 'ListItem',
+    'position': index + 1,
+    'name': item.label,
+    ...(item.href && { 'item': item.href }),
+  })),
+};
+---
+
+<nav aria-label="Breadcrumb" class={className}>
+  <ol
+    class="flex items-center flex-wrap gap-2 text-sm"
+    role="list"
+  >
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+
+      return (
+        <li class="flex items-center gap-2">
+          {item.href && !isLast ? (
+            <a
+              href={item.href}
+              class="text-[rgb(var(--color-text-muted))] hover:text-[rgb(var(--color-primary))] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-primary))] focus-visible:ring-offset-2 rounded-[var(--radius-sm)] transition-colors duration-[var(--transition-fast)]"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <span
+              class={isLast ? 'text-[rgb(var(--color-text))] font-medium' : 'text-[rgb(var(--color-text-muted))]'}
+              aria-current={isLast ? 'page' : undefined}
+            >
+              {item.label}
+            </span>
+          )}
+
+          {!isLast && (
+            <span class="text-[rgb(var(--color-text-muted))]" set:html={separatorIcons[separator]} />
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

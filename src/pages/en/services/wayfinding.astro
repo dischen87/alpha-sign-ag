@@ -1,0 +1,138 @@
+---
+/**
+ * Wayfinding & Signage Service Page (English)
+ * SEO-optimized for Swiss B2B market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Wayfinding',
+  description: 'Professional wayfinding systems in Switzerland - Directional signage, building signage and navigation systems for buildings and premises. CHF 3,000-50,000. Consultation: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Modern wayfinding system in a Swiss office building',
+  serviceDescription: `Effective orientation begins with thoughtful wayfinding design. Alpha Sign AG develops and implements customized orientation systems for businesses, public buildings, hospitals, hotels and premises throughout Switzerland.
+
+From the underground garage to the top floor, from reception to the meeting room - we guide your visitors, patients, guests and employees safely and intuitively to their destination. Our modular systems are flexibly expandable and meet the requirements for barrier-free design according to SIA 500.
+
+**Free consultation for your wayfinding project: +41 41 780 05 05**`,
+  benefits: [
+    'Consistent appearance according to your corporate design',
+    'Barrier-free navigation according to SIA 500 (Braille, tactile, high-contrast)',
+    'Modular systems for easy adaptations and extensions',
+    'Multilingual signage (DE/FR/IT/EN) for international environments',
+    'Durable, easy-care materials for intensive use',
+    'Complete service from concept through production to installation',
+    'Digital wayfinding solutions can be integrated on request',
+    'Documentation for future extensions and reorders',
+  ],
+  priceRange: {
+    min: 3000,
+    max: 50000,
+    note: 'Individual door signs from CHF 80, floor plans from CHF 500. Complete wayfinding systems for SMEs (20-50 signs) CHF 3,000-15,000. Large projects (hospitals, administration, hotels) CHF 15,000-50,000+.',
+  },
+  processSteps: [
+    {
+      title: 'Free Initial Consultation',
+      description: 'We discuss your needs, the number of areas to be signposted and your design requirements. Call: +41 41 780 05 05.',
+    },
+    {
+      title: 'Needs Analysis & Site Visit',
+      description: 'We analyze the routing on site, identify all decision points and systematically record all areas to be signposted with a detailed signage plan.',
+    },
+    {
+      title: 'Concept Development & Design',
+      description: 'Based on your corporate design, we develop a coherent wayfinding concept with typography, pictograms, color codes and a unified design language for all sign types.',
+    },
+    {
+      title: 'Visualization & Approval',
+      description: 'You receive photorealistic visualizations, sample signs for review and a detailed signage plan with all positions for final coordination.',
+    },
+    {
+      title: 'Production',
+      description: 'The signs are precisely manufactured in our workshop in Hunenberg from high-quality materials such as aluminum, acrylic glass, stainless steel or composite materials.',
+    },
+    {
+      title: 'Installation & Documentation',
+      description: 'Our installation team professionally mounts all signs according to plan. You receive complete documentation for future extensions and reorders.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Wayfinding Canton Zug Administration Building',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      category: 'Public Buildings',
+      href: '/en/portfolio/verwaltung-zug',
+    },
+    {
+      title: 'Navigation System Business Park Baar',
+      image: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=600&q=80',
+      category: 'Commercial',
+      href: '/en/portfolio/business-park-baar',
+    },
+    {
+      title: 'Orientation System Clinic Meilen',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Healthcare',
+      href: '/en/portfolio/klinik-meilen',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is wayfinding and why do I need it?',
+      answer: 'Wayfinding (also called signage or orientation system) encompasses all visual elements that serve orientation in buildings and on premises: directional signs, door signs, floor plans, pictograms, directional arrows and digital information systems. Good wayfinding guides visitors intuitively to their destination, reduces inquiries to staff and conveys professionalism. Particularly important in hospitals, hotels, office buildings, shopping centers and public buildings.',
+    },
+    {
+      question: 'How much does a wayfinding system cost?',
+      answer: 'Costs vary greatly depending on scope and material choice: Individual door signs start at CHF 80-150. A complete system for an SME or office building (20-50 signs) typically costs CHF 3,000-15,000. Large projects such as hospitals, hotels or administration buildings (100+ signs) are CHF 15,000-50,000+. We are happy to provide a detailed quote based on a site visit: +41 41 780 05 05.',
+    },
+    {
+      question: 'What materials are suitable for wayfinding?',
+      answer: 'The choice depends on location and budget: Aluminum is lightweight, corrosion-resistant and versatile - ideal for indoor and outdoor use. Acrylic glass looks modern, elegant and can be backlit. Stainless steel is particularly robust, vandal-resistant and durable. For cost-effective solutions, Forex, Dibond or HPL panels are suitable. We advise you on the optimal material choice for your requirements.',
+    },
+    {
+      question: 'Do you consider accessible design?',
+      answer: 'Yes, we design according to SIA 500 guidelines for barrier-free construction. This includes: Tactile elements and Braille for the visually impaired, high-contrast design (text/background), sufficient font sizes (depending on reading distance), accessible mounting heights (85-160 cm). Accessibility is often mandatory for public buildings and new construction. We advise you on the requirements.',
+    },
+    {
+      question: 'Can existing wayfinding systems be extended?',
+      answer: 'Yes, our modular wayfinding systems are designed for expandability. When moving, renovating, with new tenants or organizational changes, individual signs can be replaced, added or repositioned. We carefully document all projects (materials, colors, fonts) so that reorders fit perfectly even after years. We can also often seamlessly extend third-party systems.',
+    },
+    {
+      question: 'How long does a wayfinding project take?',
+      answer: 'Duration depends on scope: Small projects (10-20 signs) can be completed in 2-4 weeks. Medium projects (50-100 signs) require 4-8 weeks. For large projects with concept development, plan 2-4 months. For new construction, we integrate into the construction schedule. Express orders for individual signs or reorders are often possible within a week.',
+    },
+  ],
+  keywords: [
+    'wayfinding Switzerland',
+    'signage system',
+    'directional signs',
+    'building signage',
+    'navigation system',
+    'door signs office',
+    'pictograms signage',
+    'accessible wayfinding',
+    'hospital wayfinding',
+    'hotel signage',
+    'signage system cost',
+    'information signage',
+    'building navigation',
+    'orientation system',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="en"
+/>

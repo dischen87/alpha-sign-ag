@@ -1,0 +1,135 @@
+---
+/**
+ * Textarea Component
+ * Multi-line text input with label, helper text, and error states.
+ * Professional styling matching the Input component.
+ */
+interface Props {
+  name: string;
+  id?: string;
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  rows?: number;
+  required?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  error?: string;
+  hint?: string;
+  maxlength?: number;
+  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
+  class?: string;
+}
+
+const {
+  name,
+  id = name,
+  label,
+  placeholder,
+  value,
+  rows = 4,
+  required = false,
+  disabled = false,
+  readonly = false,
+  error,
+  hint,
+  maxlength,
+  resize = 'vertical',
+  class: className = '',
+} = Astro.props;
+
+const resizeStyles = {
+  none: 'resize-none',
+  vertical: 'resize-y',
+  horizontal: 'resize-x',
+  both: 'resize',
+};
+
+const textareaStyles = `
+  w-full
+  px-4 py-3.5
+  bg-background
+  border-2 border-border
+  rounded-[var(--radius)]
+  text-foreground text-base leading-relaxed
+  placeholder:text-muted-foreground/70
+  transition-all duration-200 ease-out
+  hover:border-muted-foreground/50
+  focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10
+  disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-muted disabled:hover:border-border
+  read-only:bg-muted read-only:cursor-default read-only:hover:border-border
+  dark:bg-input dark:border-border dark:hover:border-muted-foreground/30
+  dark:focus:ring-primary/20
+  ${resizeStyles[resize]}
+`;
+
+const errorStyles = error
+  ? 'border-destructive focus:border-destructive focus:ring-destructive/20'
+  : '';
+
+const classes = [textareaStyles, errorStyles, className].filter(Boolean).join(' ');
+---
+
+<div class="space-y-2">
+  {label && (
+    <label for={id} class="block text-sm font-semibold text-foreground mb-1.5">
+      {label}
+      {required && <span class="text-destructive ml-0.5" aria-hidden="true">*</span>}
+    </label>
+  )}
+
+  <textarea
+    name={name}
+    id={id}
+    placeholder={placeholder}
+    rows={rows}
+    required={required}
+    disabled={disabled}
+    readonly={readonly}
+    maxlength={maxlength}
+    aria-invalid={error ? 'true' : undefined}
+    aria-describedby={error ? `${id}-error` : hint ? `${id}-hint` : undefined}
+    class={classes}
+  >{value}</textarea>
+
+  <div class="flex justify-between gap-2">
+    <div>
+      {hint && !error && (
+        <p id={`${id}-hint`} class="text-sm text-muted-foreground">
+          {hint}
+        </p>
+      )}
+
+      {error && (
+        <p id={`${id}-error`} class="text-sm text-destructive flex items-center gap-1.5" role="alert">
+          <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          {error}
+        </p>
+      )}
+    </div>
+
+    {maxlength && (
+      <p class="text-sm text-muted-foreground" aria-live="polite">
+        <span data-textarea-counter={id}>0</span>/{maxlength}
+      </p>
+    )}
+  </div>
+</div>
+
+{maxlength && (
+  <script define:vars={{ id, maxlength }}>
+    const textarea = document.getElementById(id);
+    const counter = document.querySelector(`[data-textarea-counter="${id}"]`);
+
+    if (textarea && counter) {
+      const updateCounter = () => {
+        counter.textContent = textarea.value.length;
+      };
+
+      textarea.addEventListener('input', updateCounter);
+      updateCounter();
+    }
+  </script>
+)}

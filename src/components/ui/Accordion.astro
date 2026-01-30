@@ -1,0 +1,143 @@
+---
+/**
+ * Accordion Component
+ * Expandable/collapsible sections, perfect for FAQ.
+ */
+interface AccordionItem {
+  id: string;
+  title: string;
+  content: string;
+  defaultOpen?: boolean;
+}
+
+interface Props {
+  items: AccordionItem[];
+  allowMultiple?: boolean;
+  class?: string;
+}
+
+const {
+  items,
+  allowMultiple = false,
+  class: className = '',
+} = Astro.props;
+
+const accordionId = `accordion-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  class={`space-y-2 ${className}`}
+  data-accordion
+  data-allow-multiple={allowMultiple}
+  id={accordionId}
+>
+  {items.map((item, index) => (
+    <div
+      class="border border-[rgb(var(--color-border))] rounded-[var(--radius-lg)] overflow-hidden"
+      data-accordion-item
+    >
+      <h3>
+        <button
+          type="button"
+          id={`${item.id}-trigger`}
+          class="w-full flex items-center justify-between p-[var(--spacing-lg)] text-left font-medium text-[rgb(var(--color-text))] bg-[rgb(var(--color-surface))] hover:bg-[rgb(var(--color-border))] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[rgb(var(--color-primary))] transition-colors duration-[var(--transition-fast)]"
+          aria-expanded={item.defaultOpen ? 'true' : 'false'}
+          aria-controls={`${item.id}-content`}
+          data-accordion-trigger
+        >
+          <span>{item.title}</span>
+          <svg
+            class="w-5 h-5 text-[rgb(var(--color-text-muted))] transition-transform duration-[var(--transition-normal)]"
+            data-accordion-icon
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </h3>
+      <div
+        id={`${item.id}-content`}
+        role="region"
+        aria-labelledby={`${item.id}-trigger`}
+        class={`overflow-hidden transition-all duration-[var(--transition-normal)] ${item.defaultOpen ? '' : 'hidden'}`}
+        data-accordion-content
+      >
+        <div class="p-[var(--spacing-lg)] text-[rgb(var(--color-text-muted))]">
+          <Fragment set:html={item.content} />
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  class Accordion {
+    private container: HTMLElement;
+    private allowMultiple: boolean;
+    private items: NodeListOf<Element>;
+
+    constructor(element: HTMLElement) {
+      this.container = element;
+      this.allowMultiple = element.dataset.allowMultiple === 'true';
+      this.items = element.querySelectorAll('[data-accordion-item]');
+      this.setupEventListeners();
+    }
+
+    private setupEventListeners() {
+      this.items.forEach((item) => {
+        const trigger = item.querySelector('[data-accordion-trigger]');
+        trigger?.addEventListener('click', () => this.toggle(item as HTMLElement));
+      });
+    }
+
+    private toggle(item: HTMLElement) {
+      const trigger = item.querySelector('[data-accordion-trigger]');
+      const content = item.querySelector('[data-accordion-content]');
+      const icon = item.querySelector('[data-accordion-icon]');
+      const isExpanded = trigger?.getAttribute('aria-expanded') === 'true';
+
+      if (!isExpanded && !this.allowMultiple) {
+        // Close other items
+        this.items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            this.closeItem(otherItem as HTMLElement);
+          }
+        });
+      }
+
+      if (isExpanded) {
+        this.closeItem(item);
+      } else {
+        this.openItem(item);
+      }
+    }
+
+    private openItem(item: HTMLElement) {
+      const trigger = item.querySelector('[data-accordion-trigger]');
+      const content = item.querySelector('[data-accordion-content]');
+      const icon = item.querySelector('[data-accordion-icon]');
+
+      trigger?.setAttribute('aria-expanded', 'true');
+      content?.classList.remove('hidden');
+      icon?.classList.add('rotate-180');
+    }
+
+    private closeItem(item: HTMLElement) {
+      const trigger = item.querySelector('[data-accordion-trigger]');
+      const content = item.querySelector('[data-accordion-content]');
+      const icon = item.querySelector('[data-accordion-icon]');
+
+      trigger?.setAttribute('aria-expanded', 'false');
+      content?.classList.add('hidden');
+      icon?.classList.remove('rotate-180');
+    }
+  }
+
+  // Initialize all accordions
+  document.querySelectorAll('[data-accordion]').forEach((accordion) => {
+    new Accordion(accordion as HTMLElement);
+  });
+</script>

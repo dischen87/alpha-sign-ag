@@ -1,0 +1,188 @@
+---
+/**
+ * Tabs Component
+ * Tab navigation with keyboard support and ARIA attributes.
+ */
+interface Tab {
+  id: string;
+  label: string;
+  icon?: string;
+  disabled?: boolean;
+}
+
+interface Props {
+  tabs: Tab[];
+  defaultTab?: string;
+  variant?: 'default' | 'pills' | 'underline';
+  class?: string;
+}
+
+const {
+  tabs,
+  defaultTab = tabs[0]?.id,
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+
+const tabsId = `tabs-${Math.random().toString(36).substr(2, 9)}`;
+
+const variantStyles = {
+  default: {
+    list: 'border-b border-[rgb(var(--color-border))]',
+    tab: 'px-4 py-2.5 -mb-px border-b-2 border-transparent hover:border-[rgb(var(--color-border))] hover:text-[rgb(var(--color-text))]',
+    activeTab: 'border-[rgb(var(--color-primary))] text-[rgb(var(--color-primary))]',
+  },
+  pills: {
+    list: 'bg-[rgb(var(--color-surface))] p-1 rounded-[var(--radius-lg)]',
+    tab: 'px-4 py-2 rounded-[var(--radius-md)] hover:bg-[rgb(var(--color-border))] hover:text-[rgb(var(--color-text))]',
+    activeTab: 'bg-[rgb(var(--color-background))] text-[rgb(var(--color-text))] shadow-[var(--shadow-sm)]',
+  },
+  underline: {
+    list: '',
+    tab: 'px-4 py-2.5 border-b-2 border-transparent hover:text-[rgb(var(--color-text))]',
+    activeTab: 'border-[rgb(var(--color-primary))] text-[rgb(var(--color-primary))]',
+  },
+};
+
+const styles = variantStyles[variant];
+---
+
+<div class={className} data-tabs id={tabsId}>
+  <!-- Tab List -->
+  <div
+    class={`flex ${styles.list}`}
+    role="tablist"
+    aria-label="Tabs"
+  >
+    {tabs.map((tab, index) => (
+      <button
+        type="button"
+        id={`${tab.id}-tab`}
+        class={`
+          ${styles.tab}
+          ${tab.id === defaultTab ? styles.activeTab : 'text-[rgb(var(--color-text-muted))]'}
+          font-medium
+          transition-all duration-[var(--transition-fast)]
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-primary))] focus-visible:ring-offset-2
+          disabled:opacity-50 disabled:cursor-not-allowed
+        `}
+        role="tab"
+        aria-selected={tab.id === defaultTab ? 'true' : 'false'}
+        aria-controls={`${tab.id}-panel`}
+        tabindex={tab.id === defaultTab ? 0 : -1}
+        disabled={tab.disabled}
+        data-tab-trigger={tab.id}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="mt-[var(--spacing-lg)]">
+    {tabs.map((tab) => (
+      <div
+        id={`${tab.id}-panel`}
+        role="tabpanel"
+        aria-labelledby={`${tab.id}-tab`}
+        tabindex="0"
+        class={tab.id === defaultTab ? '' : 'hidden'}
+        data-tab-panel={tab.id}
+      >
+        <slot name={tab.id} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  class Tabs {
+    private container: HTMLElement;
+    private tabList: HTMLElement | null;
+    private tabs: HTMLButtonElement[];
+    private panels: HTMLElement[];
+
+    constructor(element: HTMLElement) {
+      this.container = element;
+      this.tabList = element.querySelector('[role="tablist"]');
+      this.tabs = Array.from(element.querySelectorAll('[role="tab"]'));
+      this.panels = Array.from(element.querySelectorAll('[role="tabpanel"]'));
+      this.setupEventListeners();
+    }
+
+    private setupEventListeners() {
+      this.tabs.forEach((tab) => {
+        tab.addEventListener('click', () => this.activateTab(tab));
+        tab.addEventListener('keydown', (e) => this.handleKeydown(e, tab));
+      });
+    }
+
+    private activateTab(selectedTab: HTMLButtonElement) {
+      if (selectedTab.disabled) return;
+
+      const selectedId = selectedTab.dataset.tabTrigger;
+
+      // Deactivate all tabs
+      this.tabs.forEach((tab) => {
+        tab.setAttribute('aria-selected', 'false');
+        tab.setAttribute('tabindex', '-1');
+        tab.classList.remove('border-[rgb(var(--color-primary))]', 'text-[rgb(var(--color-primary))]', 'bg-[rgb(var(--color-background))]', 'shadow-[var(--shadow-sm)]');
+        tab.classList.add('text-[rgb(var(--color-text-muted))]');
+      });
+
+      // Activate selected tab
+      selectedTab.setAttribute('aria-selected', 'true');
+      selectedTab.setAttribute('tabindex', '0');
+      selectedTab.classList.add('border-[rgb(var(--color-primary))]', 'text-[rgb(var(--color-primary))]');
+      selectedTab.classList.remove('text-[rgb(var(--color-text-muted))]');
+      selectedTab.focus();
+
+      // Show/hide panels
+      this.panels.forEach((panel) => {
+        if (panel.dataset.tabPanel === selectedId) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    private handleKeydown(e: KeyboardEvent, currentTab: HTMLButtonElement) {
+      const currentIndex = this.tabs.indexOf(currentTab);
+      let newIndex: number | null = null;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          newIndex = currentIndex === 0 ? this.tabs.length - 1 : currentIndex - 1;
+          break;
+        case 'ArrowRight':
+          newIndex = currentIndex === this.tabs.length - 1 ? 0 : currentIndex + 1;
+          break;
+        case 'Home':
+          newIndex = 0;
+          break;
+        case 'End':
+          newIndex = this.tabs.length - 1;
+          break;
+      }
+
+      if (newIndex !== null) {
+        e.preventDefault();
+        // Skip disabled tabs
+        while (this.tabs[newIndex].disabled && newIndex !== currentIndex) {
+          if (e.key === 'ArrowLeft' || e.key === 'Home') {
+            newIndex = newIndex === 0 ? this.tabs.length - 1 : newIndex - 1;
+          } else {
+            newIndex = newIndex === this.tabs.length - 1 ? 0 : newIndex + 1;
+          }
+        }
+        this.activateTab(this.tabs[newIndex]);
+      }
+    }
+  }
+
+  // Initialize all tab components
+  document.querySelectorAll('[data-tabs]').forEach((tabs) => {
+    new Tabs(tabs as HTMLElement);
+  });
+</script>

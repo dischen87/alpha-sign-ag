@@ -1,0 +1,138 @@
+---
+/**
+ * Fine Art Prints Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Fine Art Prints',
+  description: 'Fine Art Prints in der Schweiz - Hochwertige Kunstdrucke, Giclée-Druck auf Hahnemühle, Leinwandbilder und Fotodrucke in Galeriequalität. Ab CHF 50. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Fine Art Print auf hochwertigem Papier in Schweizer Galerie',
+  serviceDescription: `Bringen Sie Ihre Kunstwerke und Fotografien auf Galerieniveau mit Fine Art Prints von Alpha Sign AG. Wir drucken auf hochwertigen Künstlerpapieren und Leinwänden mit Giclée-Technologie - für Künstler, Fotografen, Galerien, Museen und Kunstliebhaber.
+
+Unsere Drucke sind lichtecht (über 100 Jahre archivfähig nach Wilhelm Research), farbgetreu und erreichen höchste Detailauflösung. Vom einzelnen Druck bis zur limitierten Edition für Ihre Ausstellung - wir bieten professionellen Service mit persönlicher Beratung.
+
+**Jetzt Probedruck anfragen: +41 41 780 05 05** - Wir beraten Sie zu Papier, Format und Farbmanagement.`,
+  benefits: [
+    'Giclée-Druck mit 12-Farben-Technologie für höchste Farbgenauigkeit und Detailtreue',
+    'Museumsqualität - lichtecht über 100 Jahre (Wilhelm Research zertifiziert)',
+    'Premium-Papiere: Hahnemühle, Canson Infinity, Epson Fine Art, Innova',
+    'Grossformate bis 150 cm Breite auf Rolle, bis 120x180 cm Einzelbogen',
+    'Professionelles Farbmanagement mit kalibrierten Monitoren und Soft-Proofing',
+    'Editionen mit fortlaufender Nummerierung, Signatur und Echtheitszertifikat',
+    'Rahmung mit Passepartout und Museumsglas auf Wunsch',
+    'Sichere Archivierung Ihrer Druckdaten für identische Nachdrucke',
+  ],
+  priceRange: {
+    min: 50,
+    max: 500,
+    note: 'A4 (21x30 cm) ab CHF 50, A3 (30x42 cm) ab CHF 80, A2 (42x60 cm) ab CHF 120, A1 (60x84 cm) ab CHF 200, 100x150 cm ab CHF 350. Leinwanddruck ca. 30% Aufschlag. Mengenrabatte für Editionen ab 5 Stück.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihr Projekt, die gewünschten Formate und beraten Sie zur optimalen Papier-/Leinwandwahl für Ihr Motiv. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Datenanlieferung & Prüfung',
+      description: 'Liefern Sie Ihre Dateien in höchster Auflösung (TIFF, PSD, JPG). Wir prüfen Auflösung, Farbprofil und Druckfähigkeit und beraten zu optimalen Einstellungen.',
+    },
+    {
+      title: 'Farbabstimmung & Proofing',
+      description: 'Auf Wunsch erstellen wir einen Soft-Proof am kalibrierten Monitor oder einen Proof-Print auf dem Zielpapier zur Freigabe. So stellen wir perfekte Farbwiedergabe sicher.',
+    },
+    {
+      title: 'Papier- und Formatwahl',
+      description: 'Wählen Sie aus unserem Sortiment: Mattes oder glänzendes Fine Art Papier, strukturiertes Büttenpapier, Baryta-Papier oder Leinwand. Wir zeigen Ihnen Muster.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Wir drucken mit kalibrierten Epson SureColor-Druckern und originalen UltraChrome HDX-Pigmenttinten. Jeder Druck wird einzeln auf Qualität geprüft.',
+    },
+    {
+      title: 'Finishing & Versand',
+      description: 'Trocknung (24h), Qualitätskontrolle und sorgfältige Verpackung (Seidenpapier, Schutzecken, stabiler Karton). Auf Wunsch Rahmung, Zertifikate und Edition-Nummerierung.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Fotografie-Edition "Schweizer Alpen"',
+      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=600&q=80',
+      category: 'Fotografie',
+      href: '/portfolio/edition-schweizer-alpen',
+    },
+    {
+      title: 'Kunstdruck-Serie für Galerie Zürich',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80',
+      category: 'Kunst',
+      href: '/portfolio/galerie-zuerich',
+    },
+    {
+      title: 'Grossformat-Leinwand Unternehmenskunst',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80',
+      category: 'Corporate Art',
+      href: '/portfolio/corporate-art',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Was ist der Unterschied zwischen Giclée-Druck und normalem Digitaldruck?',
+      answer: 'Giclée (französisch "spritzen") bezeichnet hochwertige Tintenstrahldrucke mit pigmentierten Tinten auf säurefreien Fine Art Papieren. Im Gegensatz zu Standard-Digitaldrucken verwenden Giclée-Drucker 8-12 Farben statt 4 (CMYK), erreichen einen deutlich grösseren Farbraum, feinere Abstufungen und eine Archivfähigkeit von 100+ Jahren statt 10-20 Jahren. Die Pigmenttinten sind wasserfest und lichtecht.',
+    },
+    {
+      question: 'Welche Dateiformate und Auflösungen benötigt ihr?',
+      answer: 'Ideal sind TIFF- oder PSD-Dateien ohne Komprimierung (8 oder 16 Bit) mit eingebettetem Farbprofil (Adobe RGB 1998 oder ProPhoto RGB für maximalen Farbraum). Die Auflösung sollte mindestens 200 dpi, besser 300 dpi in der gewünschten Druckgrösse betragen. JPEGs mit höchster Qualitätsstufe sind auch möglich. Für Vergrösserungen können wir mit spezialisierten Algorithmen (Topaz, ON1) verlustarm hochskalieren.',
+    },
+    {
+      question: 'Welche Papiere empfehlt ihr?',
+      answer: 'Das hängt vom Motiv und gewünschten Look ab: Für Fotografie empfehlen wir Hahnemühle Photo Rag 308g (samtmatt, neutral) oder Baryta FB (glänzend, klassischer Fotolook). Für Grafiken und Illustrationen eignet sich Hahnemühle German Etching (warmtonig, strukturiert). Für Leinwand-Optik Hahnemühle Canvas oder Epson Premium Canvas. Wir senden Ihnen gerne ein Musterset - auch mit Ihrem Motiv als Mini-Proof.',
+    },
+    {
+      question: 'Bietet ihr auch Rahmung an?',
+      answer: 'Ja, wir arbeiten mit einer spezialisierten Rahmenmanufaktur zusammen und bieten professionelle Einrahmung an: Passepartout aus säurefreiem Museumskarton, Museumsglas (UV-Schutz 99%, entspiegelt) oder Acrylglas für grosse Formate, hochwertige Holz- oder Aluminiumrahmen in vielen Profilen und Farben. Die Rahmung erfolgt archivgerecht - wichtig für den Werterhalt von Editionen.',
+    },
+    {
+      question: 'Wie funktioniert der Druck von limitierten Editionen?',
+      answer: 'Für Künstler und Fotografen drucken wir limitierte Editionen nach Ihren Vorgaben: Fortlaufende Nummerierung (z.B. 3/25), Platz für Ihre Signatur, Echtheitszertifikat mit Angaben zu Papier, Druckdatum und Auflagenhöhe. Wir archivieren Ihre Druckdateien sicher verschlüsselt, damit Nachdrucke auch nach Jahren farbidentisch sind. Auf Wunsch können wir auch den Blind-Prägestempel Ihres Ateliers einsetzen.',
+    },
+    {
+      question: 'Wie schnell kann ich meine Drucke erhalten?',
+      answer: 'Standard-Produktionszeit für Fine Art Prints ist 3-5 Werktage. Express-Aufträge können oft innerhalb von 24-48 Stunden realisiert werden (Aufpreis). Grössere Editionen (50+ Stück) benötigen entsprechend mehr Zeit. Versand erfolgt mit A-Post (1-2 Tage CH) oder auf Wunsch mit Kurier. Selbstabholung in Hünenberg ist jederzeit möglich.',
+    },
+  ],
+  keywords: [
+    'Fine Art Print Schweiz',
+    'Giclée Druck Schweiz',
+    'Kunstdruck drucken',
+    'Leinwanddruck',
+    'Fotodruck hochwertig',
+    'Hahnemühle Druck Schweiz',
+    'Galeriedruck',
+    'Kunstdrucke drucken lassen',
+    'Fine Art Printing',
+    'Archivdruck Fotografie',
+    'Edition drucken',
+    'Museumsdruck',
+    'Grossformat Kunstdruck',
+    'Pigmentdruck Schweiz',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

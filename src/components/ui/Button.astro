@@ -1,0 +1,171 @@
+---
+/**
+ * Button Component
+ * A versatile button component with multiple variants, sizes, and states.
+ * Follows Swiss design principles: clean, professional, minimal.
+ */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  href?: string;
+  iconPosition?: 'left' | 'right';
+  fullWidth?: boolean;
+  class?: string;
+  'aria-label'?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  type = 'button',
+  href,
+  iconPosition = 'left',
+  fullWidth = false,
+  class: className = '',
+  'aria-label': ariaLabel,
+  ...rest
+} = Astro.props;
+
+// Base styles - professional and clean with micro-interactions
+const baseStyles = `
+  inline-flex items-center justify-center gap-2
+  font-semibold
+  rounded-[var(--radius)]
+  btn-animate
+  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary
+  disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
+`;
+
+// Variant styles using CSS custom properties
+const variantStyles = {
+  primary: `
+    bg-primary text-primary-foreground
+    shadow-sm hover:shadow-md
+    hover:brightness-110 hover:scale-[1.02]
+    active:brightness-95 active:scale-[0.98]
+  `,
+  secondary: `
+    bg-secondary text-secondary-foreground
+    shadow-sm hover:shadow-md
+    hover:bg-secondary/90 hover:scale-[1.02]
+    active:bg-secondary/80 active:scale-[0.98]
+  `,
+  outline: `
+    border-2 border-primary text-primary
+    bg-transparent
+    hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]
+    active:bg-primary/90 active:scale-[0.98]
+  `,
+  ghost: `
+    bg-transparent text-foreground
+    hover:bg-muted hover:scale-[1.02]
+    active:bg-muted/80 active:scale-[0.98]
+  `,
+  link: `
+    bg-transparent text-primary underline-offset-4
+    hover:underline
+    p-0 h-auto
+    link-underline-animate
+  `,
+};
+
+// Size styles with proper padding and min-height for touch targets
+const sizeStyles = {
+  sm: 'px-4 py-2 text-sm min-h-[36px]',
+  md: 'px-6 py-3 text-base min-h-[44px]',
+  lg: 'px-8 py-4 text-lg min-h-[52px]',
+  xl: 'px-10 py-4 text-xl min-h-[56px]',
+};
+
+const classes = [
+  baseStyles,
+  variantStyles[variant],
+  sizeStyles[size],
+  fullWidth ? 'w-full' : '',
+  className,
+].join(' ');
+---
+
+{href ? (
+  <a
+    href={disabled ? undefined : href}
+    class={classes}
+    aria-disabled={disabled}
+    aria-label={ariaLabel}
+    {...rest}
+  >
+    {iconPosition === 'left' && <slot name="icon-left" />}
+    <slot />
+    {iconPosition === 'right' && <slot name="icon-right" />}
+  </a>
+) : (
+  <button
+    type={type}
+    disabled={disabled}
+    class={classes}
+    aria-label={ariaLabel}
+    {...rest}
+  >
+    {iconPosition === 'left' && <slot name="icon-left" />}
+    <slot />
+    {iconPosition === 'right' && <slot name="icon-right" />}
+  </button>
+)}
+
+<style>
+  /* Button animation styles for smooth micro-interactions */
+  .btn-animate {
+    transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1),
+                box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                filter 0.2s ease;
+    will-change: transform;
+  }
+
+  /* Link underline animation */
+  .link-underline-animate {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .link-underline-animate::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .link-underline-animate:hover::after {
+    width: 100%;
+  }
+
+  /* Icon animation on hover */
+  .btn-animate :global(svg) {
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .btn-animate:hover :global(svg) {
+    transform: translateX(2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-animate {
+      transition: none !important;
+    }
+    .btn-animate :global(svg) {
+      transition: none !important;
+    }
+    .link-underline-animate::after {
+      transition: none !important;
+    }
+  }
+</style>

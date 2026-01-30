@@ -1,0 +1,168 @@
+---
+/**
+ * Portfolio Section Component
+ * Filterable project grid with placeholder structure
+ */
+import { useTranslations, getLocaleFromUrl, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale?: Locale;
+}
+
+const currentLocale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
+const t = useTranslations(currentLocale);
+
+// Filter categories
+const filterCategories = [
+  'all',
+  'vehicleLettering',
+  'illuminatedSigns',
+  'signage',
+  'carWrapping',
+  'buildingLettering',
+  'tradeShows',
+  'artInArchitecture',
+  'fineArtPrints',
+] as const;
+
+// Portfolio projects with professional stock images
+const placeholderProjects = [
+  { id: 1, category: 'vehicleLettering', image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80', title: 'Fleet Graphics' },
+  { id: 2, category: 'illuminatedSigns', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80', title: 'LED Signage' },
+  { id: 3, category: 'signage', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80', title: 'Wayfinding System' },
+  { id: 4, category: 'carWrapping', image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80', title: 'Premium Car Wrap' },
+  { id: 5, category: 'buildingLettering', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80', title: 'Building Signage' },
+  { id: 6, category: 'tradeShows', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80', title: 'Trade Show Booth' },
+  { id: 7, category: 'artInArchitecture', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80', title: 'Art Installation' },
+  { id: 8, category: 'fineArtPrints', image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=600&q=80', title: 'Fine Art Print' },
+];
+---
+
+<section id="portfolio" class="py-16 lg:py-24 bg-muted dark:bg-background">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
+        {t('portfolio.title')}
+      </h2>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        {t('portfolio.subtitle')}
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Portfolio filters">
+      {filterCategories.map((category, index) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls="portfolio-grid"
+          data-filter={category}
+          class:list={[
+            'portfolio-filter px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 min-h-[44px]',
+            'hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+            index === 0 ? 'bg-primary text-primary-foreground shadow-md' : 'bg-card text-foreground border border-border dark:border-border'
+          ]}
+        >
+          {t(`portfolio.filters.${category}`)}
+        </button>
+      ))}
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div
+      id="portfolio-grid"
+      role="tabpanel"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      {placeholderProjects.map((project) => (
+        <article
+          class="portfolio-item group relative aspect-[4/3] rounded-[var(--radius)] overflow-hidden bg-muted cursor-pointer shadow-sm"
+          data-category={project.category}
+        >
+          <!-- Project Image -->
+          <img
+            src={project.image}
+            alt={project.title || t(`portfolio.filters.${project.category}`)}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+
+          <!-- Hover Overlay -->
+          <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6">
+            <!-- Category Badge -->
+            <span class="px-3 py-1 text-xs font-semibold text-primary bg-white rounded-full mb-3">
+              {t(`portfolio.filters.${project.category}`)}
+            </span>
+
+            <!-- Project Title Placeholder -->
+            <h3 class="text-lg font-bold text-white text-center mb-2">
+              {currentLocale === 'de' ? 'Projektname' : 'Project Name'}
+            </h3>
+
+            <!-- View Button -->
+            <button
+              type="button"
+              class="mt-4 inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-primary bg-white rounded-[var(--radius)] hover:bg-white/90 transition-colors duration-300 min-h-[44px]"
+            >
+              {t('portfolio.viewProject')}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Load More Button (Placeholder) -->
+    <div class="text-center mt-12">
+      <button
+        type="button"
+        class="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-foreground bg-card border-2 border-border rounded-[var(--radius)] hover:border-primary hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 min-h-[52px] dark:border-border"
+      >
+        {currentLocale === 'de' ? 'Mehr laden' : 'Load More'}
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Portfolio Filter Functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.portfolio-filter');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        // Update active button
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'shadow-md');
+          btn.classList.add('bg-card', 'text-foreground', 'border', 'border-border');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        button.classList.remove('bg-card', 'text-foreground', 'border', 'border-border');
+        button.classList.add('bg-primary', 'text-primary-foreground', 'shadow-md');
+        button.setAttribute('aria-selected', 'true');
+
+        // Filter items
+        portfolioItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.classList.remove('hidden');
+            item.classList.add('block');
+          } else {
+            item.classList.add('hidden');
+            item.classList.remove('block');
+          }
+        });
+      });
+    });
+  });
+</script>

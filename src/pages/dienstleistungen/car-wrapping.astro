@@ -1,0 +1,138 @@
+---
+/**
+ * Car Wrapping Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Car Wrapping',
+  description: 'Professionelles Car Wrapping in der Schweiz - Vollfolierung, Farbwechsel und Lackschutzfolie (PPF). CHF 2\'500-8\'000. Showroom in Hünenberg. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Professionelles Car Wrapping mit matter Folie in der Schweiz',
+  serviceDescription: `Verleihen Sie Ihrem Fahrzeug einen komplett neuen Look mit Car Wrapping von Alpha Sign AG. Ob elegantes Matt-Schwarz, auffälliges Satin-Chrome, dezenter Farbwechsel oder Carbon-Optik - mit hochwertiger Folierung ist fast alles möglich.
+
+Im Gegensatz zur Neulackierung ist Car Wrapping vollständig reversibel, deutlich schneller und oft günstiger. Gleichzeitig schützt die Folie Ihren wertvollen Originallack vor Steinschlägen, Kratzern und UV-Strahlung - ideal auch für Leasingfahrzeuge.
+
+**Besuchen Sie unseren Showroom in Hünenberg** und sehen Sie verschiedene Folien und Farben live. Beratungstermin: +41 41 780 05 05`,
+  benefits: [
+    'Vollständig reversibel - Originalzustand jederzeit wiederherstellbar',
+    'Schneller als Lackierung - Vollfolierung in nur 3-5 Tagen fertig',
+    'Lackschutz vor Steinschlägen, Kratzern und UV-Strahlung',
+    'Unbegrenzte Farbauswahl inkl. Spezialeffekte (Matt, Satin, Carbon, Chrome)',
+    'Wertsteigerung durch geschützten Originallack bei Verkauf',
+    'Keine Wartezeit für Trocknung - sofort fahrbereit',
+    'Ideal für Leasingfahrzeuge - rückstandsfreie Entfernung garantiert',
+    'Zertifizierte Folierer mit 3M und Avery Schulung',
+  ],
+  priceRange: {
+    min: 2500,
+    max: 8000,
+    note: 'Teilfolierung (Dach, Motorhaube, Spiegel) ab CHF 800. Vollfolierung Kleinwagen ab CHF 2\'500, Limousine/Kombi CHF 3\'500-5\'000, SUV/Sportwagen CHF 4\'500-6\'500. Premium-Spezialfolien (Chrome, Flip-Flop) bis CHF 8\'000.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Besuchen Sie unseren Showroom in Hünenberg und sehen Sie verschiedene Folien live. Wir beraten Sie zu Farben, Finishes und Haltbarkeit. Termin: +41 41 780 05 05.',
+    },
+    {
+      title: 'Aufmass & Fahrzeugvermessung',
+      description: 'Wir vermessen Ihr Fahrzeug exakt und berechnen den präzisen Folienbedarf. Sie erhalten eine verbindliche Offerte mit allen Details und Optionen.',
+    },
+    {
+      title: 'Design & Visualisierung',
+      description: 'Auf Wunsch erstellen wir eine digitale Visualisierung Ihres Fahrzeugs in der gewählten Folienfarbe, damit Sie das Ergebnis vorab sehen können.',
+    },
+    {
+      title: 'Fahrzeugvorbereitung',
+      description: 'Das Fahrzeug wird gründlich gereinigt, entfettet und von Insektenresten befreit. Anbauteile wie Spiegel, Türgriffe, Zierleisten und Embleme werden sorgfältig demontiert.',
+    },
+    {
+      title: 'Professionelle Folierung',
+      description: 'In unserer klimatisierten, staubfreien Werkstatt wird die Folie von unseren zertifizierten 3M-Folierern blasenfrei aufgebracht und an allen Kanten sauber eingeschlagen und versiegelt.',
+    },
+    {
+      title: 'Qualitätskontrolle & Übergabe',
+      description: 'Nach 24 Stunden Ruhezeit erfolgt die penible Endkontrolle. Sie erhalten eine Pflegeanleitung, Garantiezertifikat und alle Informationen zur Farbänderung im Fahrzeugausweis.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Tesla Model 3 Satin Black',
+      image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80',
+      category: 'Vollfolierung',
+      href: '/portfolio/tesla-satin-black',
+    },
+    {
+      title: 'BMW M4 Competition Orange',
+      image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80',
+      category: 'Farbwechsel',
+      href: '/portfolio/bmw-m4-orange',
+    },
+    {
+      title: 'Porsche 911 Lackschutzfolie',
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+      category: 'PPF',
+      href: '/portfolio/porsche-ppf',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Was ist der Unterschied zwischen Car Wrapping und Lackierung?',
+      answer: 'Car Wrapping verwendet selbstklebende Hochleistungsfolien, Lackierung verwendet Farbe. Vorteile des Wrappings: Vollständig reversibel (Folie kann entfernt werden), deutlich schneller (3-5 vs. 10-14 Tage), mehr Farboptionen (Matt, Satin, Carbon, Chrome, Flip-Flop), schützt den Originallack, günstiger bei Spezialfarben. Nachteile: Bei Beschädigung muss oft eine ganze Bahn ersetzt werden, etwas kürzere Haltbarkeit (5-7 vs. 10+ Jahre bei Qualitätslack).',
+    },
+    {
+      question: 'Welche Folien verwendet ihr für Car Wrapping?',
+      answer: 'Wir verwenden ausschliesslich Premium-Folien der Marken 3M (Serie 1080/2080), Avery Dennison Supreme Wrapping Film und Hexis. Diese gegossenen (Cast-)Folien sind speziell für Fahrzeuge entwickelt: hochflexibel für komplexe Kurven, UV-beständig, farbecht über Jahre und mit Luftkanalkleber für blasenfreie Montage. Dicke: 80-120 Mikron. Alle Folien sind REACH-konform und schadstofffrei.',
+    },
+    {
+      question: 'Wie lange hält eine Fahrzeugfolierung?',
+      answer: 'Bei hochwertigen Folien (3M, Avery Dennison, Hexis) und professioneller Montage hält eine Vollfolierung 5-7 Jahre. Die Haltbarkeit hängt von Pflege (Handwäsche empfohlen), Garagierung und Sonneneinstrahlung ab. Lackschutzfolien (PPF) können sogar 10+ Jahre halten. Wir geben eine Garantie von 3 Jahren auf Material und Verarbeitung.',
+    },
+    {
+      question: 'Muss ich Car Wrapping beim Strassenverkehrsamt melden?',
+      answer: 'Ja, bei einer Vollfolierung mit Farbwechsel muss die neue Farbe im Fahrzeugausweis eingetragen werden. Die Kosten betragen ca. CHF 50 beim Strassenverkehrsamt Ihres Kantons. Bei Teilfolierungen (Dach, Motorhaube) oder wenn die Grundfarbe noch überwiegend sichtbar ist, ist keine Änderung nötig. Wir informieren Sie genau, was in Ihrem Fall erforderlich ist.',
+    },
+    {
+      question: 'Kann ich mein foliertes Auto in die Waschanlage fahren?',
+      answer: 'Ja, aber mit Einschränkungen: Wir empfehlen Waschanlagen ohne rotierende Bürsten (bürstenlose Waschanlagen oder Handwäsche). Hochdruckreiniger sollten mit mindestens 40 cm Abstand und nicht direkt auf Kanten/Nähte gerichtet verwendet werden. In den ersten 2 Wochen nach Folierung bitte gar keine Waschanlage, damit alle Kanten vollständig aushärten können.',
+    },
+    {
+      question: 'Was kostet Car Wrapping im Vergleich zur Lackierung?',
+      answer: 'Eine Vollfolierung kostet typischerweise CHF 2\'500-6\'000 (je nach Fahrzeuggrösse und Folie), eine komplette Neulackierung CHF 5\'000-15\'000. Car Wrapping ist also oft deutlich günstiger, besonders bei Spezialfarben wie Matt, Chrome oder Carbon, die bei Lackierung sehr aufwändig wären. Zusätzlicher Vorteil: Der Originallack bleibt geschützt und beim Verkauf oder Leasingrückgabe kann die Folie entfernt werden.',
+    },
+  ],
+  keywords: [
+    'Car Wrapping Schweiz',
+    'Fahrzeugfolierung Schweiz',
+    'Auto folieren Kosten',
+    'Vollfolierung Schweiz',
+    'Car Wrapping Zug',
+    'Car Wrapping Zürich',
+    'Autofolie',
+    'Lackschutzfolie PPF',
+    'PPF Schweiz',
+    'Auto Matt folieren',
+    'Farbwechsel Folie Auto',
+    'Fahrzeug folieren lassen',
+    'Carwrapping Preise',
+    'Folierung Sportwagen',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

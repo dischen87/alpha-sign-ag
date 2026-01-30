@@ -1,0 +1,170 @@
+---
+/**
+ * CTABanner Component
+ * A reusable Call-to-Action banner with multiple variants
+ * Designed for Alpha Sign AG - professional and eye-catching
+ */
+import { getLocaleFromUrl, getLocalizedUrl, type Locale } from '../../i18n/utils';
+import Button from './Button.astro';
+
+interface Props {
+  headline: string;
+  description?: string;
+  primaryCTA?: {
+    text: string;
+    href: string;
+  };
+  secondaryCTA?: {
+    text: string;
+    href: string;
+  };
+  phone?: string;
+  email?: string;
+  variant?: 'light' | 'dark' | 'gradient';
+  compact?: boolean;
+  locale?: Locale;
+}
+
+const {
+  headline,
+  description,
+  primaryCTA,
+  secondaryCTA,
+  phone = '+41 41 780 05 05',
+  email = 'info@alphasign.ch',
+  variant = 'gradient',
+  compact = false,
+  locale = getLocaleFromUrl(Astro.url),
+} = Astro.props;
+
+// Variant styles
+const variantClasses = {
+  light: 'bg-[var(--card)] text-[var(--foreground)]',
+  dark: 'bg-[var(--color-primary-900)] text-white',
+  gradient: 'bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white',
+};
+
+const bgClass = variantClasses[variant];
+
+// Text classes based on variant
+const headlineClass = variant === 'light'
+  ? 'text-[var(--foreground)]'
+  : 'text-white';
+
+const descriptionClass = variant === 'light'
+  ? 'text-[var(--foreground-secondary)]'
+  : 'text-white/85';
+
+const linkHoverClass = variant === 'light'
+  ? 'hover:text-primary'
+  : 'hover:text-white/90';
+
+// Button variant based on banner variant
+const primaryBtnVariant = variant === 'light' ? 'primary' : 'secondary';
+const secondaryBtnClass = variant === 'light'
+  ? 'border-primary text-primary hover:bg-primary hover:text-white'
+  : 'border-white text-white hover:bg-white/10';
+
+// Padding based on compact mode
+const paddingClass = compact ? 'py-10 md:py-14' : 'py-14 md:py-20';
+
+// Contact label translations
+const contactLabels = {
+  de: { call: 'Rufen Sie uns an', email: 'Schreiben Sie uns' },
+  en: { call: 'Call us', email: 'Email us' },
+};
+const labels = contactLabels[locale] || contactLabels.de;
+---
+
+<section class={`relative overflow-hidden ${bgClass} ${paddingClass}`}>
+  <!-- Background decorations for gradient/dark variants -->
+  {variant !== 'light' && (
+    <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
+    </div>
+  )}
+
+  <!-- Shadow for light variant -->
+  {variant === 'light' && (
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+  )}
+
+  <div class="relative container mx-auto px-4 max-w-4xl">
+    <div class="text-center">
+      <!-- Headline -->
+      <h2 class={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 tracking-tight ${headlineClass}`}>
+        {headline}
+      </h2>
+
+      <!-- Description -->
+      {description && (
+        <p class={`text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed ${descriptionClass}`}>
+          {description}
+        </p>
+      )}
+
+      <!-- CTA Buttons -->
+      {(primaryCTA || secondaryCTA) && (
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          {primaryCTA && (
+            <Button
+              href={primaryCTA.href}
+              variant={primaryBtnVariant}
+              size="lg"
+              class={variant !== 'light' ? 'shadow-lg hover:shadow-xl' : ''}
+            >
+              {primaryCTA.text}
+              <svg slot="icon-right" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Button>
+          )}
+          {secondaryCTA && (
+            <a
+              href={secondaryCTA.href}
+              class={`inline-flex items-center justify-center gap-2 px-6 py-3 border-2 rounded-[var(--radius)] font-semibold transition-all duration-200 ${secondaryBtnClass}`}
+            >
+              {secondaryCTA.text}
+            </a>
+          )}
+        </div>
+      )}
+
+      <!-- Contact Info Row -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <!-- Phone -->
+        {phone && (
+          <a
+            href={`tel:${phone.replace(/\s/g, '')}`}
+            class={`inline-flex items-center gap-2 font-medium transition-colors duration-200 ${descriptionClass} ${linkHoverClass}`}
+            aria-label={labels.call}
+          >
+            <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </span>
+            <span class="font-bold">{phone}</span>
+          </a>
+        )}
+
+        <!-- Email -->
+        {email && (
+          <a
+            href={`mailto:${email}`}
+            class={`inline-flex items-center gap-2 font-medium transition-colors duration-200 ${descriptionClass} ${linkHoverClass}`}
+            aria-label={labels.email}
+          >
+            <span class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </span>
+            <span>{email}</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,138 @@
+---
+/**
+ * Kunst am Bau (Art in Architecture) Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Kunst am Bau',
+  description: 'Kunst am Bau in der Schweiz - Individuelle Kunstinstallationen, Fassadengestaltung, Skulpturen und künstlerische Objekte. CHF 5\'000-100\'000+. Erfahrung mit öffentlichen Ausschreibungen. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Künstlerische Installation an moderner Architektur in der Schweiz',
+  serviceDescription: `Alpha Sign AG verbindet traditionelles Handwerk mit modernster Technologie für künstlerische Projekte. Wir realisieren individuelle Kunstprojekte für Architektur und öffentlichen Raum - von grossformatigen Wandgestaltungen über Metallskulpturen bis zu interaktiven Lichtinstallationen.
+
+In enger Zusammenarbeit mit Architekten, Künstlern und Bauherren setzen wir anspruchsvolle Projekte um, die Gebäude und Plätze zu Unikaten machen. Profitieren Sie von unserer Erfahrung in der präzisen Umsetzung künstlerischer Visionen - mit CNC-Fräsen, Laserschneiden, 3D-Druck und traditionellen Handwerkstechniken.
+
+**Projekt anfragen: +41 41 780 05 05** - Wir besprechen Ihre Vision und zeigen Realisierungsmöglichkeiten auf.`,
+  benefits: [
+    'Umsetzung komplexer künstlerischer Visionen mit höchster Präzision',
+    'Enge Zusammenarbeit mit Architekten, Künstlern und Kunstschaffenden',
+    'Modernste Fertigungstechniken: CNC-Fräsen, Laserschneiden, Wasserstrahl, 3D-Druck',
+    'Langjährige Erfahrung mit öffentlichen Ausschreibungen und Wettbewerben',
+    'Hochwertige, langlebige Materialien für Innen- und Aussenbereich',
+    'Komplette Projektabwicklung von Machbarkeitsstudie bis Installation',
+    'Prototyping und Muster in Originalgrösse vor Serienproduktion',
+    'Dokumentation und Wartungskonzepte für dauerhafte Kunstwerke',
+  ],
+  priceRange: {
+    min: 5000,
+    max: 100000,
+    note: 'Kleine Projekte und Einzelobjekte ab CHF 5\'000. Typische Kunst-am-Bau-Projekte (Reliefs, Skulpturen, Installationen) CHF 20\'000-100\'000. Grosse öffentliche Installationen und Sonderprojekte nach individueller Offerte (CHF 100\'000+).',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihre Vision, den architektonischen Kontext und die Rahmenbedingungen. Bei Wettbewerben unterstützen wir bereits in der Konzeptphase. Rufen Sie an: +41 41 780 05 05.',
+    },
+    {
+      title: 'Konzept & Machbarkeitsstudie',
+      description: 'Gemeinsam mit Ihnen, dem Architekten oder Künstler analysieren wir die Umsetzbarkeit. Wir erstellen Materialstudien, Gewichtsberechnungen und erste Kosteneinschätzungen.',
+    },
+    {
+      title: 'Entwurf & technische Planung',
+      description: 'Detaillierte technische Zeichnungen, 3D-CAD-Modelle und Materialproben. Abstimmung mit Statiker, Architekt und allen Projektbeteiligten. Klärung von Bewilligungen.',
+    },
+    {
+      title: 'Prototyping & Bemusterung',
+      description: 'Bei komplexen Projekten fertigen wir Prototypen, Muster oder Teilstücke in Originalgrösse zur Freigabe. So können Sie Material, Oberfläche und Wirkung vorab prüfen.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Fertigung in unserer Werkstatt mit modernsten Technologien: CNC-Fräsen, Laserschneiden, Wasserstrahlschneiden, Schweissen, Oberflächenbehandlung. Qualitätskontrolle jedes Bauteils.',
+    },
+    {
+      title: 'Installation & Dokumentation',
+      description: 'Fachgerechte Montage vor Ort - koordiniert mit dem Bauzeitplan. Anschliessend Übergabe mit vollständiger Dokumentation, Pflegeanleitung und Wartungsempfehlungen.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Lichtskulptur Eingangshalle Versicherung',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80',
+      category: 'Lichtkunst',
+      href: '/portfolio/lichtskulptur-versicherung',
+    },
+    {
+      title: 'Fassadenrelief Wohnüberbauung',
+      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
+      category: 'Fassadenkunst',
+      href: '/portfolio/fassadenrelief-wohnen',
+    },
+    {
+      title: 'Metallskulptur Kreisel Gemeinde',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+      category: 'Öffentlicher Raum',
+      href: '/portfolio/kreisel-skulptur',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Was versteht man unter Kunst am Bau?',
+      answer: 'Kunst am Bau bezeichnet künstlerische Werke, die speziell für einen architektonischen Kontext geschaffen werden. Sie sind fest mit dem Gebäude verbunden (Fassadenreliefs, Wandgestaltungen) oder Teil des Aussenraums (Skulpturen, Installationen). In der Schweiz gibt es bei öffentlichen Bauten oft eine Verpflichtung, 1-2% des Baubudgets für Kunst aufzuwenden. Auch private Bauherren setzen zunehmend auf künstlerische Akzente.',
+    },
+    {
+      question: 'Welche Materialien verwendet ihr für Kunstprojekte?',
+      answer: 'Wir arbeiten mit einer Vielzahl von Materialien je nach künstlerischem Konzept und Standort: Metalle (Stahl, Edelstahl, Aluminium, Cortenstahl, Bronze, Messing), Kunststoffe (Acrylglas, GFK/Glasfaser, Corian), Holz (massiv oder Schichtholz), Glas, Beton und moderne Verbundwerkstoffe. Für den Aussenbereich achten wir auf Witterungsbeständigkeit, UV-Stabilität und Vandalismussicherheit.',
+    },
+    {
+      question: 'Arbeitet ihr direkt mit Künstlern zusammen?',
+      answer: 'Ja, sehr gerne und regelmässig. Wir setzen die Visionen von Künstlern technisch um und bringen unsere Expertise in Materialbearbeitung, Statik und Montage ein. Viele Künstler schätzen unsere Fähigkeit, auch ungewöhnliche Ideen realisierbar zu machen - und dabei das Budget im Blick zu behalten. Auf Wunsch vermitteln wir auch Kontakte zu Künstlern aus unserem Netzwerk.',
+    },
+    {
+      question: 'Wie läuft die Zusammenarbeit bei öffentlichen Ausschreibungen?',
+      answer: 'Wir haben langjährige Erfahrung mit öffentlichen Vergabeverfahren (Submissions-, Einladungs- und offene Verfahren) und den entsprechenden Anforderungen. Wir unterstützen Künstler oder Architekten bei der technischen Dokumentation für Wettbewerbseingaben, erstellen Kostenschätzungen und liefern Referenzen und Zertifizierungen. Bei Zuschlag übernehmen wir die termingerechte Realisierung.',
+    },
+    {
+      question: 'Welche Technologien setzt ihr für Kunstprojekte ein?',
+      answer: 'Wir kombinieren modernste Fertigungstechnologien mit traditionellem Handwerk: CNC-Fräsen (3- und 5-Achs) für präzise Formen in Metall, Holz und Kunststoff. Laserschneiden für filigrane Details und Konturen. Wasserstrahlschneiden für dicke Materialien ohne Wärmeverzug. 3D-Druck für Prototypen und komplexe Geometrien. Ergänzt durch Schweissen, Schleifen, Polieren und diverse Oberflächenveredelungen (Pulverbeschichtung, Eloxieren, Patinierung).',
+    },
+    {
+      question: 'Bietet ihr auch Wartung und Pflege von Kunstwerken an?',
+      answer: 'Ja, wir bieten Wartungsverträge für dauerhafte Kunstinstallationen an. Das umfasst regelmässige Inspektion, Reinigung, Nachbesserung von Oberflächenschäden und bei Lichtkunst die Wartung der elektrischen Komponenten. Gerade bei Objekten im öffentlichen Raum ist regelmässige Pflege wichtig für die Langlebigkeit. Wir erstellen individuelle Wartungskonzepte.',
+    },
+  ],
+  keywords: [
+    'Kunst am Bau Schweiz',
+    'Kunstinstallation',
+    'Fassadenkunst',
+    'Skulptur öffentlicher Raum',
+    'Architekturkunst',
+    'Öffentliche Kunst Schweiz',
+    'Metallskulptur',
+    'Lichtkunst Installation',
+    'Kunst am Bau Wettbewerb',
+    'Kunstprojekt Architektur',
+    'Relief Fassade',
+    'Kunstobjekt fertigen',
+    'Skulptur herstellen lassen',
+    'Public Art Switzerland',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

@@ -1,0 +1,254 @@
+---
+/**
+ * SidebarCTA Component
+ * Sticky sidebar CTA for service pages on desktop
+ * Shows contact options with prominent phone number
+ */
+import { getLocaleFromUrl, getLocalizedUrl, type Locale } from '../../i18n/utils';
+import Button from './Button.astro';
+
+interface Props {
+  locale?: Locale;
+  phone?: string;
+  email?: string;
+}
+
+const {
+  locale = getLocaleFromUrl(Astro.url),
+  phone = '+41 41 780 05 05',
+  email = 'info@alphasign.ch',
+} = Astro.props;
+
+// Translations
+const translations = {
+  de: {
+    title: 'Kostenlose Beratung',
+    subtitle: 'Wir beraten Sie gerne unverbindlich zu Ihrem Projekt.',
+    cta: 'Offerte anfragen',
+    call: 'Oder rufen Sie uns an',
+    consultation: 'Kostenlos & unverbindlich',
+    response: 'Antwort innerhalb 24h',
+    swiss: 'Schweizer Qualität',
+  },
+  en: {
+    title: 'Free Consultation',
+    subtitle: 'We are happy to advise you on your project without obligation.',
+    cta: 'Request Quote',
+    call: 'Or call us',
+    consultation: 'Free & no obligation',
+    response: 'Response within 24h',
+    swiss: 'Swiss Quality',
+  },
+};
+
+const t = translations[locale] || translations.de;
+const contactPath = locale === 'de' ? '/kontakt' : '/en/contact';
+---
+
+<aside class="sidebar-cta">
+  <div class="sidebar-cta__card">
+    <!-- Header -->
+    <div class="sidebar-cta__header">
+      <h3 class="sidebar-cta__title">{t.title}</h3>
+      <p class="sidebar-cta__subtitle">{t.subtitle}</p>
+    </div>
+
+    <!-- Primary CTA -->
+    <Button href={contactPath} variant="primary" size="lg" fullWidth>
+      {t.cta}
+      <svg slot="icon-right" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </Button>
+
+    <!-- Divider -->
+    <div class="sidebar-cta__divider">
+      <span>{t.call}</span>
+    </div>
+
+    <!-- Phone -->
+    <a href={`tel:${phone.replace(/\s/g, '')}`} class="sidebar-cta__phone">
+      <span class="sidebar-cta__phone-icon">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+      </span>
+      <span class="sidebar-cta__phone-number">{phone}</span>
+    </a>
+
+    <!-- Email -->
+    <a href={`mailto:${email}`} class="sidebar-cta__email">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <span>{email}</span>
+    </a>
+
+    <!-- Trust Badges -->
+    <div class="sidebar-cta__trust">
+      <div class="sidebar-cta__badge">
+        <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+        <span>{t.consultation}</span>
+      </div>
+      <div class="sidebar-cta__badge">
+        <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+        <span>{t.response}</span>
+      </div>
+      <div class="sidebar-cta__badge">
+        <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        </svg>
+        <span>{t.swiss}</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .sidebar-cta {
+    position: sticky;
+    top: 6rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .sidebar-cta__card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border);
+  }
+
+  .sidebar-cta__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-cta__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-cta__subtitle {
+    font-size: 0.875rem;
+    color: var(--foreground-secondary);
+    line-height: 1.5;
+  }
+
+  .sidebar-cta__divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  .sidebar-cta__divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .sidebar-cta__divider span {
+    position: relative;
+    background: var(--card);
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+    color: var(--foreground-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .sidebar-cta__phone {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--color-primary-50);
+    border-radius: calc(var(--radius) - 4px);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar-cta__phone:hover {
+    background: var(--color-primary-100);
+  }
+
+  .sidebar-cta__phone:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .sidebar-cta__phone-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+  }
+
+  .sidebar-cta__phone-number {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .sidebar-cta__email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--foreground-secondary);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: calc(var(--radius) - 4px);
+    transition: all 0.2s ease;
+  }
+
+  .sidebar-cta__email:hover {
+    color: var(--primary);
+    background: var(--muted);
+  }
+
+  .sidebar-cta__email:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .sidebar-cta__trust {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sidebar-cta__badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--foreground-secondary);
+  }
+
+  /* Hide on mobile - shown differently */
+  @media (max-width: 1024px) {
+    .sidebar-cta {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+/**
+ * Messeauftritte (Trade Show Displays) Service Page
+ * SEO-optimized for Swiss market
+ * Comprehensive content with pricing, process, FAQ, and CTAs
+ */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+const serviceData = {
+  title: 'Messeauftritte',
+  description: 'Professionelle Messeauftritte in der Schweiz - Messestandbau, Displays, Roll-ups und Werbematerialien. CHF 1\'500-15\'000+. Komplettservice inkl. Auf-/Abbau. Beratung: +41 41 780 05 05',
+  heroImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1920&q=80',
+  heroImageAlt: 'Moderner Messestand auf einer Schweizer Messe',
+  serviceDescription: `Ein überzeugender Messeauftritt entscheidet über Ihren Erfolg. Alpha Sign AG begleitet Sie von der ersten Idee bis zum fertigen Stand - und darüber hinaus.
+
+Wir konzipieren, gestalten und produzieren alles, was Sie für einen professionellen Messeauftritt benötigen: Individuelle Messestände, modulare Displaysysteme, Roll-ups, Banner, Theken, Beleuchtung und sämtliche Werbematerialien. Für ORNARIS, Swissbau, Zuger Messe, SWISS MEDTECH oder internationale Auftritte.
+
+**Jetzt unverbindlich anfragen: +41 41 780 05 05** - Wir beraten Sie zu Konzept, Budget und Zeitplan.`,
+  benefits: [
+    'Komplettservice von Konzept über Produktion bis Auf- und Abbau',
+    'Modulare Systeme - wiederverwendbar für verschiedene Messen und Standgrössen',
+    'Transport, Lagerung und Logistik auf Wunsch inklusive',
+    'Kurze Produktionszeiten auch bei Eilaufträgen möglich',
+    'Erfahrung mit allen grossen Schweizer Messen',
+    'Nachhaltige, recyclbare Materialien auf Wunsch',
+    'Miet-Optionen für einmalige Auftritte',
+    'Koordination mit Messeorganisation und Standbau-Richtlinien',
+  ],
+  priceRange: {
+    min: 1500,
+    max: 15000,
+    note: 'Roll-ups ab CHF 150, Pop-up-Wände CHF 500-2\'000, mobile Messestand-Pakete (3x3m) CHF 1\'500-5\'000, individuelle Messestände (9-20 m²) CHF 5\'000-15\'000. Grosse Auftritte (30+ m²) auf Anfrage.',
+  },
+  processSteps: [
+    {
+      title: 'Kostenlose Erstberatung',
+      description: 'Wir besprechen Ihre Messeziele, Budget, Standgrösse und Design-Anforderungen. Rufen Sie an: +41 41 780 05 05 oder senden Sie uns Ihre Anfrage.',
+    },
+    {
+      title: 'Aufmass & Konzept',
+      description: 'Basierend auf dem Standplan der Messe entwickeln wir ein Konzept, das Ihre Marke optimal präsentiert und die Laufwege der Besucher berücksichtigt.',
+    },
+    {
+      title: 'Design & Visualisierung',
+      description: 'Unser Designteam entwickelt Ihren Messestand inklusive Grafiken, Beleuchtungskonzept und Möblierung. Sie erhalten 3D-Visualisierungen zur Freigabe.',
+    },
+    {
+      title: 'Produktion',
+      description: 'Wir produzieren alle Elemente in unserer Werkstatt: Standwände, Grafiken, Banner, Displays, Theken und Werbematerialien - termingerecht für Ihre Messe.',
+    },
+    {
+      title: 'Logistik & Aufbau',
+      description: 'Wir organisieren Transport zur Messe und bauen Ihren Stand fachgerecht auf - Sie können sich auf Ihr Kerngeschäft und Ihre Kunden konzentrieren.',
+    },
+    {
+      title: 'Abbau & Einlagerung',
+      description: 'Nach der Messe bauen wir ab, transportieren zurück und lagern Ihren Stand auf Wunsch bei uns ein - gepflegt und bereit für den nächsten Einsatz.',
+    },
+  ],
+  relatedProjects: [
+    {
+      title: 'Messestand Medtech AG an SWISS MEDTECH',
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80',
+      category: 'Fachmesse',
+      href: '/portfolio/medtech-swiss-medtech',
+    },
+    {
+      title: 'Mobiler Stand Startup an Zuger Messe',
+      image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=600&q=80',
+      category: 'Regionalmesse',
+      href: '/portfolio/startup-zuger-messe',
+    },
+    {
+      title: 'Flagship-Stand Uhrenhersteller Baselworld',
+      image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=600&q=80',
+      category: 'Internationale Messe',
+      href: '/portfolio/uhren-baselworld',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Wie lange im Voraus muss ich einen Messestand bestellen?',
+      answer: 'Für einen individuellen, massgeschneiderten Messestand empfehlen wir 6-8 Wochen Vorlaufzeit. Standardprodukte wie Roll-ups, Pop-up-Wände oder Banner können wir oft innerhalb von 1-2 Wochen liefern. Bei Eilaufträgen fragen Sie uns - wir finden meist eine Lösung, auch kurzfristig. Je früher Sie anfragen, desto mehr Gestaltungsspielraum haben wir.',
+    },
+    {
+      question: 'Was kostet ein Messestand?',
+      answer: 'Die Kosten hängen stark von Grösse, Ausstattung und Individualität ab: Ein einfacher Pop-up-Stand (3x3m) mit Theke und Roll-up kostet ca. CHF 1\'500-3\'000. Modulare Messestände (9-20 m²) mit Grafiken liegen bei CHF 5\'000-15\'000. Grosse individuelle Auftritte (30+ m²) mit Sonderbauten kosten CHF 15\'000-50\'000+. Mietsysteme sind oft günstiger als Kauf - fragen Sie nach unseren Mietoptionen.',
+    },
+    {
+      question: 'Welche Materialien verwendet ihr für Messestände?',
+      answer: 'Wir setzen auf leichte, stabile und wiederverwendbare Materialien: Aluminium-Profilsysteme für die Struktur, Textilspannrahmen mit bedruckten Stoffbahnen (waschbar, faltenfrei), Forex/Dibond für Hartschalenelemente, LED-Beleuchtung für optimale Ausleuchtung. Auf Wunsch verwenden wir nachhaltige, recyclbare Materialien und FSC-zertifiziertes Holz.',
+    },
+    {
+      question: 'Bietet ihr auch Miet-Messestände an?',
+      answer: 'Ja, wir bieten modulare Messestand-Systeme zur Miete an. Das ist ideal, wenn Sie nur 1-2 Mal jährlich ausstellen, verschiedene Standgrössen benötigen oder das Kapital schonen möchten. Die Miete umfasst Transport, Auf- und Abbau. Die Grafiken werden individuell für Sie produziert und gehören Ihnen. Fragen Sie nach unseren Mietpaketen.',
+    },
+    {
+      question: 'Übernehmt ihr auch Auf- und Abbau?',
+      answer: 'Ja, wir bieten Full-Service an: Transport, Aufbau gemäss Standplan, Abbau und Rücktransport. Unser erfahrenes Team kennt die grossen Schweizer Messehallen (Messe Zürich, Messe Basel, Messe Luzern, BEA Bern) und deren Vorschriften. Wir koordinieren mit der Messeorganisation und kümmern uns um Strom-, Wasser- und Internetanschlüsse.',
+    },
+    {
+      question: 'Welche Messen betreut ihr regelmässig?',
+      answer: 'Wir haben Erfahrung mit allen bedeutenden Schweizer Messen: Swissbau, ORNARIS, Züspa, Baselworld/Watches & Wonders, Auto Zürich, SWISS MEDTECH, Zuger Messe, Igeho, Giardina und viele weitere. Auch internationale Auftritte in Deutschland (Frankfurt, München, Düsseldorf) und Österreich betreuen wir regelmässig. Wir kennen die Regularien und Anmeldefristen.',
+    },
+  ],
+  keywords: [
+    'Messestand Schweiz',
+    'Messeauftritte',
+    'Messebau Schweiz',
+    'Roll-up Banner',
+    'Pop-up Display',
+    'Messewand',
+    'Messestand mieten Schweiz',
+    'Werbedisplay',
+    'Messestand Kosten',
+    'Messebauer Zug',
+    'Messestand gestalten',
+    'Mobile Messestände',
+    'Messestand Komplettsystem',
+    'Trade Show Schweiz',
+  ],
+};
+---
+
+<ServiceLayout
+  title={serviceData.title}
+  description={serviceData.description}
+  heroImage={serviceData.heroImage}
+  heroImageAlt={serviceData.heroImageAlt}
+  serviceDescription={serviceData.serviceDescription}
+  benefits={serviceData.benefits}
+  priceRange={serviceData.priceRange}
+  processSteps={serviceData.processSteps}
+  relatedProjects={serviceData.relatedProjects}
+  faqs={serviceData.faqs}
+  keywords={serviceData.keywords}
+  lang="de"
+/>

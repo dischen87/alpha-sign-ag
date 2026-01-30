@@ -1,0 +1,213 @@
+---
+/**
+ * Modal Component
+ * Dialog/modal component with backdrop, close button, and keyboard navigation.
+ */
+interface Props {
+  id: string;
+  title?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  closeOnBackdrop?: boolean;
+  closeOnEscape?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  size = 'md',
+  closeOnBackdrop = true,
+  closeOnEscape = true,
+  class: className = '',
+} = Astro.props;
+
+const sizeStyles = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  full: 'max-w-full mx-4',
+};
+
+const modalStyles = `
+  relative
+  w-full
+  ${sizeStyles[size]}
+  bg-[rgb(var(--color-background))]
+  border border-[rgb(var(--color-border))]
+  rounded-[var(--radius-xl)]
+  shadow-[var(--shadow-xl)]
+  transform
+  transition-all duration-[var(--transition-normal)]
+`;
+
+const classes = [modalStyles, className].join(' ');
+---
+
+<!-- Modal Container -->
+<div
+  id={id}
+  class="fixed inset-0 z-50 hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={title ? `${id}-title` : undefined}
+  data-modal
+  data-close-on-backdrop={closeOnBackdrop}
+  data-close-on-escape={closeOnEscape}
+>
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-[var(--transition-normal)]"
+    data-modal-backdrop
+    aria-hidden="true"
+  ></div>
+
+  <!-- Modal Positioning -->
+  <div class="fixed inset-0 overflow-y-auto">
+    <div class="flex min-h-full items-center justify-center p-4">
+      <!-- Modal Content -->
+      <div class={classes} data-modal-content>
+        <!-- Header -->
+        {title && (
+          <div class="flex items-center justify-between p-[var(--spacing-lg)] border-b border-[rgb(var(--color-border))]">
+            <h2
+              id={`${id}-title`}
+              class="text-lg font-semibold text-[rgb(var(--color-text))]"
+            >
+              {title}
+            </h2>
+            <button
+              type="button"
+              class="p-2 -m-2 rounded-[var(--radius-md)] text-[rgb(var(--color-text-muted))] hover:text-[rgb(var(--color-text))] hover:bg-[rgb(var(--color-surface))] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-primary))]"
+              aria-label="Close modal"
+              data-modal-close
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        <!-- Body -->
+        <div class="p-[var(--spacing-lg)]">
+          <slot />
+        </div>
+
+        <!-- Footer -->
+        <slot name="footer">
+          <div class="flex items-center justify-end gap-3 p-[var(--spacing-lg)] border-t border-[rgb(var(--color-border))]">
+            <slot name="actions" />
+          </div>
+        </slot>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal functionality
+  class Modal {
+    private modal: HTMLElement;
+    private closeOnBackdrop: boolean;
+    private closeOnEscape: boolean;
+    private previousActiveElement: Element | null = null;
+    private focusableElements: HTMLElement[] = [];
+
+    constructor(element: HTMLElement) {
+      this.modal = element;
+      this.closeOnBackdrop = element.dataset.closeOnBackdrop === 'true';
+      this.closeOnEscape = element.dataset.closeOnEscape === 'true';
+      this.setupEventListeners();
+    }
+
+    private setupEventListeners() {
+      // Close button
+      const closeButtons = this.modal.querySelectorAll('[data-modal-close]');
+      closeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => this.close());
+      });
+
+      // Backdrop click
+      if (this.closeOnBackdrop) {
+        const backdrop = this.modal.querySelector('[data-modal-backdrop]');
+        backdrop?.addEventListener('click', () => this.close());
+      }
+
+      // Escape key
+      if (this.closeOnEscape) {
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+            this.close();
+          }
+        });
+      }
+
+      // Trap focus
+      this.modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          this.trapFocus(e);
+        }
+      });
+    }
+
+    private getFocusableElements(): HTMLElement[] {
+      const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+      return Array.from(this.modal.querySelectorAll(selector)) as HTMLElement[];
+    }
+
+    private trapFocus(e: KeyboardEvent) {
+      this.focusableElements = this.getFocusableElements();
+      const firstElement = this.focusableElements[0];
+      const lastElement = this.focusableElements[this.focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    }
+
+    open() {
+      this.previousActiveElement = document.activeElement;
+      this.modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      // Focus first focusable element
+      requestAnimationFrame(() => {
+        this.focusableElements = this.getFocusableElements();
+        this.focusableElements[0]?.focus();
+      });
+    }
+
+    close() {
+      this.modal.classList.add('hidden');
+      document.body.style.overflow = '';
+
+      // Restore focus
+      if (this.previousActiveElement instanceof HTMLElement) {
+        this.previousActiveElement.focus();
+      }
+    }
+  }
+
+  // Initialize modals
+  document.querySelectorAll('[data-modal]').forEach((modal) => {
+    const instance = new Modal(modal as HTMLElement);
+
+    // Expose methods globally
+    (window as any)[`${modal.id}Modal`] = instance;
+  });
+
+  // Helper function to open modal
+  (window as any).openModal = (id: string) => {
+    (window as any)[`${id}Modal`]?.open();
+  };
+
+  // Helper function to close modal
+  (window as any).closeModal = (id: string) => {
+    (window as any)[`${id}Modal`]?.close();
+  };
+</script>

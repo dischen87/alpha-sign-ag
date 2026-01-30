@@ -1,17 +1,103 @@
 ---
+/**
+ * German Homepage for Alpha Sign AG
+ * Includes LocalBusiness schema for SEO
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Services from '../components/sections/Services.astro';
+import WhyUs from '../components/sections/WhyUs.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import CTA from '../components/sections/CTA.astro';
+import CTABanner from '../components/ui/CTABanner.astro';
+import type { LocalBusinessSchema, BreadcrumbSchema, OrganizationSchema } from '../components/seo/SchemaOrg.astro';
 
+// Define schemas for homepage
+const localBusinessSchema: LocalBusinessSchema = {
+  type: 'LocalBusiness',
+  additionalType: 'SignShop',
+};
+
+const organizationSchema: OrganizationSchema = {
+  type: 'Organization',
+};
+
+const breadcrumbSchema: BreadcrumbSchema = {
+  type: 'BreadcrumbList',
+  items: [
+    { name: 'Home', url: 'https://www.alphasign.ch/' },
+  ],
+};
+
+// Homepage SEO keywords
+const keywords = [
+  'Schilder',
+  'Beschriftungen',
+  'Werbetechnik',
+  'Leuchtreklamen',
+  'Fahrzeugbeschriftung',
+  'Car Wrapping',
+  'Signaletik',
+  'Gebäudebeschriftung',
+  'Kunst am Bau',
+  'Fine Art Prints',
+  'Hünenberg',
+  'Zug',
+  'Schweiz',
+  'Alpha Sign AG',
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Alpha Sign AG - Beschriftungen, Leuchtreklamen & Signaletik | Hünenberg, Zug"
+  description="Alpha Sign AG in Hünenberg - Ihr Schweizer Partner für Fahrzeugbeschriftung, Car Wrapping, Leuchtreklamen, Signaletik, Gebäudebeschriftung und Fine Art Prints. Seit 1989. Jetzt Offerte anfragen!"
+  lang="de"
+  keywords={keywords}
+  schema={[localBusinessSchema, organizationSchema, breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <Hero locale="de" />
+
+  <!-- CTA Banner after Hero -->
+  <CTABanner
+    headline="Jetzt kostenlos beraten lassen"
+    description="Profitieren Sie von unserer Expertise. Wir erstellen Ihnen eine unverbindliche Offerte fuer Ihr Projekt."
+    primaryCTA={{ text: "Offerte anfragen", href: "/kontakt" }}
+    secondaryCTA={{ text: "Unsere Leistungen", href: "/dienstleistungen" }}
+    variant="light"
+    compact={true}
+    locale="de"
+  />
+
+  <!-- Services Section -->
+  <Services locale="de" />
+
+  <!-- CTA Banner after Services -->
+  <CTABanner
+    headline="Projekt besprechen"
+    description="Von der ersten Idee bis zur fertigen Umsetzung - wir begleiten Sie bei jedem Schritt."
+    primaryCTA={{ text: "Jetzt Kontakt aufnehmen", href: "/kontakt" }}
+    variant="dark"
+    compact={true}
+    locale="de"
+  />
+
+  <!-- Why Us / USP Section -->
+  <WhyUs locale="de" />
+
+  <!-- Testimonials Section -->
+  <Testimonials locale="de" />
+
+  <!-- CTA Banner after Testimonials -->
+  <CTABanner
+    headline="Ueberzeugen Sie sich selbst"
+    description="Werden Sie Teil unserer zufriedenen Kunden. Kontaktieren Sie uns fuer ein unverbindliches Gespraech."
+    primaryCTA={{ text: "Offerte anfragen", href: "/kontakt" }}
+    variant="gradient"
+    compact={true}
+    locale="de"
+  />
+
+  <!-- Call to Action Section -->
+  <CTA locale="de" phoneNumber="+41 41 780 05 05" />
+</BaseLayout>

@@ -1,0 +1,310 @@
+---
+/**
+ * Navigation Component
+ * Desktop horizontal navigation with dropdown menu for services
+ * Includes active state indicators and keyboard accessibility
+ * Uses theme CSS variables for consistent styling
+ */
+import { useTranslations, getLocalizedUrl, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className } = Astro.props;
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname;
+
+// Navigation items
+// Note: FAQ has been removed from main nav as FAQs are now integrated into service pages
+const navItems = [
+  { key: 'home', href: '/' },
+  { key: 'services', href: '/dienstleistungen', hasDropdown: true },
+  { key: 'portfolio', href: '/portfolio' },
+  { key: 'about', href: '/ueber-uns' },
+  { key: 'contact', href: '/kontakt' },
+];
+
+// Services dropdown items
+const serviceItems = [
+  { key: 'fahrzeugbeschriftung', href: '/dienstleistungen/fahrzeugbeschriftung' },
+  { key: 'leuchtreklame', href: '/dienstleistungen/leuchtreklame' },
+  { key: 'signaletik', href: '/dienstleistungen/signaletik' },
+  { key: 'carWrapping', href: '/dienstleistungen/car-wrapping' },
+  { key: 'gebaeudebeschriftung', href: '/dienstleistungen/gebaeudebeschriftung' },
+  { key: 'messeauftritte', href: '/dienstleistungen/messeauftritte' },
+  { key: 'kunstAmBau', href: '/dienstleistungen/kunst-am-bau' },
+  { key: 'fineArtPrints', href: '/dienstleistungen/fine-art-prints' },
+];
+
+// Check if a nav item is active
+function isActive(href: string): boolean {
+  const localizedHref = getLocalizedUrl(href, locale);
+  // Exact match for home, prefix match for others
+  if (href === '/') {
+    return currentPath === localizedHref || currentPath === '/' + locale;
+  }
+  return currentPath.startsWith(localizedHref);
+}
+---
+
+<nav class:list={['desktop-navigation', className]} aria-label={t('nav.mainNavigation')}>
+  <ul class="flex items-center gap-1" role="menubar">
+    {navItems.map((item) => {
+      const active = isActive(item.href);
+      const localizedHref = getLocalizedUrl(item.href, locale);
+
+      if (item.hasDropdown) {
+        return (
+          <li class="relative" role="none">
+            <button
+              type="button"
+              class:list={[
+                'nav-dropdown-trigger group inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                active
+                  ? 'text-primary'
+                  : 'text-foreground hover:bg-muted hover:text-foreground',
+              ]}
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="services-dropdown"
+              role="menuitem"
+            >
+              <span>{t(`nav.${item.key}`)}</span>
+              <svg
+                class="h-4 w-4 transition-transform duration-200 group-aria-expanded:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              id="services-dropdown"
+              class="nav-dropdown invisible absolute left-0 top-full z-50 mt-1 w-64 origin-top-left scale-95 transform rounded-xl border border-border bg-background p-2 opacity-0 shadow-lg transition-all duration-200"
+              role="menu"
+              aria-label={t('nav.servicesSubmenu')}
+            >
+              <ul class="space-y-1">
+                {serviceItems.map((service) => {
+                  const serviceHref = getLocalizedUrl(service.href, locale);
+                  const serviceActive = currentPath === serviceHref;
+                  return (
+                    <li role="none">
+                      <a
+                        href={serviceHref}
+                        class:list={[
+                          'block rounded-lg px-3 py-2.5 text-sm transition-colors',
+                          serviceActive
+                            ? 'bg-accent text-accent-foreground'
+                            : 'text-foreground hover:bg-muted',
+                        ]}
+                        role="menuitem"
+                        aria-current={serviceActive ? 'page' : undefined}
+                      >
+                        {t(`nav.servicesList.${service.key}`)}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <!-- View All Services Link -->
+              <div class="mt-2 border-t border-border pt-2">
+                <a
+                  href={localizedHref}
+                  class="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                  role="menuitem"
+                >
+                  <span>{locale === 'de' ? 'Alle Dienstleistungen' : 'All Services'}</span>
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </li>
+        );
+      }
+
+      return (
+        <li role="none">
+          <a
+            href={localizedHref}
+            class:list={[
+              'inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              active
+                ? 'text-primary'
+                : 'text-foreground hover:bg-muted',
+            ]}
+            role="menuitem"
+            aria-current={active ? 'page' : undefined}
+          >
+            {t(`nav.${item.key}`)}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+  /* Active indicator underline */
+  .desktop-navigation a[aria-current='page'],
+  .desktop-navigation button[aria-expanded='true'] {
+    position: relative;
+  }
+
+  .desktop-navigation a[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background-color: var(--primary);
+    border-radius: 9999px;
+  }
+
+  /* Dropdown open state */
+  .nav-dropdown-trigger[aria-expanded='true'] + .nav-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+<script>
+  function initDesktopNavigation() {
+    const dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger');
+
+    dropdownTriggers.forEach((trigger) => {
+      const dropdown = trigger.nextElementSibling as HTMLElement | null;
+      let closeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+      // Mouse enter - open dropdown
+      trigger.addEventListener('mouseenter', () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
+        trigger.setAttribute('aria-expanded', 'true');
+      });
+
+      // Mouse leave - start close timeout
+      trigger.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+          trigger.setAttribute('aria-expanded', 'false');
+        }, 150);
+      });
+
+      // Keep dropdown open when hovering over it
+      dropdown?.addEventListener('mouseenter', () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
+      });
+
+      dropdown?.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+          trigger.setAttribute('aria-expanded', 'false');
+        }, 150);
+      });
+
+      // Click to toggle
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      // Keyboard navigation
+      trigger.addEventListener('keydown', (e) => {
+        const key = (e as KeyboardEvent).key;
+
+        if (key === 'Enter' || key === ' ') {
+          e.preventDefault();
+          const expanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', String(!expanded));
+
+          if (!expanded && dropdown) {
+            const firstLink = dropdown.querySelector('a');
+            firstLink?.focus();
+          }
+        }
+
+        if (key === 'Escape') {
+          trigger.setAttribute('aria-expanded', 'false');
+          (trigger as HTMLElement).focus();
+        }
+
+        if (key === 'ArrowDown') {
+          e.preventDefault();
+          trigger.setAttribute('aria-expanded', 'true');
+          if (dropdown) {
+            const firstLink = dropdown.querySelector('a');
+            firstLink?.focus();
+          }
+        }
+      });
+
+      // Keyboard navigation within dropdown
+      dropdown?.addEventListener('keydown', (e) => {
+        const key = (e as KeyboardEvent).key;
+        const links = dropdown.querySelectorAll('a');
+        const currentIndex = Array.from(links).indexOf(document.activeElement as HTMLAnchorElement);
+
+        if (key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIndex = currentIndex < links.length - 1 ? currentIndex + 1 : 0;
+          (links[nextIndex] as HTMLElement).focus();
+        }
+
+        if (key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIndex = currentIndex > 0 ? currentIndex - 1 : links.length - 1;
+          (links[prevIndex] as HTMLElement).focus();
+        }
+
+        if (key === 'Escape') {
+          trigger.setAttribute('aria-expanded', 'false');
+          (trigger as HTMLElement).focus();
+        }
+
+        if (key === 'Tab' && !e.shiftKey && currentIndex === links.length - 1) {
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      dropdownTriggers.forEach((trigger) => {
+        if (!trigger.contains(e.target as Node) && !trigger.nextElementSibling?.contains(e.target as Node)) {
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initDesktopNavigation);
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initDesktopNavigation);
+</script>
