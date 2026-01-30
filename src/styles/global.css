@@ -3,7 +3,7 @@
 /*
  * Alpha Sign AG Design System
  * Swiss Professional Signage Company
- * Tailwind CSS v4 Configuration with shadcn/ui theme
+ * Tailwind CSS v4 Configuration with tweakcn theme
  */
 
 /* ============================================
@@ -43,9 +43,9 @@
   --sidebar-accent-foreground: hsl(0 0% 0%);
   --sidebar-border: hsl(0 0% 0%);
   --sidebar-ring: hsl(229.6552 93.5484% 81.7647%);
-  --font-sans: "DM Sans", sans-serif;
-  --font-serif: "DM Sans", sans-serif;
-  --font-mono: "Space Mono", monospace;
+  --font-sans: DM Sans, sans-serif;
+  --font-serif: DM Sans, sans-serif;
+  --font-mono: Space Mono, monospace;
   --radius: 1rem;
   --shadow-x: 0px;
   --shadow-y: 0px;
@@ -63,27 +63,6 @@
   --shadow-2xl: 0px 0px 0px 0px hsl(0 0% 10.1961% / 0.13);
   --tracking-normal: normal;
   --spacing: 0.25rem;
-
-  /* Success/Warning/Error semantic colors */
-  --success: hsl(142.0859 70.5628% 45.2941%);
-  --success-foreground: hsl(0 0% 100%);
-  --warning: hsl(37.6923 92.1260% 50.1961%);
-  --warning-foreground: hsl(0 0% 0%);
-  --error: hsl(0 84.2365% 60.1961%);
-  --error-foreground: hsl(0 0% 100%);
-
-  /* Neutral scale for components using neutral-* classes */
-  --neutral-50: hsl(80 33% 98%);
-  --neutral-100: hsl(80 33% 96%);
-  --neutral-200: hsl(0 0% 90%);
-  --neutral-300: hsl(0 0% 83%);
-  --neutral-400: hsl(0 0% 64%);
-  --neutral-500: hsl(0 0% 45%);
-  --neutral-600: hsl(0 0% 32%);
-  --neutral-700: hsl(0 0% 25%);
-  --neutral-800: hsl(0 0% 15%);
-  --neutral-900: hsl(0 0% 9%);
-  --neutral-950: hsl(0 0% 4%);
 }
 
 /* ============================================
@@ -97,7 +76,7 @@
   --card-foreground: hsl(0 0% 100%);
   --popover: hsl(215.2941 24.6377% 13.5294%);
   --popover-foreground: hsl(0 0% 100%);
-  --primary: hsl(234.4538 89.4737% 73.9216%);
+  --primary: hsl(210.8108 100% 70.9804%);
   --primary-foreground: hsl(0 0% 0%);
   --secondary: hsl(172.4551 66.0079% 50.3922%);
   --secondary-foreground: hsl(0 0% 0%);
@@ -123,9 +102,9 @@
   --sidebar-accent-foreground: hsl(0 0% 0%);
   --sidebar-border: hsl(0 0% 100%);
   --sidebar-ring: hsl(234.4538 89.4737% 73.9216%);
-  --font-sans: "DM Sans", sans-serif;
-  --font-serif: "DM Sans", sans-serif;
-  --font-mono: "Space Mono", monospace;
+  --font-sans: DM Sans, sans-serif;
+  --font-serif: DM Sans, sans-serif;
+  --font-mono: Space Mono, monospace;
   --radius: 1rem;
   --shadow-x: 0px;
   --shadow-y: 0px;
@@ -141,27 +120,6 @@
   --shadow-lg: 0px 0px 0px 0px hsl(0 0% 10.1961% / 0.05), 0px 4px 6px -1px hsl(0 0% 10.1961% / 0.05);
   --shadow-xl: 0px 0px 0px 0px hsl(0 0% 10.1961% / 0.05), 0px 8px 10px -1px hsl(0 0% 10.1961% / 0.05);
   --shadow-2xl: 0px 0px 0px 0px hsl(0 0% 10.1961% / 0.13);
-
-  /* Success/Warning/Error semantic colors */
-  --success: hsl(141.8919 69.1589% 58.0392%);
-  --success-foreground: hsl(0 0% 0%);
-  --warning: hsl(45.9429 96.6851% 64.5098%);
-  --warning-foreground: hsl(0 0% 0%);
-  --error: hsl(0 90.6040% 70.7843%);
-  --error-foreground: hsl(0 0% 0%);
-
-  /* Neutral scale for components using neutral-* classes */
-  --neutral-50: hsl(215 25% 98%);
-  --neutral-100: hsl(215 25% 90%);
-  --neutral-200: hsl(215 25% 80%);
-  --neutral-300: hsl(215 25% 60%);
-  --neutral-400: hsl(215 25% 45%);
-  --neutral-500: hsl(215 25% 35%);
-  --neutral-600: hsl(215 25% 25%);
-  --neutral-700: hsl(215 25% 18%);
-  --neutral-800: hsl(215 25% 13%);
-  --neutral-900: hsl(215 25% 9%);
-  --neutral-950: hsl(0 0% 0%);
 }
 
 /* ============================================
@@ -202,117 +160,15 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Semantic colors */
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-  --color-error: var(--error);
-  --color-error-foreground: var(--error-foreground);
-
-  /* Neutral palette */
-  --color-neutral-50: var(--neutral-50);
-  --color-neutral-100: var(--neutral-100);
-  --color-neutral-200: var(--neutral-200);
-  --color-neutral-300: var(--neutral-300);
-  --color-neutral-400: var(--neutral-400);
-  --color-neutral-500: var(--neutral-500);
-  --color-neutral-600: var(--neutral-600);
-  --color-neutral-700: var(--neutral-700);
-  --color-neutral-800: var(--neutral-800);
-  --color-neutral-900: var(--neutral-900);
-  --color-neutral-950: var(--neutral-950);
-
-  /* Primary scale based on new primary color */
-  --color-primary-50: hsl(209 70% 97%);
-  --color-primary-100: hsl(209 70% 92%);
-  --color-primary-200: hsl(209 70% 82%);
-  --color-primary-300: hsl(209 70% 68%);
-  --color-primary-400: hsl(209 70% 45%);
-  --color-primary-500: hsl(209 70% 40%);
-  --color-primary-600: hsl(209 70% 25%);
-  --color-primary-700: hsl(209 70% 20%);
-  --color-primary-800: hsl(209 70% 18%);
-  --color-primary-900: hsl(209 70% 14%);
-  --color-primary-950: hsl(209 70% 8%);
-
-  /* Secondary scale (teal) */
-  --color-secondary-50: hsl(173 80% 97%);
-  --color-secondary-100: hsl(173 80% 90%);
-  --color-secondary-200: hsl(173 80% 78%);
-  --color-secondary-300: hsl(173 80% 62%);
-  --color-secondary-400: hsl(173 80% 48%);
-  --color-secondary-500: hsl(173 80% 40%);
-  --color-secondary-600: hsl(173 80% 32%);
-  --color-secondary-700: hsl(173 80% 26%);
-  --color-secondary-800: hsl(173 80% 20%);
-  --color-secondary-900: hsl(173 80% 14%);
-  --color-secondary-950: hsl(173 80% 8%);
-
-  /* Accent scale (orange) */
-  --color-accent-50: hsl(38 92% 97%);
-  --color-accent-100: hsl(38 92% 92%);
-  --color-accent-200: hsl(38 92% 82%);
-  --color-accent-300: hsl(38 92% 70%);
-  --color-accent-400: hsl(38 92% 58%);
-  --color-accent-500: hsl(38 92% 50%);
-  --color-accent-600: hsl(38 92% 42%);
-  --color-accent-700: hsl(38 92% 34%);
-  --color-accent-800: hsl(38 92% 26%);
-  --color-accent-900: hsl(38 92% 18%);
-  --color-accent-950: hsl(38 92% 10%);
-
-  /* Success scale */
-  --color-success-50: hsl(142 71% 97%);
-  --color-success-100: hsl(142 71% 90%);
-  --color-success-200: hsl(142 71% 78%);
-  --color-success-300: hsl(142 71% 62%);
-  --color-success-400: hsl(142 71% 50%);
-  --color-success-500: hsl(142 71% 45%);
-  --color-success-600: hsl(142 71% 36%);
-  --color-success-700: hsl(142 71% 28%);
-  --color-success-800: hsl(142 71% 22%);
-  --color-success-900: hsl(142 71% 16%);
-  --color-success-950: hsl(142 71% 10%);
-
-  /* Warning scale */
-  --color-warning-50: hsl(38 92% 97%);
-  --color-warning-100: hsl(38 92% 90%);
-  --color-warning-200: hsl(38 92% 80%);
-  --color-warning-300: hsl(38 92% 68%);
-  --color-warning-400: hsl(38 92% 56%);
-  --color-warning-500: hsl(38 92% 50%);
-  --color-warning-600: hsl(38 92% 42%);
-  --color-warning-700: hsl(38 92% 34%);
-  --color-warning-800: hsl(38 92% 26%);
-  --color-warning-900: hsl(38 92% 18%);
-  --color-warning-950: hsl(38 92% 10%);
-
-  /* Error scale */
-  --color-error-50: hsl(0 84% 97%);
-  --color-error-100: hsl(0 84% 92%);
-  --color-error-200: hsl(0 84% 84%);
-  --color-error-300: hsl(0 84% 72%);
-  --color-error-400: hsl(0 84% 64%);
-  --color-error-500: hsl(0 84% 60%);
-  --color-error-600: hsl(0 84% 50%);
-  --color-error-700: hsl(0 84% 40%);
-  --color-error-800: hsl(0 84% 32%);
-  --color-error-900: hsl(0 84% 24%);
-  --color-error-950: hsl(0 84% 14%);
-
-  /* Font families */
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
 
-  /* Border radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Shadows */
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);
@@ -322,7 +178,6 @@
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
 
-  /* Tracking */
   --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
   --tracking-tight: calc(var(--tracking-normal) - 0.025em);
   --tracking-normal: var(--tracking-normal);
@@ -679,7 +534,7 @@ h6, .h6 {
 }
 
 .dark .form-input:focus {
-  box-shadow: 0 0 0 3px hsl(234 89% 74% / 0.25);
+  box-shadow: 0 0 0 3px hsl(210 100% 71% / 0.25);
 }
 
 .form-label {
