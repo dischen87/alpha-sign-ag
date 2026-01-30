@@ -17,20 +17,9 @@ const t = useTranslations(currentLocale);
 const { phoneNumber = '+41 41 780 05 05' } = Astro.props;
 ---
 
-<section id="contact-cta" class="relative py-16 lg:py-24 overflow-hidden scroll-animate scroll-scale-up" data-scroll-animate>
-  <!-- Background with gradient -->
-  <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary-600 to-primary-700" aria-hidden="true"></div>
-
-  <!-- Decorative elements -->
-  <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-float"></div>
-    <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/5 blur-3xl animate-float" style="animation-delay: 2s;"></div>
-    <!-- Subtle pattern -->
-    <div class="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWMThoMnY0em0wLTZoLTJWMTJoMnY0em0wLTZoLTJWNmgydjR6bTAgMzZoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em02LTM2aC00di0yaDR2MnptNiAwaC00di0yaDR2MnptNiAwaC00di0yaDR2MnoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
-  </div>
-
+<section id="contact-cta" class="relative py-16 lg:py-24 bg-primary scroll-animate scroll-scale-up" data-scroll-animate>
   <!-- Content -->
-  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <!-- Headline -->
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
       {t('cta.title')}

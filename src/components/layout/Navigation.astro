@@ -17,9 +17,8 @@ const t = useTranslations(locale);
 const currentPath = Astro.url.pathname;
 
 // Navigation items
-// Note: FAQ has been removed from main nav as FAQs are now integrated into service pages
+// Note: Home removed - users can click logo to return home
 const navItems = [
-  { key: 'home', href: '/' },
   { key: 'services', href: '/dienstleistungen', hasDropdown: true },
   { key: 'portfolio', href: '/portfolio' },
   { key: 'about', href: '/ueber-uns' },

@@ -37,11 +37,11 @@ const {
   locale = getLocaleFromUrl(Astro.url),
 } = Astro.props;
 
-// Variant styles
+// Variant styles - using solid colors, no gradients
 const variantClasses = {
   light: 'bg-[var(--card)] text-[var(--foreground)]',
-  dark: 'bg-[var(--color-primary-900)] text-white',
-  gradient: 'bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white',
+  dark: 'bg-primary text-white',
+  gradient: 'bg-primary text-white',
 };
 
 const bgClass = variantClasses[variant];
@@ -76,21 +76,13 @@ const contactLabels = {
 const labels = contactLabels[locale] || contactLabels.de;
 ---
 
-<section class={`relative overflow-hidden ${bgClass} ${paddingClass}`}>
-  <!-- Background decorations for gradient/dark variants -->
-  {variant !== 'light' && (
-    <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
-    </div>
-  )}
-
+<section class={`relative ${bgClass} ${paddingClass}`}>
   <!-- Shadow for light variant -->
   {variant === 'light' && (
     <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
   )}
 
-  <div class="relative container mx-auto px-4 max-w-4xl">
+  <div class="container mx-auto px-4 max-w-4xl">
     <div class="text-center">
       <!-- Headline -->
       <h2 class={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 tracking-tight ${headlineClass}`}>
