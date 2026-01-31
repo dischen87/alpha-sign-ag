@@ -1,0 +1,8 @@
+# Cloudflare Workers Configuration for Alpha Sign AG (Astro SSR)
+name = "alpha-sign"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+main = "dist/_worker.js/index.js"
+
+[assets]
+directory = "dist"
