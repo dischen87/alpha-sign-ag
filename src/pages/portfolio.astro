@@ -2,11 +2,15 @@
 /**
  * Portfolio Page (German)
  * Filterable project grid showcasing Alpha Sign AG's work
+ * Data is fetched from Sanity CMS with fallback to static data
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/seo/SEO.astro';
 import PortfolioGrid from '../components/sections/PortfolioGrid.astro';
-import { projects, categories } from '../data/projects';
+import { getProjects, categories } from '../lib/sanity-projects';
+
+// Fetch projects from Sanity (with fallback to static data)
+const projects = await getProjects();
 
 const title = 'Portfolio | Alpha Sign AG - Unsere Referenzprojekte';
 const description = 'Entdecken Sie unsere Referenzprojekte: Fahrzeugbeschriftung, Leuchtreklame, Signaletik, Car Wrapping und mehr. Professionelle Beschriftungslösungen aus der Schweiz.';

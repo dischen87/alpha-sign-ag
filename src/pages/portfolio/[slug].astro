@@ -2,14 +2,16 @@
 /**
  * Dynamic Project Detail Page (German)
  * Displays full project information with gallery
+ * Data is fetched from Sanity CMS with fallback to static data
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SEO from '../../components/seo/SEO.astro';
 import ProjectCard from '../../components/ui/ProjectCard.astro';
-import { projects, getProjectBySlug, getRelatedProjects, categories } from '../../data/projects';
+import { getProjects, getProjectBySlug, getRelatedProjects, categories } from '../../lib/sanity-projects';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getProjects();
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },
@@ -17,13 +19,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const { slug } = Astro.params;
-const { project } = Astro.props;
+let { project } = Astro.props;
+
+// Re-fetch if project not in props (for on-demand rendering)
+if (!project && slug) {
+  project = await getProjectBySlug(slug);
+}
 
 if (!project) {
   return Astro.redirect('/portfolio');
 }
 
-const relatedProjects = getRelatedProjects(project.slug, 3);
+const relatedProjects = await getRelatedProjects(project.slug, project.categoryKey, 3);
 const categoryLabel = categories.de.find(c => c.key === project.categoryKey)?.label || project.category;
 
 const title = `${project.de.title} | Alpha Sign AG Portfolio`;

@@ -1,13 +1,9 @@
 import { defineCliConfig } from 'sanity/cli'
 
-// Get projectId from environment variable or use placeholder
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id'
-const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
-
 export default defineCliConfig({
   api: {
-    projectId,
-    dataset,
+    projectId: 'p8qni8zq',
+    dataset: 'production',
   },
-  studioHost: 'alpha-sign-studio',
+  studioHost: 'alpha-sign',
 })
