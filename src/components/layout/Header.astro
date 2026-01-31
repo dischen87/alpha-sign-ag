@@ -39,17 +39,11 @@ const currentPath = currentUrl.pathname;
       class="flex items-center gap-2 text-xl font-bold text-foreground transition-colors hover:text-primary"
       aria-label="Alpha Sign - {t('nav.home')}"
     >
-      <!-- Light Mode: dunkelblaues Logo auf hellem Hintergrund -->
+      <!-- Logo: dunkelblau in Light Mode, weiss (invertiert) in Dark Mode -->
       <img
         src="/alpha-sign-logo-hell.png"
         alt="Alpha Sign AG"
-        class="h-[60px] w-auto block dark:hidden"
-      />
-      <!-- Dark Mode: Logo invertiert (weiss) auf dunklem Hintergrund -->
-      <img
-        src="/alpha-sign-logo-hell.png"
-        alt="Alpha Sign AG"
-        class="h-[60px] w-auto hidden dark:block brightness-0 invert"
+        class="h-[60px] w-auto dark:brightness-0 dark:invert"
       />
     </a>
 
