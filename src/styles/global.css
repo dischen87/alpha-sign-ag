@@ -141,6 +141,11 @@
    ============================================ */
 
 @theme inline {
+  /* Base colors - must be explicitly defined in Tailwind v4 */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
