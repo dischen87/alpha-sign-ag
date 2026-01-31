@@ -10,15 +10,11 @@ export default defineConfig({
   // Site URL for sitemap and canonical URLs
   site: 'https://www.alphasign.ch',
 
-  // Hybrid: static pages + dynamic API routes
-  output: 'hybrid',
+  // Static with on-demand server routes (Astro 5: static = former hybrid)
+  output: 'static',
 
   // Cloudflare Pages adapter for SSR routes
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
+  adapter: cloudflare(),
 
   integrations: [
     react(),
