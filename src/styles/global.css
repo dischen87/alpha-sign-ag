@@ -12,7 +12,9 @@
 
 :root {
   --background: hsl(80.0000 33.3333% 96.4706%);
+  --background-secondary: hsl(80 20% 92%);
   --foreground: hsl(0 0% 0%);
+  --foreground-secondary: hsl(0 0% 35%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(0 0% 0%);
   --popover: hsl(0 0% 100%);
@@ -23,6 +25,7 @@
   --secondary-foreground: hsl(0 0% 100%);
   --muted: hsl(0 0% 94.1176%);
   --muted-foreground: hsl(0 0% 20%);
+  --success: hsl(142 70% 45%);
   --accent: hsl(37.6923 92.1260% 50.1961%);
   --accent-foreground: hsl(0 0% 0%);
   --destructive: hsl(0 84.2365% 60.1961%);
@@ -71,7 +74,9 @@
 
 .dark {
   --background: hsl(0 0% 0%);
+  --background-secondary: hsl(0 0% 8%);
   --foreground: hsl(0 0% 100%);
+  --foreground-secondary: hsl(0 0% 70%);
   --card: hsl(215.2941 24.6377% 13.5294%);
   --card-foreground: hsl(0 0% 100%);
   --popover: hsl(215.2941 24.6377% 13.5294%);
@@ -82,6 +87,7 @@
   --secondary-foreground: hsl(0 0% 0%);
   --muted: hsl(0 0% 20%);
   --muted-foreground: hsl(0 0% 80%);
+  --success: hsl(142 70% 55%);
   --accent: hsl(45.9429 96.6851% 64.5098%);
   --accent-foreground: hsl(0 0% 0%);
   --destructive: hsl(0 90.6040% 70.7843%);
@@ -128,7 +134,9 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -137,6 +145,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-success: var(--success);
 
   /* Primary Color Scale - Alpha Sign Blue */
   --color-primary-50: hsl(209 70% 96%);
@@ -560,7 +569,6 @@ h6, .h6 {
 
 .form-input::placeholder {
   color: var(--muted-foreground);
-  opacity: 0.7;
 }
 
 .dark .form-input {
