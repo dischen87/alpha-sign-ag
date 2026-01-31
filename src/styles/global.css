@@ -137,6 +137,32 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Primary Color Scale - Alpha Sign Blue */
+  --color-primary-50: hsl(209 70% 96%);
+  --color-primary-100: hsl(209 70% 90%);
+  --color-primary-200: hsl(209 70% 80%);
+  --color-primary-300: hsl(209 70% 65%);
+  --color-primary-400: hsl(209 70% 50%);
+  --color-primary-500: hsl(209 70% 40%);
+  --color-primary-600: hsl(209 70% 32%);
+  --color-primary-700: hsl(209 70% 26%);
+  --color-primary-800: hsl(209 70% 20%);
+  --color-primary-900: hsl(209 70% 15%);
+  --color-primary-950: hsl(209 70% 10%);
+
+  /* Neutral Color Scale */
+  --color-neutral-50: hsl(0 0% 98%);
+  --color-neutral-100: hsl(0 0% 96%);
+  --color-neutral-200: hsl(0 0% 90%);
+  --color-neutral-300: hsl(0 0% 80%);
+  --color-neutral-400: hsl(0 0% 60%);
+  --color-neutral-500: hsl(0 0% 45%);
+  --color-neutral-600: hsl(0 0% 32%);
+  --color-neutral-700: hsl(0 0% 25%);
+  --color-neutral-800: hsl(0 0% 15%);
+  --color-neutral-900: hsl(0 0% 9%);
+  --color-neutral-950: hsl(0 0% 4%);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -192,6 +218,15 @@
 
 * {
   border-color: var(--border);
+}
+
+/* Header Logo - Dark mode inversion */
+.header-logo {
+  filter: none;
+}
+
+.dark .header-logo {
+  filter: brightness(0) invert(1);
 }
 
 html {
