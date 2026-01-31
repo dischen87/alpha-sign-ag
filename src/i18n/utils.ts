@@ -115,16 +115,22 @@ export function generateHreflangTags(currentPath: string, baseUrl: string): Arra
 
 /**
  * Get localized URL for a given path and locale
+ * Always returns URLs with trailing slashes to match Astro's trailingSlash: 'always' config
  */
 export function getLocalizedUrl(path: string, locale: Locale): string {
   const cleanPath = path.startsWith('/') ? path : '/' + path;
   const prefix = localeConfig[locale].prefix;
 
   if (cleanPath === '/') {
-    return prefix || '/';
+    return prefix ? prefix + '/' : '/';
   }
 
-  return `${prefix}${cleanPath}`;
+  const url = `${prefix}${cleanPath}`;
+  // Ensure trailing slash (unless it's a file with extension)
+  if (!url.endsWith('/') && !url.includes('.')) {
+    return url + '/';
+  }
+  return url;
 }
 
 // Re-export config values for convenience

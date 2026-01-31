@@ -136,23 +136,25 @@ const schemaOrgData = {
   ],
 };
 
-// Helper function to get localized service URL
+// Helper function to get localized service URL (with trailing slash)
 function getServiceUrl(service: { slugDe: string; slugEn: string }): string {
   const slug = locale === 'en' ? service.slugEn : service.slugDe;
   const basePath = locale === 'en' ? '/en/services/' : '/dienstleistungen/';
-  return basePath + slug;
+  return basePath + slug + '/';
 }
 
-// Helper function to get localized company link URL
+// Helper function to get localized company link URL (with trailing slash)
 function getCompanyLinkUrl(link: { slugDe: string; slugEn: string }): string {
   const slug = locale === 'en' ? link.slugEn : link.slugDe;
-  return getLocalizedUrl(`/${slug}`, locale);
+  const url = getLocalizedUrl(`/${slug}`, locale);
+  return url.endsWith('/') ? url : url + '/';
 }
 
-// Helper function to get localized legal link URL
+// Helper function to get localized legal link URL (with trailing slash)
 function getLegalLinkUrl(link: { slugDe: string; slugEn: string }): string {
   const slug = locale === 'en' ? link.slugEn : link.slugDe;
-  return getLocalizedUrl(`/${slug}`, locale);
+  const url = getLocalizedUrl(`/${slug}`, locale);
+  return url.endsWith('/') ? url : url + '/';
 }
 ---
 

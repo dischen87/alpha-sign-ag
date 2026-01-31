@@ -88,7 +88,7 @@
   --primary: hsl(210.8108 100% 70.9804%);
   --primary-foreground: hsl(0 0% 0%);
   --secondary: hsl(172.4551 66.0079% 50.3922%);
-  --secondary-foreground: hsl(0 0% 0%);
+  --secondary-foreground: hsl(0 0% 100%);
   --muted: hsl(0 0% 20%);
   --muted-foreground: hsl(0 0% 80%);
   --success: hsl(142 70% 55%);
