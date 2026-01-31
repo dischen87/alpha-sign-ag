@@ -26,6 +26,10 @@
   --muted: hsl(0 0% 94.1176%);
   --muted-foreground: hsl(0 0% 20%);
   --success: hsl(142 70% 45%);
+  --success-bg: hsl(142 70% 95%);
+  --error: hsl(0 84% 60%);
+  --error-bg: hsl(0 84% 95%);
+  --primary-light: hsl(209 70% 95%);
   --accent: hsl(37.6923 92.1260% 50.1961%);
   --accent-foreground: hsl(0 0% 0%);
   --destructive: hsl(0 84.2365% 60.1961%);
@@ -88,6 +92,10 @@
   --muted: hsl(0 0% 20%);
   --muted-foreground: hsl(0 0% 80%);
   --success: hsl(142 70% 55%);
+  --success-bg: hsl(142 70% 15%);
+  --error: hsl(0 90% 70%);
+  --error-bg: hsl(0 50% 15%);
+  --primary-light: hsl(209 70% 20%);
   --accent: hsl(45.9429 96.6851% 64.5098%);
   --accent-foreground: hsl(0 0% 0%);
   --destructive: hsl(0 90.6040% 70.7843%);
@@ -146,6 +154,10 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+  --color-primary-light: var(--primary-light);
 
   /* Primary Color Scale - Alpha Sign Blue */
   --color-primary-50: hsl(209 70% 96%);
