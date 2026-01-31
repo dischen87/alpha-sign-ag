@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 // Sanity configuration
-const projectId = 'p8qni8zq';
+const projectId = 'sxi7fruw';
 const dataset = 'production';
 const apiVersion = '2024-01-01';
 

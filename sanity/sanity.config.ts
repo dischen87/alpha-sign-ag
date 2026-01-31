@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'alpha-sign-studio',
   title: 'Alpha Sign AG',
 
-  projectId: 'p8qni8zq',
+  projectId: 'sxi7fruw',
   dataset: 'production',
 
   plugins: [
