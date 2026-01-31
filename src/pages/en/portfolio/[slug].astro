@@ -171,14 +171,14 @@ const description = project.en.description;
     </section>
 
     <!-- Results -->
-    <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+    <section class="py-16 lg:py-24" style="background-color: var(--background);">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--foreground);">
               Results
             </h2>
-            <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            <p class="text-lg" style="color: var(--foreground-secondary);">
               The measurable achievements of this project
             </p>
           </div>
@@ -239,14 +239,14 @@ const description = project.en.description;
 
     <!-- Related Projects -->
     {relatedProjects.length > 0 && (
-      <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+      <section class="py-16 lg:py-24" style="background-color: var(--background);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-              <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+              <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--foreground);">
                 Similar Projects
               </h2>
-              <p class="text-lg text-neutral-600 dark:text-neutral-400">
+              <p class="text-lg" style="color: var(--foreground-secondary);">
                 More projects in the {categoryLabel} category
               </p>
             </div>
