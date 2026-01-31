@@ -26,11 +26,11 @@ const services = [
   { key: 'fineArtPrints', icon: 'image', slug: 'fine-art-prints', slugEn: 'fine-art-prints' },
 ] as const;
 
-// Get service URL based on locale
+// Get service URL based on locale (with trailing slash)
 const getServiceUrl = (service: typeof services[number]) => {
   const basePath = currentLocale === 'de' ? '/dienstleistungen' : '/en/services';
   const slug = currentLocale === 'de' ? service.slug : service.slugEn;
-  return `${basePath}/${slug}`;
+  return `${basePath}/${slug}/`;
 };
 ---
 
