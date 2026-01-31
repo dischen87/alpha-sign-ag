@@ -9,6 +9,7 @@ import { getLocaleFromUrl, useTranslations, type Locale } from '../i18n';
 import HreflangTags from '../components/HreflangTags.astro';
 import CTABanner from '../components/ui/CTABanner.astro';
 import SidebarCTA from '../components/ui/SidebarCTA.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
 
 interface ProcessStep {
   title: string;
@@ -364,6 +365,9 @@ const localBusinessSchema = {
         <p class="service-hero__description">{description}</p>
       </div>
     </section>
+
+    <!-- Testimonials Section (after Hero) -->
+    <Testimonials locale={lang} />
 
     <!-- Service Description with Sidebar -->
     <section class="service-description section">

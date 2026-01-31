@@ -9,7 +9,6 @@ import Services from '../../components/sections/Services.astro';
 import WhyUs from '../../components/sections/WhyUs.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTA from '../../components/sections/CTA.astro';
-import CTABanner from '../../components/ui/CTABanner.astro';
 import type { LocalBusinessSchema, BreadcrumbSchema, OrganizationSchema } from '../../components/seo/SchemaOrg.astro';
 
 // Define schemas for homepage
@@ -58,45 +57,14 @@ const keywords = [
   <!-- Hero Section -->
   <Hero locale="en" />
 
-  <!-- CTA Banner after Hero -->
-  <CTABanner
-    headline="Get Free Consultation"
-    description="Benefit from our expertise. We will provide you with a no-obligation quote for your project."
-    primaryCTA={{ text: "Request Quote", href: "/en/contact" }}
-    secondaryCTA={{ text: "Our Services", href: "/en/services" }}
-    variant="light"
-    compact={true}
-    locale="en"
-  />
+  <!-- Testimonials Section (directly after Hero) -->
+  <Testimonials locale="en" />
 
   <!-- Services Section -->
   <Services locale="en" />
 
-  <!-- CTA Banner after Services -->
-  <CTABanner
-    headline="Discuss Your Project"
-    description="From the first idea to the finished implementation - we accompany you every step of the way."
-    primaryCTA={{ text: "Get in Touch", href: "/en/contact" }}
-    variant="dark"
-    compact={true}
-    locale="en"
-  />
-
   <!-- Why Us / USP Section -->
   <WhyUs locale="en" />
-
-  <!-- Testimonials Section -->
-  <Testimonials locale="en" />
-
-  <!-- CTA Banner after Testimonials -->
-  <CTABanner
-    headline="See for Yourself"
-    description="Join our satisfied customers. Contact us for a no-obligation conversation."
-    primaryCTA={{ text: "Request Quote", href: "/en/contact" }}
-    variant="gradient"
-    compact={true}
-    locale="en"
-  />
 
   <!-- Call to Action Section -->
   <CTA locale="en" phoneNumber="+41 41 780 05 05" />

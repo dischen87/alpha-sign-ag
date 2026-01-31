@@ -9,7 +9,6 @@ import Services from '../components/sections/Services.astro';
 import WhyUs from '../components/sections/WhyUs.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import CTA from '../components/sections/CTA.astro';
-import CTABanner from '../components/ui/CTABanner.astro';
 import type { LocalBusinessSchema, BreadcrumbSchema, OrganizationSchema } from '../components/seo/SchemaOrg.astro';
 
 // Define schemas for homepage
@@ -58,35 +57,14 @@ const keywords = [
   <!-- Hero Section -->
   <Hero locale="de" />
 
-  <!-- CTA Banner after Hero -->
-  <CTABanner
-    headline="Jetzt kostenlos beraten lassen"
-    description="Profitieren Sie von unserer Expertise. Wir erstellen Ihnen eine unverbindliche Offerte fuer Ihr Projekt."
-    primaryCTA={{ text: "Offerte anfragen", href: "/kontakt" }}
-    secondaryCTA={{ text: "Unsere Leistungen", href: "/dienstleistungen" }}
-    variant="light"
-    compact={true}
-    locale="de"
-  />
+  <!-- Testimonials Section (directly after Hero) -->
+  <Testimonials locale="de" />
 
   <!-- Services Section -->
   <Services locale="de" />
 
-  <!-- CTA Banner after Services -->
-  <CTABanner
-    headline="Projekt besprechen"
-    description="Von der ersten Idee bis zur fertigen Umsetzung - wir begleiten Sie bei jedem Schritt."
-    primaryCTA={{ text: "Jetzt Kontakt aufnehmen", href: "/kontakt" }}
-    variant="dark"
-    compact={true}
-    locale="de"
-  />
-
   <!-- Why Us / USP Section -->
   <WhyUs locale="de" />
-
-  <!-- Testimonials Section -->
-  <Testimonials locale="de" />
 
   <!-- Call to Action Section -->
   <CTA locale="de" phoneNumber="+41 41 780 05 05" />

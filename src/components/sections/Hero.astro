@@ -95,7 +95,7 @@ const isCompact = variant === 'compact';
     <!-- Headline - No animation delay for better LCP -->
     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.05] tracking-tight">
       <span class="block text-white">{t('hero.headline').split('.')[0]}.</span>
-      <span class="block text-primary">{t('hero.headline').split('.')[1]?.trim() || ''}</span>
+      <span class="block text-primary-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t('hero.headline').split('.')[1]?.trim() || ''}</span>
     </h1>
 
     <!-- Subheadline -->
@@ -144,37 +144,37 @@ const isCompact = variant === 'compact';
       </a>
     </div>
 
-    <!-- Trust Indicators -->
+    <!-- Trust Indicators (+35% larger) -->
     <div class="mt-16 pt-8 border-t border-white/10 animate-fade-in-up" style="animation-delay: 0.5s;">
-      <div class="flex flex-wrap justify-center items-center gap-x-8 sm:gap-x-12 gap-y-6">
+      <div class="flex flex-wrap justify-center items-center gap-x-10 sm:gap-x-16 gap-y-8">
         <!-- Experience -->
-        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
-          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
-            <svg class="w-7 h-7 text-primary-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <div class="flex flex-col items-center gap-3 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-[4.75rem] h-[4.75rem] rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-10 h-10 text-primary-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
           </div>
-          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.experience')}</span>
+          <span class="text-lg font-semibold tracking-wide">{t('hero.trust.experience')}</span>
         </div>
 
         <!-- Projects -->
-        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
-          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
-            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <div class="flex flex-col items-center gap-3 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-[4.75rem] h-[4.75rem] rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-10 h-10 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
           </div>
-          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.projects')}</span>
+          <span class="text-lg font-semibold tracking-wide">{t('hero.trust.projects')}</span>
         </div>
 
         <!-- Swiss Made -->
-        <div class="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors group">
-          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
-            <svg class="w-7 h-7 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <div class="flex flex-col items-center gap-3 text-white/80 hover:text-white transition-colors group">
+          <div class="flex items-center justify-center w-[4.75rem] h-[4.75rem] rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary-400/50 transition-colors">
+            <svg class="w-10 h-10 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
           </div>
-          <span class="text-sm font-semibold tracking-wide">{t('hero.trust.swissMade')}</span>
+          <span class="text-lg font-semibold tracking-wide">{t('hero.trust.swissMade')}</span>
         </div>
       </div>
     </div>
