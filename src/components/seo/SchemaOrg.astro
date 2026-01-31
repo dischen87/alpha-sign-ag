@@ -142,7 +142,7 @@ const { schema } = Astro.props;
 const company = {
   name: 'Alpha Sign AG',
   legalName: 'Alpha Sign AG',
-  url: Astro.site?.href || 'https://www.alphasign.ch',
+  url: (Astro.site?.href || 'https://www.alphasign.ch').replace(/\/$/, ''),
   logo: new URL('/logo.png', Astro.site || 'https://www.alphasign.ch').href,
   image: new URL('/og-image.jpg', Astro.site || 'https://www.alphasign.ch').href,
   description: 'Alpha Sign AG - Ihr Partner für hochwertige Schilder, Beschriftungen und Werbetechnik in der Schweiz seit 1989. Fahrzeugbeschriftung, Car Wrapping, Leuchtreklamen, Signaletik und mehr.',
@@ -238,9 +238,14 @@ const company = {
 };
 
 function buildLocalBusinessSchema(data: LocalBusinessSchema) {
+  // Use array of types if additionalType is provided for proper schema.org format
+  const schemaType = data.additionalType 
+    ? ['LocalBusiness', data.additionalType] 
+    : 'LocalBusiness';
+  
   return {
     '@context': 'https://schema.org',
-    '@type': data.additionalType || 'LocalBusiness',
+    '@type': schemaType,
     '@id': `${company.url}#organization`,
     name: company.name,
     legalName: company.legalName,

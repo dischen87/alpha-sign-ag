@@ -97,6 +97,9 @@ export default defineConfig({
     format: 'directory',
   },
 
+  // Always use trailing slashes to avoid 308 redirects
+  trailingSlash: 'always',
+
   // Internationalization configuration for Swiss market
   i18n: {
     defaultLocale: 'de',
